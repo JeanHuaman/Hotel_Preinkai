@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenido a login</h1>
+        <h1>Bienvenido al mundo magico</h1>
     </body>
 </html>
