@@ -10,45 +10,47 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">HOTEL PREINKAI</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarScroll">
-                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#habitaciones">Habitaciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#servicios">
-                                    Servicios
-                                </a>
-                                <!--<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>-->
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contactanos">Contáctanos</a>
-                            </li>
-                             <li class="nav-item">
-                                <a class="nav-link" href="vistas/login.jsp">Iniciar sesión</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+            <div class="header_top">
+                <nav class="navbar navbar-expand-lg bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">HOTEL PREINKAI</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarScroll">
+                            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#habitaciones">Habitaciones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#servicios">
+                                        Servicios
+                                    </a>
+                                    <!--<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>-->
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contactanos">Contáctanos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesión</a>
+                                </li>
+                            </ul>
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </header>
         <section style="background-image: url(img/banner_hotel.jpg);background-repeat: no-repeat;
                  background-position: center;background-attachment: fixed;" class="mt-3" id="inicio">
@@ -101,34 +103,56 @@
                 <br>
                 <h2>Habitaciones de PREINKAI</h2>
                 <br>
-                <div class="row row-cols-1 row-cols-md-3 g-3">
-                    <div class="col">
-                        <div class="card">
-                            <img src="img/habitacion 1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Habitación más pequeña - 2 camas individuales - Planta principal</h5>
-                                <br>
-                                <a href="#" class="btn btn-primary form-control">Ver detalles</a>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h3><u>Filtros</u></h3>
+                        <h5>Tipo Habitación</h5>
+                        <input type="checkbox"> Individual<br>
+                        <input type="checkbox"> Doble<br>
+                        <input type="checkbox"> Triple<br>
+                        <input type="checkbox"> Quad<br>
+                        <input type="checkbox"> Queen<br>
+                        <input type="checkbox"> King<br>
+                        <input type="checkbox"> Twin<br>
+                        <input type="checkbox"> Doble-doble<br>
+                        <input type="checkbox"> Estudio<br>
+                        <br>
+                        <h5>Precios</h5>
+                        <input type="number" class="form-control"> a <input type="number" class="form-control">
+                        <br><a class="btn btn-primary form-control">Buscar</a>
+                        <br><br>
+                    </div> 
+                    <div class="col-sm-10">
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="card">
+                                    <img src="img/habitacion 1.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Habitación más pequeña - 2 camas - Planta principal</h5>
+                                        <br>
+                                        <a href="vistas/verdetalle.jsp" class="btn btn-primary form-control">Ver detalles</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="img/habitacion 2.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Habitación Doble Clásica - 2 camas - Planta principal</h5>
-                                <br>
-                                <a href="#" class="btn btn-primary form-control">Ver detalles</a>
+                            <div class="col">
+                                <div class="card">
+                                    <img src="img/habitacion 2.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Habitación Doble Clásica - 2 camas - Planta principal</h5>
+                                        <br>
+                                        <a href="#" class="btn btn-primary form-control">Ver detalles</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="img/habitacion 3.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Habitación esquinera con cama extragrande - Planta principal</h5>
-                                <br>
-                                <a href="#" class="btn btn-primary form-control">Ver detalles</a>
+                            <div class="col">
+                                <div class="card">
+                                    <img src="img/habitacion 3.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Habitación esquinera con cama extragrande - Planta principal</h5>
+                                        <br>
+                                        <a href="#" class="btn btn-primary form-control">Ver detalles</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
