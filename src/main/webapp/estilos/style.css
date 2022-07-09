@@ -1,0 +1,46 @@
+a{
+    text-decoration: none;
+}
+.card_item{
+    width: 16rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.2rem;
+}
+.optionDashboard{
+    background-color: #a5a8ab;
+    padding: 5px;
+}
+.option,.subOption{
+    background-color: transparent;
+    color:white;
+    text-align: center;
+    border:0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+.option:hover{
+   background-color: white;
+   color:black; 
+}
+.subOption a{
+    color: #00398d;
+}
+.subOption a:hover{
+    background-color:#000 ;
+    color:#fff;
+}
+@media (min-width: 600px) {
+    .dimension{
+        width: 50%;
+    } 
+}
+.desplazamiento{
+    overflow-x: auto;
+    min-width: 250px;
+}
+.encabezado{
+    min-height:80px;
+}
+
