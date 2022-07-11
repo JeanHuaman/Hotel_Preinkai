@@ -61,9 +61,15 @@
                                 <tbody>
                                     
                                     <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td class="row">
                                             <div class="col-4">
-                                                <a class="btn btn-success" href="">Editar</a>
+                                                <a class="btn btn-success" href="${pageContext.request.contextPath}/vistas/editarHabitacion.jsp">Editar</a>
                                             </div>
                                             <div class="col-4">
                                                 <a class="btn btn-danger" href="">Eliminar</a>

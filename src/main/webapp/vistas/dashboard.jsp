@@ -35,8 +35,8 @@
                     <a class="option" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mantenimiento</a>
                     <div class="collapse multi-collapse " id="multiCollapseExample1">
                         <div class="card card-body subOption">
-                            <a href="">Habitaciones</a>
-                            <a href="">Servicios</a>
+                            <a href="${pageContext.request.contextPath}/vistas/crudHabitaciones.jsp">Habitaciones</a>
+                            <a href="${pageContext.request.contextPath}/vistas/crudServicios.jsp">Servicios</a>
                         </div>
                     </div> 
                     <button type="button" class="option">Reportes</button>

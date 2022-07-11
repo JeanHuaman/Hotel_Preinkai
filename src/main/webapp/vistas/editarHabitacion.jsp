@@ -13,7 +13,7 @@
             <h1 class="text-center">Editar Habitación</h1>
         </header>
                <div class="card-body">
-                    <div class="container-fluid">
+                    <div class="container">
                         <div class="row justify-content-between my-4">
                             <div class="col-sm-3">
                                 <label class="form-label" for="nombre">Disponibilidad</label>

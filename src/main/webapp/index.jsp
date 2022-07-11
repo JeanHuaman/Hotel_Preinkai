@@ -26,7 +26,7 @@
                                     <a class="nav-link" href="#habitaciones">Habitaciones</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#servicios">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/vistas/servicios.jsp">
                                         Servicios
                                     </a>
                                     <!--<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">

@@ -18,6 +18,11 @@
     </head>
     <body>
         <h1 class="text-center">Reserva de Servicios</h1>
+        <div class="container mx-auto row my-2">
+                <div class="col-12 col-sm-2">
+                    <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-primary fs-3">Regresar</a>
+                </div>
+        </div>
         <div class="text-center">
             <span >Fecha de Reserva</span>
             <input placeholder="dd/mm/aa">
