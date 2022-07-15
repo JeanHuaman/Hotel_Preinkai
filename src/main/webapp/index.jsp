@@ -1,12 +1,24 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="modelo.Habitacion"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.HabitacionDAO"%>
+<%
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+    List<Habitacion> habitaciones = new HabitacionDAO().listar();
+
+
+%>
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hotel PREINKAI</title>
+        <!-- Custom fonts for this template-->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- Custom styles for this page -->
+        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -20,7 +32,7 @@
                         <div class="collapse navbar-collapse" id="navbarScroll">
                             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
+                                    <a class="nav-link active" aria-current="page" href="HabitacionControlador?accion=listarHabitaciones">Inicio</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#habitaciones">Habitaciones</a>
@@ -37,16 +49,13 @@
                                     </ul>-->
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#contactanos">Cont√°ctanos</a>
+                                    <a class="nav-link" href="#contactanos">Cont·ctanos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesi√≥n</a>
+                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesiÛn</a>
                                 </li>
                             </ul>
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
-                            </form>
+
                         </div>
                     </div>
                 </nav>
@@ -77,14 +86,14 @@
                                     </div> 
                                 </div>
                                 <br>
-                                <p class="card-text">Su reserva ser√° de 1 noche(s)</p>
+                                <p class="card-text">Su reserva ser· de 1 noche(s)</p>
                                 <div class="row">
                                     <div class="col-6">
                                         <p>Adulto(s)</p> 
                                         <input type="number" class="form-control">
                                     </div>
                                     <div class="col-6">
-                                        <p>Ni√±o(s)</p> 
+                                        <p>NiÒo(s)</p> 
                                         <input type="number" class="form-control">
                                     </div> 
                                 </div>
@@ -98,200 +107,205 @@
                 </div>
             </div>
         </section>
-        <section class="mt-3" id="habitaciones">
+        <br> <br>
+        <section>
             <div class="container">
-                <br>
-                <h2>Habitaciones de PREINKAI</h2>
-                <br>
                 <div class="row">
-                    <div class="col-sm-2">
-                        <h3><u>Filtros</u></h3>
-                        <h5>Tipo Habitaci√≥n</h5>
-                        <input type="checkbox"> Individual<br>
-                        <input type="checkbox"> Doble<br>
-                        <input type="checkbox"> Triple<br>
-                        <input type="checkbox"> Quad<br>
-                        <input type="checkbox"> Queen<br>
-                        <input type="checkbox"> King<br>
-                        <input type="checkbox"> Twin<br>
-                        <input type="checkbox"> Doble-doble<br>
-                        <input type="checkbox"> Estudio<br>
-                        <br>
-                        <h5>Precios</h5>
-                        <input type="number" class="form-control"> a <input type="number" class="form-control">
-                        <br><a class="btn btn-primary form-control">Buscar</a>
-                        <br><br>
+                    <div class="col-sm-6">
+                        <h2>Habitaciones de PREINKAI</h2>
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <!--<div class="card-header py-3">Habitaciones de PREINKAI</div>-->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Imagen</th>
+                                                <th>DescripciÛn</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Imagen</th>
+                                                <th>DescripciÛn</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <% for (Habitacion habitacion : habitaciones) {%>
+                                            <tr>
+                                                <td><img src="<%= habitacion.getImagen()%>" class="card-img-top" alt="..."></td>
+                                                <td><h5><%= habitacion.getDescripcion()%></h5>
+                                                    <h5 style="color: red;"><b>S/.<%= habitacion.getPrecio()%>0</b></h5>
+                                                   <br> 
+                                                    <a href="${pageContext.request.contextPath}/HabitacionControlador?accion=RoomDetails&id=<%= habitacion.getId_habitacion()%>" class="btn btn-primary">Ver detalles</a>
+                                                </td>
+                                            </tr>
+                                            <% }%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div> 
-                    <div class="col-sm-10">
-                        <div class="row row-cols-1 row-cols-md-3 g-3">
-                            <div class="col">
-                                <div class="card">
-                                    <img src="img/habitacion 1.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Habitaci√≥n m√°s peque√±a - 2 camas - Planta principal</h5>
-                                        <br>
-                                        <a href="vistas/verdetalle.jsp" class="btn btn-primary form-control">Ver detalles</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                    <img src="img/habitacion 2.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Habitaci√≥n Doble Cl√°sica - 2 camas - Planta principal</h5>
-                                        <br>
-                                        <a href="#" class="btn btn-primary form-control">Ver detalles</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                    <img src="img/habitacion 3.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Habitaci√≥n esquinera con cama extragrande - Planta principal</h5>
-                                        <br>
-                                        <a href="#" class="btn btn-primary form-control">Ver detalles</a>
-                                    </div>
+                   
+                    <div class="col-sm-6">
+                         <h2>Servicios de PREINKAI</h2>
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <!--<div class="card-header py-3">Servicios de PREINKAI</div>-->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">DescripciÛn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Exteriores</td>
+                                                <td>Terraza / sol·rium, Terraza, JardÌn</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Mascotas</td>
+                                                <td>Se admiten. Se pueden aplicar suplementos.</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Comida y bebida</td>
+                                                <td>Bar, Restaurante</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>Internet</td>
+                                                <td>Hay conexiÛn a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">5</th>
+                                                <td>Aparcamiento</td>
+                                                <td>Parking adaptado para personas de movilidad reducida, Parking en un garaje</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">6</th>
+                                                <td>Servicios de recepciÛn</td>
+                                                <td>Guardaequipaje, InformaciÛn turÌstica, RecepciÛn 24 horas</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">7</th>
+                                                <td>Servicios de limpieza</td>
+                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavanderÌa De pago</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">8</th>
+                                                <td>General</td>
+                                                <td>Aire acondicionado, Prohibido fumar en todo el alojamiento, Ascensor, Habitaciones familiares, Adaptado personas de movilidad reducida, Servicio de habitaciones</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">9</th>
+                                                <td>Instalaciones de negocios</td>
+                                                <td>Fax / fotocopiadora, Centro de negocios, Salas de reuniones / banquetes De pago</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">10</th>
+                                                <td>Seguridad</td>
+                                                <td>Extintores, C·maras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="mt-3" id="servicios">
+        </div>
+    </section>
+    <br><br>  
+    <footer id="contactanos">
+        <div class="footer-top text-center">
             <div class="container">
-                <br>
-                <h2>Servicios de PREINKAI</h2>
-                <br>
+                <h2>øEn quÈ te podemos ayudar?</h2>
+                <p>DÈjanos tu email y un operador te ofrecer· la mejor opciÛn disponible seg˙n tu b˙squeda</p>
                 <div class="row">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Descripci√≥n</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Exteriores</td>
-                                <td>Terraza / sol√°rium, Terraza, Jard√≠n</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mascotas</td>
-                                <td>Se admiten. Se pueden aplicar suplementos.</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Comida y bebida</td>
-                                <td>Bar, Restaurante</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Internet</td>
-                                <td>Hay conexi√≥n a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Aparcamiento</td>
-                                <td>Parking adaptado para personas de movilidad reducida, Parking en un garaje</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Servicios de recepci√≥n</td>
-                                <td>Guardaequipaje, Informaci√≥n tur√≠stica, Recepci√≥n 24 horas</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <td>Servicios de limpieza</td>
-                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavander√≠a De pago</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <td>General</td>
-                                <td>Aire acondicionado, Prohibido fumar en todo el alojamiento, Ascensor, Habitaciones familiares, Adaptado personas de movilidad reducida, Servicio de habitaciones</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <td>Instalaciones de negocios</td>
-                                <td>Fax / fotocopiadora, Centro de negocios, Salas de reuniones / banquetes De pago</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <td>Seguridad</td>
-                                <td>Extintores, C√°maras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-        <br> 
-        <footer id="contactanos">
-            <div class="footer-top text-center">
-                <div class="container">
-                    <h2>¬øEn qu√© te podemos ayudar?</h2>
-                    <p>D√©janos tu email y un operador te ofrecer√° la mejor opci√≥n disponible seg√∫n tu b√∫squeda</p>
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            Nombre: <label style="color:red;">(*)</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            Apellidos: <label style="color:red;">(*)</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        Nombre: <label style="color:red;">(*)</label>
+                                        <input type="text" class="form-control">
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            Correo: <label style="color:red;">(*)</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            Tel√©fono: <label style="color:red;">(*)</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                                    <div class="col-sm-6">
+                                        Apellidos: <label style="color:red;">(*)</label>
+                                        <input type="text" class="form-control">
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            Descripci√≥n: <label style="color:red;">(*)</label>
-                                            <textarea class="form-control"></textarea>
-                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        Correo: <label style="color:red;">(*)</label>
+                                        <input type="text" class="form-control">
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <a href="#" class="btn btn-primary" style="float: right;">Enviar</a>
-                                        </div>
+                                    <div class="col-sm-6">
+                                        TelÈfono: <label style="color:red;">(*)</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        DescripciÛn: <label style="color:red;">(*)</label>
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="#" class="btn btn-primary" style="float: right;">Enviar</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <img src="img/contactanos.png" width="100%">
-                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="img/contactanos.png" width="100%">
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
-                <div class="container">
-                    <div class="row">
-                        <p class="pull-left">Copyright ¬© 2022 PREINKAI. All rights reserved.</p>
-                    </div>
+        </div>
+        <br><br> 
+        <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2022 PREINKAI. All rights reserved.</p>
                 </div>
             </div>
+        </div>
 
-        </footer><!--/Footer-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    </body>
+    </footer><!--/Footer-->
+
+    <!-- Page level custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+
+
+</body>
 </html>
