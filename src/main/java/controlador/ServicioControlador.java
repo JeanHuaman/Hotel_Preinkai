@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Servicio;
 
 /**
  *
@@ -51,10 +52,10 @@ public class ServicioControlador extends HttpServlet{
         {
             switch(accion){
                 case "filtrarServicio":  
-//                    this.productosFiltrados(request, response);
+                    this.filtrarServicio(request,response);
                     break;
 //                case "listarNombreServicio":
-//                    this.nombresServicios(request,response);
+//                    this.filtrarServicio(request,response);
 //                    break;
 //                case "agregarProducto":
 //                    this.agregarProducto(request,response);
@@ -80,6 +81,15 @@ public class ServicioControlador extends HttpServlet{
        InterfaceServicioDAO servicio = new ServicioDAO();
        List<String> listaServicios = servicio.nombreServicios();
        return listaServicios;
+   }
+   
+   private void filtrarServicio(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+       
+       InterfaceServicioDAO controladorServicio = new ServicioDAO();
+       List<Servicio> servicios = controladorServicio.filtrarServicios("tenis");
+       request.setAttribute("servicios", servicios);
+       
+       request.getRequestDispatcher("vistas/servicios.jsp").forward(request, response);
    }
     
 }

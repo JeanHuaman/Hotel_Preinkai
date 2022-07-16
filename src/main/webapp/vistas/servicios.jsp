@@ -4,8 +4,8 @@
 <%@page import="controlador.ServicioControlador"%>
 
 <%
-  List<String> servicios  = new ServicioDAO().nombreServicios();
-  
+    List<String> nombreServicios = ServicioControlador.listarServicios();
+
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,19 +29,18 @@
             <div class="my-2 container mx-auto">
                 <form class="row justify-content-center align-items-center me-0 justify-content-sm-around" action="${pageContext.request.contextPath}/ServicioControlador?accion=filtrarServicio" method="POST">
                     <div class="px-0 fs-4 col-8 d-flex justify-content-between col-sm-4">
-                        <label>Fecha de Reserva</label>
-                        <input class="boton" type="date" placeholder="Ingrese fecha">
+                        <label>Fecha de Reserva </label>
+                        <input class="boton" name="fecha" type="date" placeholder="Ingrese fecha">
                     </div>
                     <div class="px-0 py-3 fs-4 col-8 d-flex justify-content-between col-sm-4">
-                        <label>Fecha de Reserva</label>
-                        <select class="boton" name="marca">
-                            <%
-                                for(String nombreServicio:servicios){
-                                %>
+                        <label>Servicios </label>
+                        <select name =nombreServicio" class="boton" name="marca">
+                            <%                                for (String nombreServicio : nombreServicios) {
+                            %>
                             <option value="<%= nombreServicio%>"><%= nombreServicio%></option>
                             <%
                                 }
-                                %>
+                            %>
                         </select>
                     </div>
                     <button class="col-8 col-sm-1 btn btn-primary fs-4" type="submit">Buscar</button>
@@ -76,48 +75,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Cancha de Tennis</td>
-                                    <td><input type="number"></td>
-                                    <td>S/30.00</td>
+                                <%
+                                    List<Servicio> servicios = (List<Servicio>) request.getAttribute("servicios");
+                                    int contador=0;
+                                    if (servicios != null) {
+                                    int i;                        
+                                        for (i=0;i<servicios.size();i++) {
+                                %>
+                                <form>
+                                <tr style="height: 60px;">
+                                    <td><%= servicios.get(i).getAmbiente()%></td>
+                                    <td><input type="number" style="width: 80px;"></td>
+                                    <td><%= servicios.get(i).getPrecio()%></td>
+
                                     <td>
                                         <select>
-                                            <option>8am - 9am</option>
-                                            <option>9:30am - 10:30am</option>
-                                            <option>11:00am - 12:00pm</option>
+                                            <%
+                                              String ambiente = servicios.get(i).getAmbiente();
+                                              for(int j=i;j<servicios.size();j++){                                              
+                                              if (servicios.get(j).getAmbiente().equalsIgnoreCase(ambiente)) {     
+                                            %>   
+                                            <option value="<%= servicios.get(j).getHorariInicio() %>-<%= servicios.get(j).getHorarioFinal() %> <%= servicios.get(j).getId_servicio() %>"><%= servicios.get(j).getHorarioFinal() %> - <%= servicios.get(j).getHorarioFinal() %> </option>
+                                            <%
+                                                contador=j;
+                                                }
+                                            }
+                                            
+                                            %>
                                         </select>
                                     </td>
-                                    <td>S/150.00</td>
-                                    <td><a href="#">Reservar</a></td>
+                                    <td><%= servicios.get(i).getPrecio()%></td>
+                                    <td><a href="${pageContext.request.contextPath}/ServicioControlador?accion=detalleServicio&idServicio=<%= servicios.get(i).getId_servicio()%>">Reservar</a></td>
                                 </tr>
-                                <tr>
-                                    <td>Restaurante Oceania</td>
-                                    <td><input type="number"></td>
-                                    <td>S/30.00</td>
-                                    <td>
-                                        <select>
-                                            <option>8am - 9am</option>
-                                            <option>9:30am - 10:30am</option>
-                                            <option>11:00am - 12:00pm</option>
-                                        </select>
-                                    </td>
-                                    <td>S/150.00</td>
-                                    <td><a href="#">Reservar</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Sauna</td>
-                                    <td><input type="number"></td>
-                                    <td>S/30.00</td>
-                                    <td>
-                                        <select>
-                                            <option>8am - 9am</option>
-                                            <option>9:30am - 10:30am</option>
-                                            <option>11:00am - 12:00pm</option>
-                                        </select>
-                                    </td>
-                                    <td>S/150.00</td>
-                                    <td><a href="#">Reservar</a></td>
-                                </tr>
+                                <%
+                                    i=contador;
+                                    }  
+                                }
+                                
+                                %>    
+                               </form>
                             </tbody>
                         </table>
                     </div>
@@ -140,7 +136,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr style="height: 60px;">
                                     <td>Cancha de Tennis</td>
                                     <td>8am - 9am</td>
                                     <td>S/150.00</td>
@@ -158,7 +154,7 @@
                         <span>S/150.00</span>
                     </p>
                     <div class="text-center">
-                        <a href="#" class="btn btn-primary">Reservar</a>
+                        <a href="${pageContext.request.contextPath}/ServicioControlador?accion=detalleServicio" class="btn btn-primary">Reservar</a>
                     </div>
                 </div>
             </section>
