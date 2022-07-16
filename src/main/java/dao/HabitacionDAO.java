@@ -20,6 +20,10 @@ public class HabitacionDAO implements IHabitacion {
             + "imagen,descripcion,personas_maximas, disponibilidad,estrellas FROM habitacion h "
             + "INNER JOIN tipo_habitacion th on th.id_tipohabitacion=h.id_tipohabitacion "
             + "WHERE id_habitacion =?";
+    private static final String SELECT_HABITACION_POR_RECOMENDACION = "SELECT id_habitacion,nombre,id_piso,precio,"
+            + "imagen,descripcion,personas_maximas, disponibilidad,estrellas FROM habitacion h "
+            + "INNER JOIN tipo_habitacion th on th.id_tipohabitacion=h.id_tipohabitacion "
+            + "WHERE personas_maximas=";
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -90,6 +94,41 @@ public class HabitacionDAO implements IHabitacion {
         }
 
         return h;
+    }
+
+    @Override
+    public List<Habitacion> listarPorRecomendacion(int adultos, int ninos) throws SQLException {
+        List<Habitacion> listarHabitacionesRecomendadas = new ArrayList<>();
+
+        String sql = null;
+        estadoOperacion = false;
+        conn = Conexion.getConexion();
+        int personas_maximas = adultos + ninos;
+        try {
+            sql = SELECT_HABITACION_POR_RECOMENDACION + personas_maximas;
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery(sql);
+            //stmt.setInt(1, personas_maximas);
+            while (rs.next()) {
+                Habitacion h = new Habitacion();
+                h.setId_habitacion(rs.getInt(1));
+                h.setTipohabitacion(rs.getString(2));
+                h.setId_piso(rs.getInt(3));
+                h.setPrecio(rs.getDouble(4));
+                h.setImagen(rs.getString(5));
+                h.setDescripcion(rs.getString(6));
+                h.setPersonas_maximas(rs.getInt(7));
+                h.setDisponibilidad(rs.getString(8));
+                h.setEstrellas(rs.getInt(9));
+                listarHabitacionesRecomendadas.add(h);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("" + e);
+        }
+
+        return listarHabitacionesRecomendadas;
     }
 
 }

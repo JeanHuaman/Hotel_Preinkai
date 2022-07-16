@@ -69,39 +69,42 @@
                     <div class="col-sm-4">
                         <div class="card text-bg-dark text-center mb-3" style="max-width: 20rem;opacity: 94%;">
                             <div class="card-header">
-                                DESDE 87,00 (USD $)
+                                Desde S/.100.00
                             </div>
-                            <div class="card-body" style="text-align: left;">
-                                <h5 class="card-title">RESERVA ONLINE</h5>
-                                <p class="card-text">Mejor precio garantizado</p>
-                                <p class="card-text">--------------------------------------------</p>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>Entrada</p> 
-                                        <input type="date" class="form-control">
+                            <form action="HabitacionControlador" method="post">
+                                <input type="hidden" name="accion" value="RoomsRecommendation">
+                                <div class="card-body" style="text-align: left;">
+                                    <h5 class="card-title">RESERVA ONLINE</h5>
+                                    <p class="card-text">Mejor precio garantizado</p>
+                                    <p class="card-text">--------------------------------------------</p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>Entrada</p> 
+                                            <input type="date" class="form-control">
+                                        </div>
+                                        <div class="col-6">
+                                            <p>Salida</p> 
+                                            <input type="date" class="form-control">
+                                        </div> 
                                     </div>
-                                    <div class="col-6">
-                                        <p>Salida</p> 
-                                        <input type="date" class="form-control">
-                                    </div> 
-                                </div>
-                                <br>
-                                <p class="card-text">Su reserva será de 1 noche(s)</p>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>Adulto(s)</p> 
-                                        <input type="number" class="form-control">
+                                    <br>
+                                    <p class="card-text">Su reserva será de 1 noche(s)</p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>Adulto(s)</p> 
+                                            <input type="number" class="form-control" name="cantAdultos" min="1">
+                                        </div>
+                                        <div class="col-6">
+                                            <p>Niño(s)</p> 
+                                            <input type="number" class="form-control" name="cantNinos" min="0">
+                                        </div> 
                                     </div>
-                                    <div class="col-6">
-                                        <p>Niño(s)</p> 
-                                        <input type="number" class="form-control">
-                                    </div> 
                                 </div>
-                            </div>
 
-                            <div class="card-footer text-muted">
-                                <a href="#" class="btn btn-primary">VER PRECIOS</a>
-                            </div>
+                                <div class="card-footer text-muted">
+                                    <input type="submit" class="btn btn-primary" value="Ver Precios">
+                                </div>
+                            </form> 
                         </div>
                     </div>
                 </div>
@@ -137,7 +140,7 @@
                                                 <td><img src="<%= habitacion.getImagen()%>" class="card-img-top" alt="..."></td>
                                                 <td><h5><%= habitacion.getDescripcion()%></h5>
                                                     <h5 style="color: red;"><b>S/.<%= habitacion.getPrecio()%>0</b></h5>
-                                                   <br> 
+                                                    <br> 
                                                     <a href="${pageContext.request.contextPath}/HabitacionControlador?accion=RoomDetails&id=<%= habitacion.getId_habitacion()%>" class="btn btn-primary">Ver detalles</a>
                                                 </td>
                                             </tr>
@@ -148,9 +151,9 @@
                             </div>
                         </div>
                     </div> 
-                   
+
                     <div class="col-sm-6">
-                         <h2>Servicios de PREINKAI</h2>
+                        <h2>Servicios de PREINKAI</h2>
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <!--<div class="card-header py-3">Servicios de PREINKAI</div>-->

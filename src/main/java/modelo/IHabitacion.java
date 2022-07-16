@@ -9,5 +9,7 @@ public interface IHabitacion {
     public List<Habitacion> listar();
 
     public Habitacion listarId(int id) throws SQLException;
+    
+    public List<Habitacion> listarPorRecomendacion(int adultos, int ninos) throws SQLException;
 
 }
