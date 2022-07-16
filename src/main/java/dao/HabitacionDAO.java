@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.CRUD;
 import modelo.Conexion;
 import modelo.Habitacion;
+import modelo.IHabitacion;
 
-public class HabitacionDAO implements CRUD {
+public class HabitacionDAO implements IHabitacion {
 
     private static final String SELECT_HABITACION = "SELECT id_habitacion,id_tipohabitacion,id_piso,"
             + "precio,imagen,descripcion,personas_maximas,disponibilidad,estrellas "

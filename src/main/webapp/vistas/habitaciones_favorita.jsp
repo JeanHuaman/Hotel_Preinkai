@@ -1,88 +1,96 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="modelo.HabitacionFavorita"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.HabitacionFavoritaDAO"%>
+<%
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+    List<HabitacionFavorita> habitacionesFavoritas = new HabitacionFavoritaDAO().listar();
+
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title>Habitaciones Favoritas</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <link href="${pageContext.request.contextPath}/estilos/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <header class="py-3">
-            <nav class="container d-md-flex justify-content-md-between align-items-md-center">
-                <div class="text-center">
-                    <img src="${pageContext.request.contextPath}/img/Logo.png" alt="logo">
-                </div>
-                <div class="d-flex justify-content-around">
-                    <div class="px-2">
-                        <a class="btn btn-primary" href="">Ver ReservaciÃ³n</a>
+        <header>
+            <div class="header_top">
+                <nav class="navbar navbar-expand-lg bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="index.jsp">HOTEL PREINKAI</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarScroll">
+                            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="HabitacionControlador?accion=listarHabitaciones">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#habitaciones">Habitaciones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/vistas/servicios.jsp">
+                                        Servicios
+                                    </a>
+                                    <!--<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>-->
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contactanos">Contáctanos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesión</a>
+                                </li>
+                            </ul>
+
+                        </div>
                     </div>
-                    <div class="px-2">
-                        <a class="btn btn-primary" href="">Jean Franco Huaman</a>
-                    </div>
-                </div>
-            </nav>  
+                </nav>
+            </div>
         </header>
+        <div class="container">
+            <div class="row mt-3">
+                <h1 class="text-center">Habitaciones Favoritas</h1>
 
-        <h1 class="text-center">Habitaciones Favoritas</h1>
+                <main class="mt-3">
+                    <div class="row row-cols-1 row-cols-md-3 g-4" style="padding: 25px;">
+                        <% for (HabitacionFavorita habitacionFavorita : habitacionesFavoritas) {%>
+                        <div class="col">
+                            <div class="card">
+                                <img src="<%= habitacionFavorita.getImagen()%>" class="card-img-top" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= habitacionFavorita.getDescripcion()%></h5>
+                                    <p class="card-text">S/.<%= habitacionFavorita.getPrecio()%>0</p>
+                                    <a href="#" class="btn btn-primary">Reservar</a>
+                                </div>
+                            </div>
 
-        <main>
-            <div class="container mx-auto">
-                <div class="row justify-content-between">
-                    <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
+                        <% }%>
                     </div>
-                    <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                        <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
+                </main>
+            </div>
+        </div>
+         <br><br><br>
+        <footer id="contactanos">
+            <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
+                <div class="container">
+                    <div class="row">
+                        <p class="pull-left">Copyright © 2022 PREINKAI. All rights reserved.</p>
                     </div>
                 </div>
             </div>
-        </main>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        </footer><!--/Footer-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-public interface CRUD {
+public interface IHabitacion {
 
     public List<Habitacion> listar();
 

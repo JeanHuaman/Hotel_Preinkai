@@ -69,8 +69,15 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title">${habitacion.descripcion}</h5>
-                                        <p class="card-text">Elige tu habitación favorita y haz tu reserva. Fácil, sencillo y muy cómodo a través de nuestra web. Solamente haciendo clic en Añadir a mis favoritos.</p>
-                                        <p class="card-text"><a href="#" class="btn btn-success">+ Agregar a mis favoritos</a></p>
+                                        <p class="card-text">Elige tu habitación favorita y haz tu reserva. 
+                                            Fácil, sencillo y muy cómodo a través de nuestra web. 
+                                            Solamente haciendo clic en Añadir a mis favoritos.</p>
+                                        <form action="UsuarioControlador" method="post">
+                                            <input type="hidden" name="accion" value="SaveFavoriteRoom">
+                                            <input type="number" name="id_usuario" value="1" hidden="true">
+                                            <input type="number" name="id_habitacion" value="${habitacion.id_habitacion}" hidden="true">
+                                            <input type="submit" class="btn btn-success" value="+ Agregar a mis favoritos">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
