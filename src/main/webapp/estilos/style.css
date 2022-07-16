@@ -43,4 +43,6 @@ a{
 .encabezado{
     min-height:80px;
 }
-
+.boton{
+    width: 190px;
+}

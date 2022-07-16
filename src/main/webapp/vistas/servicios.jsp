@@ -1,10 +1,12 @@
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%-- 
-    Document   : servicios
-    Created on : 9 jul. 2022, 10:07:20
-    Author     : JEAN
---%>
+<%@page import="dao.ServicioDAO"%>
+<%@page import="modelo.Servicio"%>
+<%@page import="java.util.List"%>
+<%@page import="controlador.ServicioControlador"%>
 
+<%
+  List<String> servicios  = new ServicioDAO().nombreServicios();
+  
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,26 +19,48 @@
         <link href="${pageContext.request.contextPath}/estilos/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h1 class="text-center">Reserva de Servicios</h1>
-        <div class="container mx-auto row my-2">
-                <div class="col-12 col-sm-2">
+        <header>            
+            <div class="container mx-auto row my-2 text-center">
+                <div class="col-12 col-sm-3">
                     <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-primary fs-3">Regresar</a>
                 </div>
-        </div>
-        <div class="text-center">
-            <span >Fecha de Reserva</span>
-            <input placeholder="dd/mm/aa">
-        </div>
+                <h1 class="text-center col-12 col-sm-8">Reserva de Servicios</h1>
+            </div>
+            <div class="my-2 container mx-auto">
+                <form class="row justify-content-center align-items-center me-0 justify-content-sm-around" action="${pageContext.request.contextPath}/ServicioControlador?accion=filtrarServicio" method="POST">
+                    <div class="px-0 fs-4 col-8 d-flex justify-content-between col-sm-4">
+                        <label>Fecha de Reserva</label>
+                        <input class="boton" type="date" placeholder="Ingrese fecha">
+                    </div>
+                    <div class="px-0 py-3 fs-4 col-8 d-flex justify-content-between col-sm-4">
+                        <label>Fecha de Reserva</label>
+                        <select class="boton" name="marca">
+                            <%
+                                for(String nombreServicio:servicios){
+                                %>
+                            <option value="<%= nombreServicio%>"><%= nombreServicio%></option>
+                            <%
+                                }
+                                %>
+                        </select>
+                    </div>
+                    <button class="col-8 col-sm-1 btn btn-primary fs-4" type="submit">Buscar</button>
+                </form>
+            </div>
+        </header>        
+
         <main>
-            <section class="row px-5">
+            <section class="row px-5 me-0">
                 <div class="col-12 col-lg-8 ">
                     <div class="encabezado">
                         <p>Selecciona la hora de reservación</p>
-                        <div>
-                            <span>Turno</span>
-                            <button class="btn btn-primary">Mañana</button>
-                            <button class="btn btn-primary">Tarde</button>
-                            <button class="btn btn-primary">Noche</button>
+                        <div class="row">
+                            <span class="col-12 col-sm-3">Turno</span>
+                            <div class="col-12 col-sm-8 mx-auto row gap-1">
+                                <button class="col-12 col-sm-3 btn btn-primary">Mañana</button>
+                                <button class="col-12 col-sm-3 btn btn-primary">Tarde</button>
+                                <button class="col-12 col-sm-3 btn btn-primary">Noche</button>
+                            </div>
                         </div> 
                     </div>                    
                     <div class="desplazamiento py-3">
