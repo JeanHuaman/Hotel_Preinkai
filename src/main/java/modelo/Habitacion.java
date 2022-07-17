@@ -27,10 +27,20 @@ public class Habitacion {
         this.disponibilidad = disponibilidad;
         this.estrellas = estrellas;
     }
-
-    public Habitacion(int id_habitacion, int id_tipohabitacion, String tipohabitacion, int id_piso, double precio, String imagen, String descripcion, int personas_maximas, String disponibilidad, int estrellas) {
-        this.id_habitacion = id_habitacion;
+    
+     public Habitacion(int id_tipohabitacion, int id_piso, double precio, String imagen, String descripcion, int personas_maximas, String disponibilidad, int estrellas) {
         this.id_tipohabitacion = id_tipohabitacion;
+        this.id_piso = id_piso;
+        this.precio = precio;
+        this.imagen = imagen;
+        this.descripcion = descripcion;
+        this.personas_maximas = personas_maximas;
+        this.disponibilidad = disponibilidad;
+        this.estrellas = estrellas;
+    }
+
+    public Habitacion(int id_habitacion, String tipohabitacion, int id_piso, double precio, String imagen, String descripcion, int personas_maximas, String disponibilidad, int estrellas) {
+        this.id_habitacion = id_habitacion;
         this.tipohabitacion = tipohabitacion;
         this.id_piso = id_piso;
         this.precio = precio;
