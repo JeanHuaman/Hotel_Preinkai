@@ -14,6 +14,10 @@ import modelo.Reserva;
 public interface IReservaDAO {
     String INSERT_RESERVA = "INSERT INTO reserva(id_usuario,importe_total,tipo_pago,tipo_tarjeta,fecha_entrada,fecha_salida,cantidad_personas) VALUES(?,?,?,?,?,?,?)";
     String SELECT_ID_RESERVA = "SELECT max(id_reserva) FROM reserva";
+    String CANTIDAD_RESERVAS = "SELECT count(id_reserva) FROM reserva";
+    String TOTAL_VENTAS = "select sum(importe_total) from reserva";
 int insertarReserva(Reserva reserva);
 int obtenerIdReserva();
+int cantidadReservas();
+double totalVentas();
 }

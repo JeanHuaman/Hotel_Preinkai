@@ -140,5 +140,30 @@ public class ServicioDAO implements IServicioDAO{
         }
         return servicio;
     }
+
+    @Override
+    public int cantidadServicios() {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        int cantidadServicios=0;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IServicioDAO.CANTIDAD_SERVICIOS);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                cantidadServicios = rs.getInt(1);
+            }
+                                    
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return cantidadServicios;
+    }
     
 }

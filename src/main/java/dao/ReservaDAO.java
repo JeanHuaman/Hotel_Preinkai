@@ -70,5 +70,55 @@ public class ReservaDAO implements IReservaDAO{
         }
         return id;
     }
+
+    @Override
+    public int cantidadReservas() {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        int cantidadReservas=0;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IReservaDAO.CANTIDAD_RESERVAS);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                cantidadReservas = rs.getInt(1);
+            }
+                                    
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return cantidadReservas;
+    }
+
+    @Override
+    public double totalVentas() {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        double totalVentas=0;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IReservaDAO.TOTAL_VENTAS);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                totalVentas = rs.getDouble(1);
+            }
+                                    
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return totalVentas;
+    }
     
 }

@@ -14,21 +14,21 @@ import java.sql.SQLException;
  *
  * @author JEAN
  */
-public class HabitacionDAO implements IHabitacionDAO {
+public class MembresiaDAO implements IMembresiaDAO{
 
     @Override
-    public int cantidadHabitaciones() {
+    public int cantidadMembresia() {
         Connection conn=null;
         PreparedStatement stmt=null;
         ResultSet rs=null;
-        int cantidadHabitaciones=0;
+        int cantidadMembresias=0;
         try {
             conn = Conexion.getConexion();
-            stmt = conn.prepareStatement(IHabitacionDAO.CANTIDAD_HABITACION);
+            stmt = conn.prepareStatement(IMembresiaDAO.CANTIDAD_MEMBRESIA);
             rs = stmt.executeQuery();
             while(rs.next())
             {
-                cantidadHabitaciones = rs.getInt(1);
+                cantidadMembresias = rs.getInt(1);
             }
                                     
         } catch (SQLException ex) {
@@ -38,7 +38,7 @@ public class HabitacionDAO implements IHabitacionDAO {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        return cantidadHabitaciones ;
+        return cantidadMembresias;
     }
     
 }
