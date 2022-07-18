@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="modelo.Usuario"%>
 <%@page import="modelo.Habitacion"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.HabitacionDAO"%>
@@ -48,11 +49,29 @@
                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                                     </ul>-->
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#contactanos">Contáctanos</a>
+                                <%                                    Usuario usuario = (Usuario) session.getAttribute("usuario");
+                                    if (usuario != null) {
+                                %>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <%= usuario.getEmail()%>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ReservacionControlador?accion=VerReservacion&idUsuario=<%= usuario.getIdUsuario()%>">Ver Reservacion</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar SesiÃ³n</a></li>
+                                    </ul>
                                 </li>
+                                <%
+                                } else {
+                                %>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesión</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar SesiÃ³n</a>
+                                </li>
+                                <%
+                                    }
+                                %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contactanos">ContÃ¡ctanos</a>
                                 </li>
                             </ul>
 
@@ -88,14 +107,14 @@
                                         </div> 
                                     </div>
                                     <br>
-                                    <p class="card-text">Su reserva será de 1 noche(s)</p>
+                                    <p class="card-text">Su reserva serÃ¡ de 1 noche(s)</p>
                                     <div class="row">
                                         <div class="col-6">
                                             <p>Adulto(s)</p> 
                                             <input type="number" class="form-control" name="cantAdultos" min="1">
                                         </div>
                                         <div class="col-6">
-                                            <p>Niño(s)</p> 
+                                            <p>NiÃ±o(s)</p> 
                                             <input type="number" class="form-control" name="cantNinos" min="0">
                                         </div> 
                                     </div>
@@ -125,13 +144,13 @@
                                         <thead>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripción</th>
+                                                <th>DescripciÃ³n</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripción</th>
+                                                <th>DescripciÃ³n</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -164,14 +183,14 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">Descripción</th>
+                                                <th scope="col">DescripciÃ³n</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Exteriores</td>
-                                                <td>Terraza / solárium, Terraza, Jardín</td>
+                                                <td>Terraza / solÃ¡rium, Terraza, JardÃ­n</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
@@ -186,7 +205,7 @@
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <td>Internet</td>
-                                                <td>Hay conexión a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
+                                                <td>Hay conexiÃ³n a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
@@ -195,13 +214,13 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
-                                                <td>Servicios de recepción</td>
-                                                <td>Guardaequipaje, Información turística, Recepción 24 horas</td>
+                                                <td>Servicios de recepciÃ³n</td>
+                                                <td>Guardaequipaje, InformaciÃ³n turÃ­stica, RecepciÃ³n 24 horas</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">7</th>
                                                 <td>Servicios de limpieza</td>
-                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavandería De pago</td>
+                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavanderÃ­a De pago</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">8</th>
@@ -216,7 +235,7 @@
                                             <tr>
                                                 <th scope="row">10</th>
                                                 <td>Seguridad</td>
-                                                <td>Extintores, Cámaras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
+                                                <td>Extintores, CÃ¡maras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -232,8 +251,8 @@
     <footer id="contactanos">
         <div class="footer-top text-center">
             <div class="container">
-                <h2>¿En qué te podemos ayudar?</h2>
-                <p>Déjanos tu email y un operador te ofrecerá la mejor opción disponible según tu búsqueda</p>
+                <h2>Â¿En quÃ© te podemos ayudar?</h2>
+                <p>DÃ©janos tu email y un operador te ofrecerÃ¡ la mejor opciÃ³n disponible segÃºn tu bÃºsqueda</p>
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="card">
@@ -255,14 +274,14 @@
                                         <input type="text" class="form-control">
                                     </div>
                                     <div class="col-sm-6">
-                                        Teléfono: <label style="color:red;">(*)</label>
+                                        TelÃ©fono: <label style="color:red;">(*)</label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        Descripción: <label style="color:red;">(*)</label>
+                                        DescripciÃ³n: <label style="color:red;">(*)</label>
                                         <textarea class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -285,7 +304,7 @@
         <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright © 2022 PREINKAI. All rights reserved.</p>
+                    <p class="pull-left">Copyright Â© 2022 PREINKAI. All rights reserved.</p>
                 </div>
             </div>
         </div>
