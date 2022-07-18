@@ -129,13 +129,20 @@ public class UsuarioControlador extends HttpServlet {
 
         String email = request.getParameter("correo");
         String password = request.getParameter("password");
-
+        String rol = "";
         Usuario usuario = new UsuarioDAO().iniciarSesion(email);
-
+        rol = usuario.getRol();
+        System.out.println("Rol: " + rol);
         if (usuario.getPassword().equals(password)) {
-            HttpSession sesion = request.getSession();
-            sesion.setAttribute("usuario", usuario);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            if (rol.equals("Usuario")) {
+                HttpSession sesion = request.getSession();
+                sesion.setAttribute("usuario", usuario);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else if (rol.equals("Administrador")) {
+                HttpSession sesion = request.getSession();
+                sesion.setAttribute("usuario", usuario);
+                request.getRequestDispatcher("vistas/dashboard.jsp").forward(request, response);
+            }
         } else {
             request.setAttribute("errorLogin", "error");
             request.getRequestDispatcher("./vistas/login.jsp").forward(request, response);

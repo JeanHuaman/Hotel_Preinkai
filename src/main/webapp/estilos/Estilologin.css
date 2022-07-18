@@ -78,7 +78,6 @@ main{
     color: #46A2FD;
 }
 
-/Formularios/
 
 .contenedor__login-register{
     display: flex;
@@ -161,8 +160,7 @@ main{
     }
 
 
-    /Formularios/
-
+    
     .contenedor__login-register{
         top: -10px;
         left: -5px;
