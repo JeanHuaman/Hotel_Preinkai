@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.Conexion;
 import modelo.HabitacionFavorita;
-import modelo.IHabitacionFavorita;
 
-public class HabitacionFavoritaDAO implements IHabitacionFavorita {
+public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
 
     private static final String SELECT_HABITACION_FAVORITA = "SELECT imagen, descripcion, precio FROM habitaciones_favoritas hf INNER JOIN habitacion h on h.id_habitacion=hf.id_habitacion";
     private static final String INSERT_HABITACION_FAVORITA = "INSERT INTO habitaciones_favoritas "

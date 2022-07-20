@@ -6,12 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import modelo.Conexion;
 import modelo.Habitacion;
-import modelo.IHabitacion;
 
-public class HabitacionDAO implements IHabitacion {
+public class HabitacionDAO implements IHabitacionDAO {
 
     private static final String SELECT_HABITACION = "SELECT id_habitacion,nombre,id_piso,precio,"
             + "imagen,descripcion,personas_maximas, disponibilidad,estrellas FROM habitacion h "
@@ -58,7 +55,6 @@ public class HabitacionDAO implements IHabitacion {
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-            JOptionPane.showMessageDialog(null, ex);
         }
         return habitaciones;
     }

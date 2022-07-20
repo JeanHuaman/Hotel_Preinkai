@@ -1,10 +1,11 @@
-package modelo;
+package dao;
 
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Habitacion;
 
-public interface IHabitacion {
+public interface IHabitacionDAO {
 
     public List<Habitacion> listar();
 

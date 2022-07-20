@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import modelo.Conexion;
-import modelo.IUsuario;
 import modelo.Usuario;
 
-public class UsuarioDAO implements IUsuario {
+public class UsuarioDAO implements IUsuarioDAO {
 
     private static final String REGISTRAR_USUARIO = "INSERT INTO usuario(id_membresia,dni,nombre,celular,direccion,email,password,rol) "
             + "VALUES(?,?,?,?,?,?,?,?)";

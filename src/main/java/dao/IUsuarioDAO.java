@@ -1,6 +1,8 @@
-package modelo;
+package dao;
 
-public interface IUsuario {
+import modelo.Usuario;
+
+public interface IUsuarioDAO {
     public int registrarse(Usuario usuario);
     public Usuario iniciarSesion(String correo);
 }

@@ -12,7 +12,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hotel PREINKAI</title>
         <!-- Custom fonts for this template-->
@@ -58,20 +58,20 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ReservacionControlador?accion=VerReservacion&idUsuario=<%= usuario.getIdUsuario()%>">Ver Reservacion</a></li>
-                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesi√≥n</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar SesiÛn</a></li>
                                     </ul>
                                 </li>
                                 <%
                                 } else {
                                 %>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar Sesi√≥n</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar SesiÛn</a>
                                 </li>
                                 <%
                                     }
                                 %>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#contactanos">Cont√°ctanos</a>
+                                    <a class="nav-link" href="#contactanos">Contactanos</a>
                                 </li>
                             </ul>
 
@@ -107,14 +107,14 @@
                                         </div> 
                                     </div>
                                     <br>
-                                    <p class="card-text">Su reserva ser√° de 1 noche(s)</p>
+                                    <p class="card-text">Su reserva ser· de 1 noche(s)</p>
                                     <div class="row">
                                         <div class="col-6">
                                             <p>Adulto(s)</p> 
                                             <input type="number" class="form-control" name="cantAdultos" min="1">
                                         </div>
                                         <div class="col-6">
-                                            <p>Ni√±o(s)</p> 
+                                            <p>NiÒo(s)</p> 
                                             <input type="number" class="form-control" name="cantNinos" min="0">
                                         </div> 
                                     </div>
