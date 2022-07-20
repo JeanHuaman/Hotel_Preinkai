@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,10 +39,10 @@
                                     </ul>-->
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#contactanos">Cont√°ctanos</a>
+                                    <a class="nav-link" href="#contactanos">Cont·ctanos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesi√≥n</a>
+                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesiÛn</a>
                                 </li>
                             </ul>
                             <form class="d-flex" role="search">
@@ -51,69 +54,79 @@
                 </nav>
             </div>
         </header>
-        <section>
+        <c:set var="habitacion" value="${habitacion}"> </c:set>
             <div class="container">
                 <div class="row mt-3">
-                    <div class="card mb-3">
-                        <div class="row g-2">
-                            <div class="col-md-4">
-                                <img src="../img/habitacion 1.jpg" class="img-fluid rounded-start" style="width: 100%;">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Habitaci√≥n m√°s peque√±a - 2 camas - Planta principal</h5>
-                                    <p class="card-text">1 habitaci√≥n grande con una ba√±o personal, adem√°s de dos camas grandes con polar para el fr√≠o, tv.</p>
-                                    <p class="card-text"><a href="#" class="btn btn-success">+ Agregar a mis favoritos</a></p>
+                    <h2>HabitaciÛn</h2>
+                    <br>
+                    <div class="col-sm-6">
+                        <section>
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="${habitacion.imagen}" class="img-fluid rounded-start" style="width: 100%;height: 100%">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${habitacion.descripcion}</h5>
+                                        <p class="card-text">Elige tu habitaciÛn favorita y haz tu reserva. 
+                                            F·cil, sencillo y muy cÛmodo a travÈs de nuestra web. 
+                                            Solamente haciendo clic en AÒadir a mis favoritos.</p>
+                                        <form action="UsuarioControlador" method="post">
+                                            <input type="hidden" name="accion" value="SaveFavoriteRoom">
+                                            <input type="number" name="id_usuario" value="1" hidden="true">
+                                            <input type="number" name="id_habitacion" value="${habitacion.id_habitacion}" hidden="true">
+                                            <input type="submit" class="btn btn-success" value="+ Agregar a mis favoritos">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="container">
-                <h2>Caracter√≠sticas</h2>
-                <br>
-                <div class="row">
-                    <div class="col-sm-6">
+
+                    </section>
+                    <section>
+                        <h2>CaracterÌsticas</h2>
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
-                                    <th scope="row">Categor√≠a</th>
-                                    <td>3 estrellas</td>
+                                    <th scope="row">CategorÌa</th>
+                                    <td>${habitacion.estrellas} estrellas</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Tipo Habitaci√≥n</th>
-                                    <td>Suit</td>
+                                    <th scope="row">Tipo HabitaciÛn</th>
+                                    <td>${habitacion.tipohabitacion}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Precio</th>
-                                    <td>$200.00</td>
+                                    <td>$${habitacion.precio}0</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Disponibilidad</th>
-                                    <td>Habilitado</td>
+                                    <td>${habitacion.disponibilidad}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Aforo</th>
-                                    <td>3 personas</td>
+                                    <td>${habitacion.personas_maximas} personas</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="#" class="btn btn-primary">Seleccionar habitaci√≥n</a>
-                    </div>
-                    <div class="col-sm-6">
-                        <img src="../img/banner_ver_detalle.png" width="100%">
-                    </div>
+                        <a href="index.jsp" class="btn btn-danger">Regresar</a>
+                        <a href="#" class="btn btn-primary">Seleccionar habitaciÛn</a>
+
+                    </section>
+                    <br><br>
+                </div>
+                <div class="col-sm-6">
+                    <img src="img/banner_ver_detalle.png" width="100%">
                 </div>
             </div>
-        </section>
+        </div>
+        <br>
         <footer id="contactanos">
             <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
                 <div class="container">
                     <div class="row">
-                        <p class="pull-left">Copyright ¬© 2022 PREINKAI. All rights reserved.</p>
+                        <p class="pull-left">Copyright © 2022 PREINKAI. All rights reserved.</p>
                     </div>
                 </div>
             </div>
