@@ -5,9 +5,11 @@
  */
 package controlador;
 
-import dao.InterfaceServicioDAO;
 import dao.ServicioDAO;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Servicio;
+import dao.IServicioDAO;
 
 /**
  *
@@ -51,10 +55,10 @@ public class ServicioControlador extends HttpServlet{
         {
             switch(accion){
                 case "filtrarServicio":  
-//                    this.productosFiltrados(request, response);
+                    this.filtrarServicio(request,response);
                     break;
-//                case "listarNombreServicio":
-//                    this.nombresServicios(request,response);
+//                case "detalleServicio":
+//                    this.detalleServicio(request,response);
 //                    break;
 //                case "agregarProducto":
 //                    this.agregarProducto(request,response);
@@ -77,9 +81,34 @@ public class ServicioControlador extends HttpServlet{
     }
 
    public static List<String> listarServicios(){
-       InterfaceServicioDAO servicio = new ServicioDAO();
+       IServicioDAO servicio = new ServicioDAO();
        List<String> listaServicios = servicio.nombreServicios();
        return listaServicios;
    }
+   
+   private void filtrarServicio(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+       HttpSession sesion = request.getSession();
+       IServicioDAO controladorServicio = new ServicioDAO();
+       String fecha = request.getParameter("fecha");
+       String nombreServicio = request.getParameter("nombreServicio");
+       List<Servicio> servicios = controladorServicio.filtrarServicios(nombreServicio);
+       request.setAttribute("servicios", servicios);
+       sesion.setAttribute("nombreServicioActual", nombreServicio);
+       sesion.setAttribute("fechaServicio", fecha);
+       
+       request.getRequestDispatcher("vistas/servicios.jsp").forward(request, response);
+   }
+
+    public static List<Servicio> listarServicioDefecto(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
+        HttpSession sesion = request.getSession();
+        String nombreServicio = (String) sesion.getAttribute("nombreServicioActual");
+        IServicioDAO controladorServicio = new ServicioDAO();
+        if(nombreServicio==null){
+            nombreServicio="tenis";
+        }
+        List<Servicio> servicios = controladorServicio.filtrarServicios(nombreServicio);
+        
+        return servicios;
+    }
     
 }

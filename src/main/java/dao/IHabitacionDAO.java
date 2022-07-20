@@ -7,6 +7,7 @@ import modelo.Habitacion;
 
 public interface IHabitacionDAO {
 
+    String CANTIDAD_HABITACION = "select count(id_habitacion) from habitacion";
     public List<Habitacion> listar();
 
     public Habitacion listarId(int id) throws SQLException;
@@ -19,4 +20,8 @@ public interface IHabitacionDAO {
     
     public int eliminar(Habitacion habitacion);
 
-    }
+    
+    
+    int cantidadHabitaciones();
+}
+

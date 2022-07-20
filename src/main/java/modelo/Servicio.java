@@ -20,9 +20,8 @@ public class Servicio {
     private String ambiente;
     private String estado;
     private int personasMaximas;
-    private Date fecha;
 
-    public Servicio(int id_servicio, String nombreServicio, double precio, String horariInicio, String horarioFinal, String ambiente, String estado, int personasMaximas, Date fecha) {
+    public Servicio(int id_servicio, String nombreServicio, double precio, String horariInicio, String horarioFinal, String ambiente, String estado, int personasMaximas) {
         this.id_servicio = id_servicio;
         this.nombreServicio = nombreServicio;
         this.precio = precio;
@@ -31,10 +30,9 @@ public class Servicio {
         this.ambiente = ambiente;
         this.estado = estado;
         this.personasMaximas = personasMaximas;
-        this.fecha = fecha;
     }
 
-    public Servicio(String nombreServicio, double precio, String horariInicio, String horarioFinal, String ambiente, String estado, int personasMaximas, Date fecha) {
+    public Servicio(String nombreServicio, double precio, String horariInicio, String horarioFinal, String ambiente, String estado, int personasMaximas) {
         this.nombreServicio = nombreServicio;
         this.precio = precio;
         this.horariInicio = horariInicio;
@@ -42,7 +40,6 @@ public class Servicio {
         this.ambiente = ambiente;
         this.estado = estado;
         this.personasMaximas = personasMaximas;
-        this.fecha = fecha;
     }
 
    
@@ -115,14 +112,10 @@ public class Servicio {
         this.personasMaximas = personasMaximas;
     }
 
-    public Date getFecha() {
-        return fecha;
+    @Override
+    public String toString() {
+        return "Servicio{" + "id_servicio=" + id_servicio + ", nombreServicio=" + nombreServicio + ", precio=" + precio + ", horariInicio=" + horariInicio + ", horarioFinal=" + horarioFinal + ", ambiente=" + ambiente + ", estado=" + estado + ", personasMaximas=" + personasMaximas + '}';
     }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-   
+    
     
 }

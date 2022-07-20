@@ -1,3 +1,34 @@
+
+<%@page import="dao.MembresiaDAO"%>
+<%@page import="dao.IMembresiaDAO"%>
+<%@page import="dao.ServicioDAO"%>
+<%@page import="dao.IServicioDAO"%>
+<%@page import="dao.HabitacionDAO"%>
+<%@page import="dao.IHabitacionDAO"%>
+<%@page import="dao.ReservaDAO"%>
+<%@page import="dao.IReservaDAO"%>
+<%@page import="dao.IUsuarioDAO"%>
+<%@page import="dao.UsuarioDAO"%>
+<%
+    IUsuarioDAO usuarioDao = new UsuarioDAO();
+    int cantidadUsuario = usuarioDao.cantidadUsuario();
+    
+    IReservaDAO reservaDao = new ReservaDAO();
+    int cantidadReservas = reservaDao.cantidadReservas();
+    double totalReservas = reservaDao.totalVentas();
+    
+    IHabitacionDAO habitacionDao = new HabitacionDAO();
+    int cantidadHabitaciones = habitacionDao.cantidadHabitaciones();
+    
+    IServicioDAO servicioDao = new ServicioDAO();
+    int cantidadServicios = servicioDao.cantidadServicios();
+    
+    IMembresiaDAO membresiaDao = new MembresiaDAO();
+    int cantidadMembresias = membresiaDao.cantidadMembresia();
+    
+    
+    
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="modelo.Usuario"%>
 <!DOCTYPE html>
@@ -59,45 +90,45 @@
             <section class="col-12 col-md-9 py-3">
                 <div class="row justify-content-between text-center">
                     <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/img/logoUsuario.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Usuarios</h5>
-                            <p class="card-text">33</p>
+                            <p class="card-text"><%= cantidadUsuario %></p>
                         </div>
                     </div>
                     <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/img/logoHabitacion.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Usuarios</h5>
-                            <p class="card-text">33</p>
+                            <h5 class="card-title">Habitaciones</h5>
+                            <p class="card-text"><%= cantidadHabitaciones %></p>
                         </div>
                     </div>
                     <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/img/logoServicios.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Usuarios</h5>
-                            <p class="card-text">33</p>
+                            <h5 class="card-title">Servicios</h5>
+                            <p class="card-text"><%= cantidadServicios %></p>
                         </div>
                     </div>
                     <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/img/logoMembresia.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Usuarios</h5>
-                            <p class="card-text">33</p>
+                            <h5 class="card-title">Membresia</h5>
+                            <p class="card-text"><%= cantidadMembresias %></p>
                         </div>
                     </div>
                     <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/img/logoReservacion.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Usuarios</h5>
-                            <p class="card-text">33</p>
+                            <h5 class="card-title">Reservaciones</h5>
+                            <p class="card-text"><%= cantidadReservas %></p>
                         </div>
                     </div>
                     <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/Logo.png" class="card-img-top" alt="...">
+                        <img src="${pageContext.request.contextPath}/img/logoGanancia.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Usuarios</h5>
-                            <p class="card-text">33</p>
+                            <h5 class="card-title">Ganancia</h5>
+                            <p class="card-text"><%= totalReservas %></p>
                         </div>
                     </div>
                 </div>

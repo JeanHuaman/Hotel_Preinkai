@@ -1,49 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
+/**
+ *
+ * @author JEAN
+ */
 public class Usuario {
-
     private int idUsuario;
     private int idMembresia;
-    private String dni = "";
-    private String nombre = "";
-    private String celular = "";
-    private String direccion = "";
-    private String email = "";
-    private String password = "";
-    private String rol = "";
+    private String dni;
+    private String nombre;
+    private String celular;
+    private String direccion;
+    private String email;
+    private String password;
+    private String rol;
 
-    public Usuario() {
-    }
-
-    public Usuario(int idUsuario) {
+    public Usuario(){}
+    public Usuario(int idUsuario, int idMembresia, String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
         this.idUsuario = idUsuario;
-    }
-
-    public Usuario(String email, String password) {
+        this.idMembresia = idMembresia;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.celular = celular;
+        this.direccion = direccion;
         this.email = email;
         this.password = password;
+        this.rol = rol;
     }
 
-    public Usuario(int idMembresia, String dni,String nombre,String celular,String direccion,
-            String email,String password,String rol) {
-        this.idMembresia=idMembresia;
-        this.dni=dni;
-        this.nombre=nombre;
-        this.celular=celular;
-        this.direccion=direccion;
-        this.email=email;
-        this.password=password;
-        this.rol=rol;
-        
-    }
-
-    
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+    public Usuario(int idMembresia, String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
+        this.idMembresia = idMembresia;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.celular = celular;
+        this.direccion = direccion;
+        this.email = email;
         this.password = password;
+        this.rol = rol;
     }
 
     public int getIdUsuario() {
@@ -100,6 +98,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRol() {

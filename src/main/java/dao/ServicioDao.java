@@ -18,22 +18,51 @@ import modelo.Servicio;
  *
  * @author JEAN
  */
-public class ServicioDAO implements InterfaceServicioDAO{
+public class ServicioDAO implements IServicioDAO{
 
     @Override
-    public List<Servicio> filtrarServicios(Date fecha, String nombreServicio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Servicio> filtrarServicios(String nombreServicio) {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        Servicio servicio=null;
+        List<Servicio> servicios=new ArrayList();
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IServicioDAO.SELECT_FILTRO_SERVICIOS);
+            stmt.setString(1, nombreServicio);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                int id_servicio = rs.getInt("id_servicio");
+                double precio = rs.getDouble("precio");
+                String horarioInicio = rs.getString("horario_inicio");
+                String horarioFinal = rs.getString("horario_fin");
+                String ambiente = rs.getString("ambiente");
+                String estado = rs.getString("estado");
+                int personasMaximas = rs.getInt("personas_maximas");
+                servicio = new Servicio(id_servicio,nombreServicio,precio,horarioInicio,horarioFinal,ambiente,estado,personasMaximas);
+                servicios.add(servicio);
+            }
+                                    
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return servicios;
     }
 
     @Override
     public int insertarServicios(Servicio servicio) {
         Connection conn=null;
          PreparedStatement stmt=null;
-         Date fechaSql = new java.sql.Date(servicio.getFecha().getTime());
          int rows = 0;
          try{
              conn = Conexion.getConexion();
-             stmt = conn.prepareStatement(InterfaceServicioDAO.INSERT_SERVICIO);
+             stmt = conn.prepareStatement(IServicioDAO.INSERT_SERVICIO);
              stmt.setString(1,servicio.getNombreServicio());
              stmt.setDouble(2,servicio.getPrecio());
              stmt.setString(3,servicio.getHorariInicio());
@@ -41,7 +70,6 @@ public class ServicioDAO implements InterfaceServicioDAO{
              stmt.setString(5,servicio.getAmbiente());
              stmt.setString(6,servicio.getEstado());
              stmt.setInt(7,servicio.getPersonasMaximas());
-             stmt.setDate(8,fechaSql);
              rows = stmt.executeUpdate();
          }catch(SQLException ex){
              ex.printStackTrace(System.out);
@@ -62,7 +90,7 @@ public class ServicioDAO implements InterfaceServicioDAO{
         List<String> nombreServiciosDisponibles = new ArrayList();
         try {
             conn = Conexion.getConexion();
-            stmt = conn.prepareStatement(InterfaceServicioDAO.SELECT_NOMBRE_SERVICIOS);
+            stmt = conn.prepareStatement(IServicioDAO.SELECT_NOMBRE_SERVICIOS);
             rs = stmt.executeQuery();
             while(rs.next())
             {
@@ -78,6 +106,64 @@ public class ServicioDAO implements InterfaceServicioDAO{
             Conexion.close(conn);
         }
         return nombreServiciosDisponibles;
+    }
+
+    @Override
+    public Servicio filtrarServicioId(int idServicio) {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        Servicio servicio=null;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IServicioDAO.SELECT_FILTRA_SERVICIO_ID);
+            stmt.setInt(1, idServicio);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                String nombreServicio = rs.getString("nombre_servicio");
+                double precio = rs.getDouble("precio");
+                String horarioInicio = rs.getString("horario_inicio");
+                String horarioFinal = rs.getString("horario_fin");
+                String ambiente = rs.getString("ambiente");
+                String estado = rs.getString("estado");
+                int personasMaximas = rs.getInt("personas_maximas");
+                servicio = new Servicio(idServicio,nombreServicio,precio,horarioInicio,horarioFinal,ambiente,estado,personasMaximas);
+            }
+                                    
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return servicio;
+    }
+
+    @Override
+    public int cantidadServicios() {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        int cantidadServicios=0;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IServicioDAO.CANTIDAD_SERVICIOS);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                cantidadServicios = rs.getInt(1);
+            }
+                                    
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return cantidadServicios;
     }
     
 }
