@@ -93,11 +93,22 @@ public class ServicioControlador extends HttpServlet{
        String nombreServicio = request.getParameter("nombreServicio");
        List<Servicio> servicios = controladorServicio.filtrarServicios(nombreServicio);
        request.setAttribute("servicios", servicios);
+       sesion.setAttribute("nombreServicioActual", nombreServicio);
        sesion.setAttribute("fechaServicio", fecha);
        
        request.getRequestDispatcher("vistas/servicios.jsp").forward(request, response);
    }
 
-    
+    public static List<Servicio> listarServicioDefecto(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
+        HttpSession sesion = request.getSession();
+        String nombreServicio = (String) sesion.getAttribute("nombreServicioActual");
+        IServicioDAO controladorServicio = new ServicioDAO();
+        if(nombreServicio==null){
+            nombreServicio="tenis";
+        }
+        List<Servicio> servicios = controladorServicio.filtrarServicios(nombreServicio);
+        
+        return servicios;
+    }
     
 }

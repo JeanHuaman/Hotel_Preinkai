@@ -52,9 +52,11 @@
             <section class="row px-5 me-0">
                 <div class="col-12 col-lg-8 ">
                     <div class="encabezado">
-                        <p>Selecciona la hora de reservación</p>
+                        <p>Selecciona la hora de reservación </p>
                         <div class="row">
-                            <span class="col-12 col-sm-3">Turno</span>
+                            <span class="col-12 col-sm-3">Turno 
+                                <span>${nombreServicioActual}</span>
+                            </span>
                             <div class="col-12 col-sm-8 mx-auto row gap-1">
                                 <button class="col-12 col-sm-3 btn btn-primary">Mañana</button>
                                 <button class="col-12 col-sm-3 btn btn-primary">Tarde</button>
@@ -74,6 +76,9 @@
                                 <%
                                     List<Servicio> servicios = (List<Servicio>) request.getAttribute("servicios");
                                     int contador = 0;
+                                    if (servicios == null) {
+                                        servicios = ServicioControlador.listarServicioDefecto(request, response);
+                                    }
                                     if (servicios != null) {
                                         int i;
                                         for (i = 0; i < servicios.size(); i++) {
@@ -81,7 +86,7 @@
                                 <form class="grid" action="${pageContext.request.contextPath}/UsuarioControlador?accion=agregarServicio" method="POST">
 
                                     <div><%= servicios.get(i).getAmbiente()%></div>
-                                    <div><input name="personas" type="number" style="width: 80px;"></div>
+                                    <div><input name="personas" min="0" required="true" value="0" type="number" style="width: 80px;"></div>
                                     <div><%= servicios.get(i).getPrecio()%></div>
                                     <div>                                        
                                         <select name="idServicio">
