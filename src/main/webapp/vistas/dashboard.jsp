@@ -1,4 +1,4 @@
-
+<%@page import="modelo.Usuario"%>
 <%@page import="dao.MembresiaDAO"%>
 <%@page import="dao.IMembresiaDAO"%>
 <%@page import="dao.ServicioDAO"%>
@@ -29,8 +29,8 @@
     
     
 %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="modelo.Usuario"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="d-flex justify-content-around">
                     <div class="px-2">
-                        <a class="btn btn-primary" href="">Ver ReservaciÃ³n</a>
+                        <a class="btn btn-primary" href="">Ver Reservación</a>
                     </div>
                     <%   Usuario usuario = (Usuario) session.getAttribute("usuario");
                         if (usuario != null) {
@@ -61,7 +61,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ReservacionControlador?accion=VerReservacion&idUsuario=<%= usuario.getIdUsuario()%>">Ver Reservacion</a></li>
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar SesiÃ³n</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
                         </ul>
                     </li>
                     </ul>
