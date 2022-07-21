@@ -1,11 +1,19 @@
+<%@page import="dao.PisoDAO"%>
+<%@page import="modelo.Piso"%>
+<%@page import="dao.TipoHabitacionDAO"%>
+<%@page import="modelo.TipoHabitacion"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modelo.Habitacion"%>
 <%@page import="java.util.List"%>
+<%@page import="modelo.Servicio"%>
+<%@page import="dao.ServicioDAO"%>
 <%@page import="dao.HabitacionDAO"%>
 <%
 
     List<Habitacion> habitaciones = new HabitacionDAO().listar();
-
+    List<Servicio> servicios = new ServicioDAO().listar();
+    List<TipoHabitacion> tiposhabitacion = new TipoHabitacionDAO().getListaTipoHabitacion();
+    List<Piso> pisos = new PisoDAO().getListaPiso();
 
 %>
 
@@ -55,28 +63,28 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="text-center">
                                             <tr>
-                                                <th>C骴igo</th>
-                                                <th>Tipo de Habitaci髇</th>
+                                                <th>C贸digo</th>
+                                                <th>Tipo de Habitaci贸n</th>
                                                 <th>Disponibilidad</th>
                                                 <th>Piso</th>
                                                 <th>Precio</th>
-                                                <th>Descripci髇</th>
-                                                <th>Personas M醲imas</th>
+                                                <th>Descripci贸n</th>
+                                                <th>Personas M谩ximas</th>
                                                 <th>Estrellas</th>
-                                                <th colspan="2">Acci髇</th>
+                                                <th>Acci贸n</th>
                                             </tr>
                                         </thead>
                                         <tfoot class="text-center">
                                             <tr>
-                                                <th>C骴igo</th>
-                                                <th>Tipo de Habitaci髇</th>
+                                                 <th>C贸digo</th>
+                                                <th>Tipo de Habitaci贸n</th>
                                                 <th>Disponibilidad</th>
                                                 <th>Piso</th>
                                                 <th>Precio</th>
-                                                <th>Descripci髇</th>
-                                                <th>Personas M醲imas</th>
+                                                <th>Descripci贸n</th>
+                                                <th>Personas M谩ximas</th>
                                                 <th>Estrellas</th>
-                                                <th colspan="2">Acci髇</th>
+                                                <th>Acci贸n</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -91,8 +99,8 @@
                                                 <td class="text-center"><%= habitacion.getPersonas_maximas()%></td>
                                                 <td class="text-center"><%= habitacion.getEstrellas()%></td>
                                                 <td style="text-align: center;">
-                                                    <a class="btn btn-success" href="">Editar</a> <br>
-                                                    <a class="btn btn-danger" href="">Eliminar</a>
+                                                    <a class="btn btn-success" href="${pageContext.request.contextPath}/HabitacionControlador?accion=EditRoom&id=<%= habitacion.getId_habitacion()%>">Editar</a> <br>
+                                                    <a class="btn btn-danger" href="${pageContext.request.contextPath}/HabitacionControlador?accion=eliminar&id=<%= habitacion.getId_habitacion()%>">Eliminar</a>
                                                 </td>
                                             </tr>
                                             <% }%>
@@ -103,7 +111,7 @@
                         </div>
                         <br>
                         <h1>
-                            Agregar Habitaci髇
+                            Agregar Habitaci贸n
                         </h1>
                         <div class="row">
                             <div class="col-sm-6">
@@ -112,21 +120,18 @@
                                         <div class="row justify-content-between my-4">
                                             <form action="${pageContext.request.contextPath}/HabitacionControlador?accion=AddRoom" method="POST">
                                                 <br>
-                                                <label class="form-label" for="id_tipohabitacion">Tipo de Habitaci髇</label>
-                                                <select class="form-select" name="id_tipohabitacion">           
-                                                    <option value="1">Individual</option>
-                                                    <option value="2">Doble</option>
-                                                    <option value="3">Triple</option>
-                                                    <option value="4">Suite y Suite Ejecutiva</option>
-                                                    <option value="5">Suite presidencial</option>
+                                                <label class="form-label" for="id_tipohabitacion">Tipo de Habitaci贸n</label>
+                                                <select class="form-select" name="id_tipohabitacion">
+                                                    <% for (TipoHabitacion tipo_habitacion : tiposhabitacion) {%>
+                                                    <option value="<%= tipo_habitacion.getIdTipoHabitacion()%>"><%= tipo_habitacion.getNombreH()%></option>
+                                                    <% }%>
                                                 </select> <br>
 
                                                 <label class="form-label" for="piso">Piso</label>
-                                                <select class="form-select" name="id_piso">           
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
+                                                <select class="form-select" name="id_piso">     
+                                                     <% for (Piso piso : pisos) {%>
+                                                    <option value="<%= piso.getIdPiso()%>"><%= piso.getIdPiso()%></option>
+                                                     <% }%>
                                                 </select> <br>
 
                                                 <label class="form-label" for="precio">Precio</label>
@@ -134,27 +139,25 @@
 
                                                 <label class="form-label" for="imagen">Imagen</label>
                                                 <select class="form-select" name="imagen">
-                                                    <option value="http://localhost/habitaciones/habitacion-1.jpg">Razon Plaza</option>
-                                                    <option value="http://localhost/habitaciones/habitacion-2.jpg">Bosques Florales</option>
-                                                    <option value="http://localhost/habitaciones/habitacion-3.jpg">Plazon Suit</option>
-                                                    <option value="http://localhost/habitaciones/habitacion-4.jpg">24K Ultra</option>
-                                                    <option value="http://localhost/habitaciones/habitacion-5.jpg">Season Black</option>
+                                                    <option value="http://localhost/habitaciones/habitacion-1.jpg">Habitaci贸n Cl谩sica - 1 cama extragrande</option>
+                                                    <option value="http://localhost/habitaciones/habitacion-2.jpg">Suite Presidencial con cama extragrande</option>
+                                                    <option value="http://localhost/habitaciones/habitacion-3.jpg">Suite Executive Le Meridien - Cama extragrande</option>
                                                 </select>    <br>
 
-                                                <label class="form-label" for="descripcion">Descripci髇</label>
-                                                <textarea class="col-12 form-control" for="descripcion" name="descripcion" placeholder="Escribe una descripci髇"></textarea><br>
+                                                <label class="form-label">Descripci贸n</label>
+                                                <textarea class="col-12 form-control" for="descripcion" name="descripcion" placeholder="Escribe una descripci贸n"></textarea><br>
 
-                                                <label class="form-label" for="personas m醲imas">Personas M醲imas</label>
+                                                <label class="form-label">Personas M谩ximas</label>
                                                 <input class="form-control" type="number" name="personas_maximas"/> <br>
 
-                                                <label class="form-label" for="disponibilidad">Disponibilidad</label>
+                                                <label class="form-label">Disponibilidad</label>
                                                 <select class="form-select" name="disponibilidad">           
                                                     <option value="Disponible">Disponible</option>
                                                     <option value="Ocupado">Ocupado</option>
                                                     <option value="Limpieza">En Limpieza</option>
                                                 </select> <br>
 
-                                                <label class="form-label" for="estrellas">Estrellas</label>
+                                                <label class="form-label">Estrellas</label>
                                                 <select class="form-select" name="estrellas">           
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -175,11 +178,106 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <br>
+                        <h1>Listado de Servicios</h1>
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th>C贸digo</th>
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Horario Inicio</th>
+                                                <th>Horario Fin</th>
+                                                <th>Ambiente</th>
+                                                <th>Estado</th>
+                                                <th>Personas M谩ximas</th>
+                                                <th>Acci贸n</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot class="text-center">
+                                            <tr>
+                                                <th>C贸digo</th>
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Horario Inicio</th>
+                                                <th>Horario Fin</th>
+                                                <th>Ambiente</th>
+                                                <th>Estado</th>
+                                                <th>Personas M谩ximas</th>
+                                                <th>Acci贸n</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                           <% for (Servicio servicio : servicios) {%> 
+                                            <tr>
+                                                <td class="text-center"><%= servicio.getId_servicio()%></td>
+                                                <td><%= servicio.getNombreServicio()%></td>
+                                                <td><%= servicio.getPrecio()%></td>
+                                                <td><%= servicio.getHorariInicio()%></td>
+                                                <td><%= servicio.getHorarioFinal()%></td>
+                                                <td><%= servicio.getAmbiente()%></td>
+                                                <td><%= servicio.getEstado()%></td>
+                                                <td class="text-center"><%= servicio.getPersonasMaximas()%></td>
+                                                <td style="text-align: center;">
+                                                    <a class="btn btn-success" href="${pageContext.request.contextPath}/ServicioControlador?accion=EditService&id=<%= servicio.getId_servicio()%>">Editar</a> <br>
+                                                    <a class="btn btn-danger" href="${pageContext.request.contextPath}/ServicioControlador?accion=eliminar&id=<%= servicio.getId_servicio()%>">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                           <% }%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <h1>Agregar Servicio</h1>    
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card-body shadow mb-4">
+                                    <div class="container-fluid">
+                                        <div class="row justify-content-between my-4">
+                                            <form action="${pageContext.request.contextPath}/ServicioControlador?accion=AddService" method="POST">
+                                                <br>
+                                                <label class="form-label" for="nombre">Nombre</label>
+                                                <input class="form-control" type="text" name="nombre_servicio"/>
+                                                <br>  
+                                                <label class="form-label" for="precio">Precio</label>
+                                                <input class="form-control" type="number" name="precio"/><br>
+                                                
+                                                <label class="form-label" for="nombre">Horario Inicio</label>
+                                                <input class="form-control" type="text" name="horario_inicio"/>
+                                                <br> 
+                                                <label class="form-label" for="nombre">Horario Fin</label>
+                                                <input class="form-control" type="text" name="horario_fin"/> <br>
 
+                                                 <label class="form-label" for="nombre">Ambiente</label>
+                                                <input class="form-control" type="text" name="ambiente"/> <br>
+                                                
+                                                <label class="form-label">Estado</label>
+                                                <select class="form-select" name="estado">           
+                                                    <option value="Disponible">Disponible</option>
+                                                    <option value="Ocupado">Ocupado</option>
+                                                    <option value="Limpieza">En Limpieza</option>
+                                                </select><br>
 
+                                                <label class="form-label">Personas M谩ximas</label>
+                                                <input class="form-control" type="number" name="personas_maximas"/> <br>
 
-
-
+                                                <input class="btn btn-primary col-12 mx-auto" type="submit" value="Agregar"/>
+                                                <br><br>
+                                            </form> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="../img/banner_agregar_habitacion.png" alt="" width="100%"/>
+                            </div>
+                        </div>    
+                    /*Aqui acaba el codigo supongo*/
                     </div>
                 </div>
             </div>     
