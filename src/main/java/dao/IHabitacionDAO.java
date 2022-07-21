@@ -11,6 +11,8 @@ public interface IHabitacionDAO {
     public List<Habitacion> listar();
 
     public Habitacion listarId(int id) throws SQLException;
+    
+     public Habitacion obtenerHabitacion(int id) throws SQLException;
 
     public List<Habitacion> listarPorRecomendacion(int adultos, int ninos) throws SQLException;
 
