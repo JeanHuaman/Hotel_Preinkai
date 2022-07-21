@@ -246,5 +246,30 @@ public class HabitacionDAO implements IHabitacionDAO {
 
         return h;
     }
+    
+    @Override
+    public int cantidadHabitaciones() {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        int cantidadHabitaciones=0;
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IHabitacionDAO.CANTIDAD_HABITACION);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                cantidadHabitaciones = rs.getInt(1);
+            }
+                                    
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return cantidadHabitaciones;
+    }
 
 }
