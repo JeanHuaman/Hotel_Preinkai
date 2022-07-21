@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.Conexion;
 import modelo.Habitacion;
 
 public class HabitacionDAO implements IHabitacionDAO {
@@ -17,12 +19,16 @@ public class HabitacionDAO implements IHabitacionDAO {
             + "imagen,descripcion,personas_maximas, disponibilidad,estrellas FROM habitacion h "
             + "INNER JOIN tipo_habitacion th on th.id_tipohabitacion=h.id_tipohabitacion "
             + "WHERE id_habitacion =?";
+    private static final String EDIT_HABITACION_POR_ID = "SELECT id_habitacion,th.id_tipohabitacion,id_piso,precio,"
+            + "imagen,descripcion,personas_maximas, disponibilidad,estrellas FROM habitacion h "
+            + "INNER JOIN tipo_habitacion th on th.id_tipohabitacion=h.id_tipohabitacion "
+            + "WHERE id_habitacion =";
     private static final String SELECT_HABITACION_POR_RECOMENDACION = "SELECT id_habitacion,nombre,id_piso,precio,"
             + "imagen,descripcion,personas_maximas, disponibilidad,estrellas FROM habitacion h "
             + "INNER JOIN tipo_habitacion th on th.id_tipohabitacion=h.id_tipohabitacion "
             + "WHERE personas_maximas=";
     private static final String INSERT_HABITACION = "INSERT INTO habitacion(id_tipohabitacion, id_piso, precio, imagen, descripcion, personas_maximas, disponibilidad, estrellas) VALUES (?,?,?,?,?,?,?,?)";
-    private static final String UPDATE_HABITACION = "UPDATE habitacion SET id_tipohabitacion=?,id_piso=?,precio=?,imagen=?,descripcion=?,personas_maximas=?,disponibilidad=?, estrellas=? WHERE id_habitacion=?";
+    private static final String UPDATE_HABITACION = "UPDATE habitacion SET id_tipohabitacion=?,id_piso=?,precio=?,descripcion=?,personas_maximas=?,disponibilidad=?, estrellas=? WHERE id_habitacion=?";
     private static final String DELETE_HABITACION = "DELETE FROM habitacion WHERE id_habitacion=?";
     Connection conn = null;
     PreparedStatement stmt = null;
@@ -55,6 +61,7 @@ public class HabitacionDAO implements IHabitacionDAO {
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
+            JOptionPane.showMessageDialog(null, ex);
         }
         return habitaciones;
     }
@@ -167,14 +174,13 @@ public class HabitacionDAO implements IHabitacionDAO {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(UPDATE_HABITACION);
             stmt.setInt(1, habitacion.getId_tipohabitacion());
-
-            stmt.setInt(3, habitacion.getId_piso());
-            stmt.setDouble(4, habitacion.getPrecio());
-            stmt.setString(5, habitacion.getImagen());
-            stmt.setString(6, habitacion.getDescripcion());
-            stmt.setInt(7, habitacion.getPersonas_maximas());
-            stmt.setString(8, habitacion.getDisponibilidad());
-            stmt.setInt(8, habitacion.getEstrellas());
+            stmt.setInt(2, habitacion.getId_piso());
+            stmt.setDouble(3, habitacion.getPrecio());
+            stmt.setString(4, habitacion.getDescripcion());
+            stmt.setInt(5, habitacion.getPersonas_maximas());
+            stmt.setString(6, habitacion.getDisponibilidad());
+            stmt.setInt(7, habitacion.getEstrellas());
+            stmt.setInt(8,habitacion.getId_habitacion());
             rows = stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -208,36 +214,37 @@ public class HabitacionDAO implements IHabitacionDAO {
         return rows;
     }
 
-
-/**
- *
- * @author JEAN
- */
-
-
     @Override
-    public int cantidadHabitaciones() {
-        Connection conn=null;
-        PreparedStatement stmt=null;
-        ResultSet rs=null;
-        int cantidadHabitaciones=0;
+    public Habitacion obtenerHabitacion(int id) throws SQLException {
+        Habitacion h = new Habitacion();
+
+        String sql = null;
+        estadoOperacion = false;
+        conn = Conexion.getConexion();
+
         try {
-            conn = Conexion.getConexion();
-            stmt = conn.prepareStatement(IHabitacionDAO.CANTIDAD_HABITACION);
+            sql = EDIT_HABITACION_POR_ID + id;
+            stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
-            while(rs.next())
-            {
-                cantidadHabitaciones = rs.getInt(1);
+
+            if (rs.next()) {
+                h.setId_habitacion(rs.getInt(1));
+                h.setId_tipohabitacion(rs.getInt(2));
+                h.setId_piso(rs.getInt(3));
+                h.setPrecio(rs.getDouble(4));
+                h.setImagen(rs.getString(5));
+                h.setDescripcion(rs.getString(6));
+                h.setPersonas_maximas(rs.getInt(7));
+                h.setDisponibilidad(rs.getString(8));
+                h.setEstrellas(rs.getInt(9));
+
             }
-                                    
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }finally{
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return cantidadHabitaciones ;
+
+        return h;
     }
-    
+
 }
