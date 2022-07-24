@@ -241,6 +241,10 @@ public class HabitacionDAO implements IHabitacionDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return h;

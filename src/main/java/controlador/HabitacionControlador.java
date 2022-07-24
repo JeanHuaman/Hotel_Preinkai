@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,16 +54,19 @@ public class HabitacionControlador extends HttpServlet {
             }
             break;
             case "EditRoom":
+            {
                 try {
-                h = hdao.obtenerHabitacion(Integer.parseInt(id));
+                    h = hdao.obtenerHabitacion(Integer.parseInt(id));
+                } catch (SQLException ex) {
+                    Logger.getLogger(HabitacionControlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
                 System.out.println(h);
                 request.setAttribute("habitacion", h);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/vistas/editarHabitacion.jsp");
                 requestDispatcher.forward(request, response);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
             break;
+
             case "eliminar":
                 this.eliminarHabitacion(request, response);
                 break;
@@ -147,22 +152,16 @@ public class HabitacionControlador extends HttpServlet {
 
     }
 
-    private void editarHabitacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void editarHabitacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println("Editar id: " + id);
         HabitacionDAO habitacionDAO = new HabitacionDAO();
         Habitacion h = new Habitacion();
-        try {
-            h = habitacionDAO.obtenerHabitacion(id);
-            //System.out.println(h);
-            request.setAttribute("habitacion", h);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/vistas/editarHabitacion.jsp");
-            requestDispatcher.forward(request, response);
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        h = habitacionDAO.obtenerHabitacion(id); // TODO Auto-generated catch block
+        //System.out.println(h);
+        request.setAttribute("habitacion", h);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/vistas/editarHabitacion.jsp");
+        requestDispatcher.forward(request, response);
 
     }
     private void modificarHabitacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

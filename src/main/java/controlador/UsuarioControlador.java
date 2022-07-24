@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import dao.DetalleServicioDAO;
+import dao.HabitacionDAO;
 import dao.ReservaDAO;
 import dao.ServicioDAO;
 import javax.servlet.ServletException;
@@ -29,8 +30,12 @@ import modelo.Reserva;
 import modelo.Servicio;
 import modelo.Usuario;
 import dao.IDetalleServicioDAO;
+import dao.IHabitacionDAO;
 import dao.IReservaDAO;
 import dao.IServicioDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.Habitacion;
 
 /**
  *
@@ -53,9 +58,17 @@ public class UsuarioControlador extends HttpServlet{
         if(accion!=null)
         {
             switch(accion){
-//                case "editar":  
-//                    this.editarProducto(request, response);
-//                    break;
+                case "agregarHabitacion":                
+                {
+                    try {
+                        this.agregarHabitacion(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                    break;
+
+
 //                case "eliminar":
 //                    this.eliminarProducto(request,response);
 //                    break;   
@@ -220,8 +233,7 @@ public class UsuarioControlador extends HttpServlet{
         IReservaDAO controladorReserva = new ReservaDAO();
         IDetalleServicioDAO controladorDetalle = new DetalleServicioDAO();
         
-        Usuario usuario= (Usuario) request.getAttribute("usuario");
-        usuario = new Usuario(1,1,"74883021","jean","933610015","niño jesus","jean@gmail.com","123456","usuario");
+        Usuario usuario= (Usuario) sesion.getAttribute("usuario");
         if(usuario != null)
         {
             List<Servicio> carritoServicios = (List<Servicio>) sesion.getAttribute("carritoServicios");
@@ -245,9 +257,25 @@ public class UsuarioControlador extends HttpServlet{
             sesion.setAttribute("carritoServicios", null);
             sesion.setAttribute("totalServicio",0);
             sesion.setAttribute("fechaServicio", "");
-           request.getRequestDispatcher("index.jsp").forward(request, response); 
+           response.sendRedirect("index.jsp");
         }
         
+    }
+
+    private void agregarHabitacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        HttpSession sesion = request.getSession();
+        IHabitacionDAO Ihabitacion = new HabitacionDAO();
+        List<Habitacion> carritoHabitacion = (List<Habitacion>) sesion.getAttribute("carritoHabitacion");
+        int idHabitacion = Integer.parseInt(request.getParameter("idHabitacion"));
+        Habitacion habitacion = Ihabitacion.obtenerHabitacion(idHabitacion);
+        if(carritoHabitacion==null)
+        {
+            carritoHabitacion = new ArrayList();
+            sesion.setAttribute("carritoHabitacion", carritoHabitacion);
+        }
+        
+        carritoHabitacion.add(habitacion);
+        response.sendRedirect("index.jsp");
     }
     
 }

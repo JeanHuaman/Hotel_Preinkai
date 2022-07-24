@@ -10,7 +10,7 @@
 
 %>
 <!doctype html>
-<html lang="en">
+<html lang="en">  
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -144,13 +144,13 @@
                                         <thead>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripci贸n</th>
+                                                <th>Descripci髇</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripci贸n</th>
+                                                <th>Descripci髇</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -183,14 +183,14 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">Descripci贸n</th>
+                                                <th scope="col">Descripci髇</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Exteriores</td>
-                                                <td>Terraza / sol谩rium, Terraza, Jard铆n</td>
+                                                <td>Terraza , Terraza, Jard憝n</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
@@ -205,7 +205,7 @@
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <td>Internet</td>
-                                                <td>Hay conexi贸n a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
+                                                <td>Hay conexi髇 a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
@@ -214,8 +214,8 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
-                                                <td>Servicios de recepci贸n</td>
-                                                <td>Guardaequipaje, Informaci贸n tur铆stica, Recepci贸n 24 horas</td>
+                                                <td>Servicios de recepci髇</td>
+                                                <td>Guardaequipaje, Informaci髇 tur铆stica, Recepci髇 24 horas</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">7</th>
@@ -235,7 +235,7 @@
                                             <tr>
                                                 <th scope="row">10</th>
                                                 <td>Seguridad</td>
-                                                <td>Extintores, C谩maras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
+                                                <td>Extintores, C醡aras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
                                             </tr>
                                         </tbody>
                                     </table>
