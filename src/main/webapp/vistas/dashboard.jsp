@@ -42,14 +42,14 @@
         <link href="${pageContext.request.contextPath}/estilos/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <header class="py-3">
-            <nav class="container d-md-flex justify-content-md-between align-items-md-center">
-                <div class="text-center">
-                    <img src="../img/preinkai.png" alt="logo">
+        <header>
+            <nav class="p-3 d-md-flex justify-content-md-between align-items-md-center bg-light">
+                <div class="text-center">                    
+                    <a href="${pageContext.request.contextPath}/index.jsp"><p class="fs-2 link-secondary">HOTEL PREINKAI</p></a> 
                 </div>
                 <div class="d-flex justify-content-around">
                     <div class="px-2">
-                        <a class="btn btn-primary" href="">Ver Reservación</a>
+                        <a class="btn btn-primary" href="">Ver Reservaciï¿½n</a>
                     </div>
                     <%   Usuario usuario = (Usuario) session.getAttribute("usuario");
                         if (usuario != null) {
@@ -61,7 +61,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ReservacionControlador?accion=VerReservacion&idUsuario=<%= usuario.getIdUsuario()%>">Ver Reservacion</a></li>
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesiï¿½n</a></li>
                         </ul>
                     </li>
                     </ul>
@@ -71,7 +71,7 @@
                 </div>
             </nav>  
         </header>
-        <main class="container mx-auto row flex-column flex-md-row">
+        <main class="container mx-auto row flex-column flex-md-row my-2">
             <section class="optionDashboard col-12 col-md-3">
                 <div class="list-group">
                     <button type="button" class="option" aria-current="true">

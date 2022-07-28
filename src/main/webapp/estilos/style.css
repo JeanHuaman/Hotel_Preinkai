@@ -2,7 +2,7 @@ a{
     text-decoration: none;
 }
 .card_item{
-    width: 16rem;
+    width: 14rem;
     margin-left: auto;
     margin-right: auto;
     font-size: 1.2rem;
@@ -44,7 +44,7 @@ a{
     min-height:80px;
 }
 .boton{
-    width: 190px;
+    width: 170px;
 }
 .grid{
     display: grid;

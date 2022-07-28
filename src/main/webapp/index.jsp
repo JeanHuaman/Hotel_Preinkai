@@ -12,7 +12,7 @@
 
 %>
 <!doctype html>
-<html lang="en">
+<html lang="en">  
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,14 +57,14 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ReservacionControlador?accion=VerReservacion&idUsuario=<%= usuario.getIdUsuario()%>">Ver Reservacion</a></li>
-                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesiï¿½n</a></li>
                                     </ul>
                                 </li>
                                 <%
                                 } else {
                                 %>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar Sesión</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar Sesiï¿½n</a>
                                 </li>
                                 <%
                                     }
@@ -98,27 +98,26 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <p>Entrada</p> 
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" name="fechaEntrada" required value="${fechaEntrada}">
                                         </div>
                                         <div class="col-6">
                                             <p>Salida</p> 
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" name="fechaSalida" required value="${fechaSalida}">
                                         </div> 
                                     </div>
                                     <br>
-                                    <p class="card-text">Su reserva será de 1 noche(s)</p>
+                                    <p class="card-text">Su reserva serï¿½ de 1 noche(s)</p>
                                     <div class="row">
                                         <div class="col-6">
                                             <p>Adulto(s)</p> 
-                                            <input type="number" class="form-control" name="cantAdultos" min="1">
+                                            <input type="number" class="form-control" name="cantAdultos" min="0">
                                         </div>
                                         <div class="col-6">
-                                            <p>Niño(s)</p> 
+                                            <p>Niï¿½o(s)</p> 
                                             <input type="number" class="form-control" name="cantNinos" min="0">
                                         </div> 
                                     </div>
                                 </div>
-
                                 <div class="card-footer text-muted">
                                     <input type="submit" class="btn btn-primary" value="Ver Precios">
                                 </div>
@@ -129,6 +128,7 @@
             </div>
         </section>
         <br> <br>
+        ${carritoHabitacion}
         <section id="habitaciones">
             <div class="container">
                 <div class="row">
@@ -143,13 +143,13 @@
                                         <thead>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripción</th>
+                                                <th>Descripciï¿½n</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripción</th>
+                                                <th>Descripciï¿½n</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -181,14 +181,14 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">Descripción</th>
+                                                <th scope="col">Descripciï¿½n</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Exteriores</td>
-                                                <td>Terraza / solárium, Terraza, Jarín</td>
+                                                <td>Terraza , Terraza, JardÃ­n</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
@@ -203,7 +203,7 @@
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <td>Internet</td>
-                                                <td>Hay conexión a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
+                                                <td>Hay conexiï¿½n a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
@@ -212,13 +212,13 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
-                                                <td>Servicios de recepción</td>
-                                                <td>Guardaequipaje, Información turística, Recepción 24 horas</td>
+                                                <td>Servicios de recepciÃ³n</td>
+                                                <td>Guardaequipaje, InformaciÃ³n turÃ­stica, RecepciÃ³n 24 horas</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">7</th>
                                                 <td>Servicios de limpieza</td>
-                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavandería De pago</td>
+                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavanderï¿½a De pago</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">8</th>
@@ -233,7 +233,7 @@
                                             <tr>
                                                 <th scope="row">10</th>
                                                 <td>Seguridad</td>
-                                                <td>Extintores, Cámaras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
+                                                <td>Extintores, Cï¿½maras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -251,8 +251,8 @@
     <footer id="contactanos">
         <div class="footer-top text-center">
             <div class="container">
-                <h2>¿En qué te podemos ayudar?</h2>
-                <p>Déjanos tu email y un operador te ofrecerá la mejor opción disponible según tu búsqueda</p>
+                <h2>ï¿½En quï¿½ te podemos ayudar?</h2>
+                <p>Dï¿½janos tu email y un operador te ofrecerï¿½ la mejor opciï¿½n disponible segï¿½n tu bï¿½squeda</p>
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="card">
@@ -272,7 +272,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            Dirección: <label style="color:red;">(*)</label>
+                                            Direcciï¿½n: <label style="color:red;">(*)</label>
                                             <input type="text" class="form-control" name="txtDireccion" value="${usuario.getDireccion()}">
                                         </div>
                                         <div class="col-sm-6">
@@ -283,7 +283,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            Descripción: <label style="color:red;">(*)</label>
+                                            Descripciï¿½n: <label style="color:red;">(*)</label>
                                             <textarea class="form-control" name="txtDescripcion" required></textarea>
                                         </div>
                                     </div>
@@ -307,7 +307,7 @@
         <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright © 2022 PREINKAI. All rights reserved.</p>
+                    <p class="pull-left">Copyright ï¿½ 2022 PREINKAI. All rights reserved.</p>
                 </div>
             </div>
         </div>

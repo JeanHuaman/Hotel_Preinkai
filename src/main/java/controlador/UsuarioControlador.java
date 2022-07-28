@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import dao.DetalleReservaDAO;
 import dao.HabitacionFavoritaDAO;
 import dao.UsuarioDAO;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import dao.DetalleServicioDAO;
+import dao.HabitacionDAO;
+import dao.IDetalleReservaDAO;
 import dao.ReservaDAO;
 import dao.ServicioDAO;
 import javax.servlet.ServletException;
@@ -29,12 +32,15 @@ import modelo.Reserva;
 import modelo.Servicio;
 import modelo.Usuario;
 import dao.IDetalleServicioDAO;
+import dao.IHabitacionDAO;
 import dao.IReservaDAO;
 import dao.IServicioDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import servicios.Excel;
 import servicios.Mail;
+import modelo.DetalleReserva;
+import modelo.Habitacion;
 
 /**
  *
@@ -64,6 +70,14 @@ public class UsuarioControlador extends HttpServlet {
 //                case "eliminar":
 //                    this.eliminarProducto(request,response);
 //                    break;   
+                case "seleccionarHabitacion": {
+                    try {
+                        this.seleccionarHabitacion(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
                 case "GoToLogin":
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("vistas/login.jsp");
                     requestDispatcher.forward(request, response);
@@ -98,12 +112,23 @@ public class UsuarioControlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion != null) {
             switch (accion) {
-                case "pagarServicio":
-                    this.pagarServicio(request, response);
-                    break;
                 case "agregarServicio":
                     this.agregarServicio(request, response);
                     break;
+                case "pagar":
+                    this.pagarReserva(request, response);
+                    break;
+                case "agregarServicio":
+                    this.agregarServicio(request, response);
+                    break;                    
+                case "agregarHabitacion": {
+                    try {
+                        this.agregarHabitacion(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
                 case "AddUser":
                     this.agregarUsuario(request, response);
                     break;
@@ -241,37 +266,94 @@ public class UsuarioControlador extends HttpServlet {
         request.getRequestDispatcher("vistas/servicios.jsp").forward(request, response);
     }
 
-    private void pagarServicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void pagarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         IReservaDAO controladorReserva = new ReservaDAO();
-        IDetalleServicioDAO controladorDetalle = new DetalleServicioDAO();
-
-        Usuario usuario = (Usuario) request.getAttribute("usuario");
-        usuario = new Usuario(1, 1, "74883021", "jean", "933610015", "niño jesus", "jean@gmail.com", "123456", "usuario");
+        String tipoReserva = request.getParameter("tipo");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        String tipoPago = request.getParameter("tipoPago");
+        String tipoTarjeta = request.getParameter("tipoTarjeta");
         if (usuario != null) {
-            List<Servicio> carritoServicios = (List<Servicio>) sesion.getAttribute("carritoServicios");
-            double totalServicios = (double) sesion.getAttribute("totalServicio");
+            if (tipoReserva.equalsIgnoreCase("servicio")) {
+                IDetalleServicioDAO controladorDetalle = new DetalleServicioDAO();
+                List<Servicio> carritoServicios = (List<Servicio>) sesion.getAttribute("carritoServicios");
+                double totalServicios = (double) sesion.getAttribute("totalServicio");
 
-            String tipoPago = request.getParameter("tipoPago");
-            String tipoTarjeta = request.getParameter("tipoTarjeta");
-            String fecha = (String) sesion.getAttribute("fechaServicio");
-            int cantidad = 4;
+                String fecha = (String) sesion.getAttribute("fechaServicio");
+                int cantidad = 4;
 
-            Reserva reserva = new Reserva(usuario.getIdUsuario(), totalServicios, tipoPago, tipoTarjeta, fecha, fecha, cantidad);
-            controladorReserva.insertarReserva(reserva);
-            int idReserva = controladorReserva.obtenerIdReserva();
-            for (Servicio s : carritoServicios) {
+                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalServicios, tipoPago, tipoTarjeta, fecha, fecha, cantidad);
+                controladorReserva.insertarReserva(reserva);
+                int idReserva = controladorReserva.obtenerIdReserva();
+                for (Servicio s : carritoServicios) {
 
-                DetalleServicio detalle = new DetalleServicio(idReserva, s.getId_servicio(), usuario.getDni(), usuario.getNombre());
-                controladorDetalle.insertarDetalleServicio(detalle);
+                    DetalleServicio detalle = new DetalleServicio(idReserva, s.getId_servicio(), usuario.getDni(), usuario.getNombre());
+                    controladorDetalle.insertarDetalleServicio(detalle);
+                }
+                sesion.setAttribute("carritoServicios", null);
+                sesion.setAttribute("totalServicio", 0);
+                sesion.setAttribute("fechaServicio", "");
             }
 
-            sesion.setAttribute("carritoServicios", null);
-            sesion.setAttribute("totalServicio", 0);
-            sesion.setAttribute("fechaServicio", "");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            if (tipoReserva.equalsIgnoreCase("habitacion")) {
+                IDetalleReservaDAO IDetalleReserva = new DetalleReservaDAO();
+                List<Habitacion> carritoHabitaciones = (List<Habitacion>) sesion.getAttribute("carritoHabitacion");
+                double totalHabitaciones = (double) sesion.getAttribute("totalHabitacion");
+                String fechaEntrada = (String) sesion.getAttribute("fechaEntrada");
+                String fechaSalida = (String) sesion.getAttribute("fechaSalida");
+                int totalHuespedes = (int) sesion.getAttribute("totalHuespedes");
+                
+                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalHabitaciones, tipoPago, tipoTarjeta, fechaEntrada, fechaSalida, totalHuespedes);
+                controladorReserva.insertarReserva(reserva);
+                int idReserva = controladorReserva.obtenerIdReserva();
+                
+                for(Habitacion s : carritoHabitaciones) {
+
+                    DetalleReserva detalle = new DetalleReserva(idReserva, s.getId_habitacion(), usuario.getDni(), usuario.getNombre());
+                    IDetalleReserva.insertarDetalleReserva(detalle);
+                }
+                sesion.setAttribute("carritoHabitacion", null);
+                sesion.setAttribute("totalHabitacion", 0);
+                sesion.setAttribute("fechaEntrada", "");
+                sesion.setAttribute("fechaSalida", "");
+            }
+
+            response.sendRedirect("index.jsp");
         }
 
+    }
+
+    private void agregarHabitacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        HttpSession sesion = request.getSession();
+        IHabitacionDAO Ihabitacion = new HabitacionDAO();
+        List<Habitacion> carritoHabitacion = (List<Habitacion>) sesion.getAttribute("carritoHabitacion");
+        int idHabitacion = Integer.parseInt(request.getParameter("idHabitacion"));
+        Habitacion habitacion = Ihabitacion.obtenerHabitacion(idHabitacion);
+        double totalHabitacion = 0;
+        int totalHuespedes =0;
+        if (carritoHabitacion == null) {
+            carritoHabitacion = new ArrayList();
+            sesion.setAttribute("carritoHabitacion", carritoHabitacion);
+        }
+
+        carritoHabitacion.add(habitacion);
+
+        for (Habitacion h : carritoHabitacion) {
+            totalHabitacion = h.getPrecio() + totalHabitacion;
+            totalHuespedes = h.getPersonas_maximas() + totalHuespedes;
+        }
+        sesion.setAttribute("totalHabitacion", totalHabitacion);
+        sesion.setAttribute("totalHuespedes", totalHuespedes);
+
+        response.sendRedirect("index.jsp");
+    }
+
+    private void seleccionarHabitacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        IHabitacionDAO Ihabitacion = new HabitacionDAO();
+        int idHabitacion = Integer.parseInt(request.getParameter("idHabitacion"));
+        Habitacion habitacion = Ihabitacion.obtenerHabitacion(idHabitacion);
+        request.setAttribute("habitacion", habitacion);
+        request.getRequestDispatcher("vistas/reservahabitacion.jsp").forward(request, response);
     }
 
 }
