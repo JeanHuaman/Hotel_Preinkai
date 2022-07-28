@@ -42,10 +42,10 @@
         <link href="${pageContext.request.contextPath}/estilos/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <header class="py-3">
-            <nav class="container d-md-flex justify-content-md-between align-items-md-center">
-                <div class="text-center">
-                    <img src="img/Logo.png" alt="logo">
+        <header>
+            <nav class="p-3 d-md-flex justify-content-md-between align-items-md-center bg-light">
+                <div class="text-center">                    
+                    <a href="${pageContext.request.contextPath}/index.jsp"><p class="fs-2 link-secondary">HOTEL PREINKAI</p></a> 
                 </div>
                 <div class="d-flex justify-content-around">
                     <div class="px-2">
@@ -71,7 +71,7 @@
                 </div>
             </nav>  
         </header>
-        <main class="container mx-auto row flex-column flex-md-row">
+        <main class="container mx-auto row flex-column flex-md-row my-2">
             <section class="optionDashboard col-12 col-md-3">
                 <div class="list-group">
                     <button type="button" class="option" aria-current="true">

@@ -70,15 +70,6 @@ public class UsuarioControlador extends HttpServlet {
                     }
                 }
                 break;
-                case "agregarHabitacion": {
-                    try {
-                        this.agregarHabitacion(request, response);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                break;
-
                 case "GoToLogin":
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("vistas/login.jsp");
                     requestDispatcher.forward(request, response);
@@ -105,7 +96,15 @@ public class UsuarioControlador extends HttpServlet {
                     break;
                 case "agregarServicio":
                     this.agregarServicio(request, response);
-                    break;
+                    break;                    
+                case "agregarHabitacion": {
+                    try {
+                        this.agregarHabitacion(request, response);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
                 case "AddUser":
                     this.agregarUsuario(request, response);
                     break;
@@ -262,13 +261,11 @@ public class UsuarioControlador extends HttpServlet {
                 IDetalleReservaDAO IDetalleReserva = new DetalleReservaDAO();
                 List<Habitacion> carritoHabitaciones = (List<Habitacion>) sesion.getAttribute("carritoHabitacion");
                 double totalHabitaciones = (double) sesion.getAttribute("totalHabitacion");
-                int adulto = (int) sesion.getAttribute("cantidadAdulto");
-                int ninos = (int) sesion.getAttribute("cantidadNinos");
                 String fechaEntrada = (String) sesion.getAttribute("fechaEntrada");
                 String fechaSalida = (String) sesion.getAttribute("fechaSalida");
-                int cantidad = adulto + ninos;
+                int totalHuespedes = (int) sesion.getAttribute("totalHuespedes");
                 
-                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalHabitaciones, tipoPago, tipoTarjeta, fechaEntrada, fechaSalida, 5);
+                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalHabitaciones, tipoPago, tipoTarjeta, fechaEntrada, fechaSalida, totalHuespedes);
                 controladorReserva.insertarReserva(reserva);
                 int idReserva = controladorReserva.obtenerIdReserva();
                 
@@ -295,6 +292,7 @@ public class UsuarioControlador extends HttpServlet {
         int idHabitacion = Integer.parseInt(request.getParameter("idHabitacion"));
         Habitacion habitacion = Ihabitacion.obtenerHabitacion(idHabitacion);
         double totalHabitacion = 0;
+        int totalHuespedes =0;
         if (carritoHabitacion == null) {
             carritoHabitacion = new ArrayList();
             sesion.setAttribute("carritoHabitacion", carritoHabitacion);
@@ -304,8 +302,10 @@ public class UsuarioControlador extends HttpServlet {
 
         for (Habitacion h : carritoHabitacion) {
             totalHabitacion = h.getPrecio() + totalHabitacion;
+            totalHuespedes = h.getPersonas_maximas() + totalHuespedes;
         }
         sesion.setAttribute("totalHabitacion", totalHabitacion);
+        sesion.setAttribute("totalHuespedes", totalHuespedes);
 
         response.sendRedirect("index.jsp");
     }

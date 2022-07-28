@@ -26,15 +26,15 @@
                         <div class="mb-3 dimension">
                             <label for="exampleFormControlInput1" class="form-label">Tipo de Pago</label>
                             <select class="form-select" aria-label="Default select example" name="tipoPago">
-                                <option value="1">Efectivo</option>
-                                <option value="2">Tarjeta</option>
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Tarjeta">Tarjeta</option>
                             </select>
                         </div>
                         <div class="mb-3 dimension">
                             <label for="exampleFormControlInput1" class="form-label">Tipo de Tarjeta</label>
                             <select class="form-select" aria-label="Default select example" name="tipoTarjeta">
-                                <option value="1">Visa</option>
-                                <option value="2">Mastercard</option>
+                                <option value="Visa">Visa</option>
+                                <option value="Mastercard">Mastercard</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Titular de la tarjeta</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" value="${usuario.getNombre()}">
                         </div>
                         <div class="mb-3 ">
                             <button class="btn btn-primary w-100" type="submit">Reservar y pagar</button>

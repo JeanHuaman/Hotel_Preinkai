@@ -87,6 +87,7 @@ public class HabitacionControlador extends HttpServlet {
                 HttpSession sesion=request.getSession();
                 int cantAdultos = Integer.parseInt(request.getParameter("cantAdultos"));
                 int cantNinos = Integer.parseInt(request.getParameter("cantNinos"));
+                
                 String fechaEntrada = request.getParameter("fechaEntrada");
                 String fechaSalida = request.getParameter("fechaSalida");
                 

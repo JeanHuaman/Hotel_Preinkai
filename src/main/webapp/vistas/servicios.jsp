@@ -20,21 +20,21 @@
     </head>
     <body>
         <header>            
-            <div class="container mx-auto row my-2 text-center">
+            <nav class="p-3 d-md-flex text-center align-items-md-center bg-light">
                 <div class="col-12 col-sm-3">
-                    <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-primary fs-3">Regresar</a>
+                    <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-primary fs-5">Regresar</a>
                 </div>
                 <h1 class="text-center col-12 col-sm-8">Reserva de Servicios</h1>
-            </div>
+            </nav>
             <div class="my-2 container mx-auto">
-                <form class="row justify-content-center align-items-center me-0 justify-content-sm-around" action="${pageContext.request.contextPath}/ServicioControlador?accion=filtrarServicio" method="POST">
-                    <div class="px-0 fs-4 col-8 d-flex justify-content-between col-sm-4">
+                <form class="row justify-content-center align-items-center me-0 justify-content-sm-around fs-5" action="${pageContext.request.contextPath}/ServicioControlador?accion=filtrarServicio" method="POST">
+                    <div class="px-0 col-8 d-flex justify-content-center gap-2 col-sm-4">
                         <label>Fecha de Reserva </label>
-                        <input class="boton" name="fecha" type="date" value="${fechaServicio}">
+                        <input class="boton" name="fecha" type="date" value="${fechaServicio}" required>
                     </div>
-                    <div class="px-0 py-3 fs-4 col-8 d-flex justify-content-between col-sm-4">
+                    <div class="px-0 py-3 col-8 d-flex justify-content-center gap-2 col-sm-4">
                         <label>Servicios </label>
-                        <select name ="nombreServicio" class="boton">
+                        <select name ="nombreServicio" class="boton" required>
                             <%                                for (String nombreServicio : nombreServicios) {
                             %>
                             <option value="<%= nombreServicio%>"><%= nombreServicio%></option>
