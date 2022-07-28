@@ -80,6 +80,9 @@ public class ServicioControlador extends HttpServlet {
             case "AddService":
                 this.agregarServicio(request, response);
                 break;
+            case "filtrarServicio":
+                this.filtrarServicio(request, response);
+                break;
             default:
                 this.accionDefault(request, response);
                 break;
@@ -129,7 +132,7 @@ public class ServicioControlador extends HttpServlet {
         String estado = request.getParameter("estado");
         int personas_maximas = Integer.parseInt(request.getParameter("personas_maximas"));
 
-        Servicio servicio = new Servicio(nombre_servicio, precio, horario_inicio, horario_fin, ambiente, estado, personas_maximas,id_servicio);
+        Servicio servicio = new Servicio(nombre_servicio, precio, horario_inicio, horario_fin, ambiente, estado, personas_maximas, id_servicio);
 
         int registrosModificados = new ServicioDAO().actualizar(servicio);
         request.setAttribute("servicio", servicio);
@@ -151,20 +154,35 @@ public class ServicioControlador extends HttpServlet {
         int cantidadInserto = new ServicioDAO().insertar(servicio);
         response.sendRedirect("vistas/crudHabitaciones.jsp");
     }
-    public static List<String> listarServicios(){
-       IServicioDAO servicio = new ServicioDAO();
-       List<String> listaServicios = servicio.nombreServicios();
-       return listaServicios;
-   }
-    public static List<Servicio> listarServicioDefecto(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
+
+    public static List<String> listarServicios() {
+        IServicioDAO servicio = new ServicioDAO();
+        List<String> listaServicios = servicio.nombreServicios();
+        return listaServicios;
+    }
+
+    public static List<Servicio> listarServicioDefecto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         String nombreServicio = (String) sesion.getAttribute("nombreServicioActual");
         IServicioDAO controladorServicio = new ServicioDAO();
-        if(nombreServicio==null){
-            nombreServicio="tenis";
+        if (nombreServicio == null) {
+            nombreServicio = "tenis";
         }
         List<Servicio> servicios = controladorServicio.filtrarServicios(nombreServicio);
-        
+
         return servicios;
+    }
+
+    private void filtrarServicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
+        IServicioDAO controladorServicio = new ServicioDAO();
+        String fecha = request.getParameter("fecha");
+        String nombreServicio = request.getParameter("nombreServicio");
+        List<Servicio> servicios = controladorServicio.filtrarServicios(nombreServicio);
+        request.setAttribute("servicios", servicios);
+        sesion.setAttribute("nombreServicioActual", nombreServicio);
+        sesion.setAttribute("fechaServicio", fecha);
+
+        request.getRequestDispatcher("vistas/servicios.jsp").forward(request, response);
     }
 }
