@@ -169,7 +169,6 @@
                             </div>
                         </div>
                     </div> 
-
                     <div class="col-sm-6">
                         <h2>Servicios de PREINKAI</h2>
                         <!-- DataTales Example -->
@@ -262,11 +261,11 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             Nombre: <label style="color:red;">(*)</label>
-                                            <input type="text" class="form-control" name="txtNombre" value="<%= usuario.getNombre()%>">
+                                            <input type="text" class="form-control" name="txtNombre" value="${usuario.getNombre()}">
                                         </div>
                                         <div class="col-sm-6">
                                             Celular: <label style="color:red;">(*)</label>
-                                            <input type="text" class="form-control" name="txtCelular" value="<%= usuario.getCelular()%>">
+                                            <input type="text" class="form-control" name="txtCelular" value="${usuario.getCelular()}">
                                         </div>
 
                                     </div>
@@ -274,11 +273,11 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             Dirección: <label style="color:red;">(*)</label>
-                                            <input type="text" class="form-control" name="txtDireccion" value="<%= usuario.getDireccion()%>">
+                                            <input type="text" class="form-control" name="txtDireccion" value="${usuario.getDireccion()}">
                                         </div>
                                         <div class="col-sm-6">
                                             Correo: <label style="color:red;">(*)</label>
-                                            <input type="email" class="form-control" name="txtCorreo" value="<%= usuario.getEmail()%>">
+                                            <input type="email" class="form-control" name="txtCorreo" value="${usuario.getEmail()}">
                                         </div>
                                     </div>
                                     <br>
