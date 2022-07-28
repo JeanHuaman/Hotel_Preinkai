@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(description = "administra peticiones para la tabla servicio", urlPatterns = {"/ServicioControlador"})
 public class ServicioControlador extends HttpServlet {
@@ -155,4 +156,15 @@ public class ServicioControlador extends HttpServlet {
        List<String> listaServicios = servicio.nombreServicios();
        return listaServicios;
    }
+    public static List<Servicio> listarServicioDefecto(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
+        HttpSession sesion = request.getSession();
+        String nombreServicio = (String) sesion.getAttribute("nombreServicioActual");
+        IServicioDAO controladorServicio = new ServicioDAO();
+        if(nombreServicio==null){
+            nombreServicio="tenis";
+        }
+        List<Servicio> servicios = controladorServicio.filtrarServicios(nombreServicio);
+        
+        return servicios;
+    }
 }
