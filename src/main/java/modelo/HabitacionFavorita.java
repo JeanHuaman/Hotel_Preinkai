@@ -18,6 +18,11 @@ public class HabitacionFavorita {
         this.id_usuario = id_usuario;
         this.id_habitacion = id_habitacion;
     }
+    
+     public HabitacionFavorita(int id_usuario, int id_habitacion) {
+        this.id_usuario = id_usuario;
+        this.id_habitacion = id_habitacion;
+    }
 
     public HabitacionFavorita(String imagen, String descripcion, double precio) {
         this.imagen = imagen;

@@ -63,28 +63,28 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="text-center">
                                             <tr>
-                                                <th>C贸digo</th>
-                                                <th>Tipo de Habitaci贸n</th>
+                                                <th>C骴igo</th>
+                                                <th>Tipo de Habitaci髇</th>
                                                 <th>Disponibilidad</th>
                                                 <th>Piso</th>
                                                 <th>Precio</th>
-                                                <th>Descripci贸n</th>
-                                                <th>Personas M谩ximas</th>
+                                                <th>Descripci髇</th>
+                                                <th>Personas M醲imas</th>
                                                 <th>Estrellas</th>
-                                                <th>Acci贸n</th>
+                                                <th>Acci髇</th>
                                             </tr>
                                         </thead>
                                         <tfoot class="text-center">
                                             <tr>
-                                                 <th>C贸digo</th>
-                                                <th>Tipo de Habitaci贸n</th>
+                                                <th>C骴igo</th>
+                                                <th>Tipo de Habitaci髇</th>
                                                 <th>Disponibilidad</th>
                                                 <th>Piso</th>
                                                 <th>Precio</th>
-                                                <th>Descripci贸n</th>
-                                                <th>Personas M谩ximas</th>
+                                                <th>Descripci髇</th>
+                                                <th>Personas M醲imas</th>
                                                 <th>Estrellas</th>
-                                                <th>Acci贸n</th>
+                                                <th>Acci髇</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -111,7 +111,7 @@
                         </div>
                         <br>
                         <h1>
-                            Agregar Habitaci贸n
+                            Agregar Habitaci髇
                         </h1>
                         <div class="row">
                             <div class="col-sm-6">
@@ -129,9 +129,9 @@
 
                                                 <label class="form-label" for="piso">Piso</label>
                                                 <select class="form-select" name="id_piso">     
-                                                     <% for (Piso piso : pisos) {%>
+                                                    <% for (Piso piso : pisos) {%>
                                                     <option value="<%= piso.getIdPiso()%>"><%= piso.getIdPiso()%></option>
-                                                     <% }%>
+                                                    <% }%>
                                                 </select> <br>
 
                                                 <label class="form-label" for="precio">Precio</label>
@@ -144,10 +144,10 @@
                                                     <option value="http://localhost/habitaciones/habitacion-3.jpg">Suite Executive Le Meridien - Cama extragrande</option>
                                                 </select>    <br>
 
-                                                <label class="form-label">Descripci贸n</label>
+                                                <label class="form-label">Descripci髇</label>
                                                 <textarea class="col-12 form-control" for="descripcion" name="descripcion" placeholder="Escribe una descripci贸n"></textarea><br>
 
-                                                <label class="form-label">Personas M谩ximas</label>
+                                                <label class="form-label">Personas M醲imas</label>
                                                 <input class="form-control" type="number" name="personas_maximas"/> <br>
 
                                                 <label class="form-label">Disponibilidad</label>
@@ -186,32 +186,32 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="text-center">
                                             <tr>
-                                                <th>C贸digo</th>
+                                                <th>C骴igo</th>
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Horario Inicio</th>
                                                 <th>Horario Fin</th>
                                                 <th>Ambiente</th>
                                                 <th>Estado</th>
-                                                <th>Personas M谩ximas</th>
-                                                <th>Acci贸n</th>
+                                                <th>Personas M醲imas</th>
+                                                <th>Acci髇</th>
                                             </tr>
                                         </thead>
                                         <tfoot class="text-center">
                                             <tr>
-                                                <th>C贸digo</th>
+                                                <th>C骴igo</th>
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Horario Inicio</th>
                                                 <th>Horario Fin</th>
                                                 <th>Ambiente</th>
                                                 <th>Estado</th>
-                                                <th>Personas M谩ximas</th>
-                                                <th>Acci贸n</th>
+                                                <th>Personas M醲imas</th>
+                                                <th>Acci髇</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                           <% for (Servicio servicio : servicios) {%> 
+                                            <% for (Servicio servicio : servicios) {%> 
                                             <tr>
                                                 <td class="text-center"><%= servicio.getId_servicio()%></td>
                                                 <td><%= servicio.getNombreServicio()%></td>
@@ -226,7 +226,7 @@
                                                     <a class="btn btn-danger" href="${pageContext.request.contextPath}/ServicioControlador?accion=eliminar&id=<%= servicio.getId_servicio()%>">Eliminar</a>
                                                 </td>
                                             </tr>
-                                           <% }%>
+                                            <% }%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -246,16 +246,16 @@
                                                 <br>  
                                                 <label class="form-label" for="precio">Precio</label>
                                                 <input class="form-control" type="number" name="precio"/><br>
-                                                
+
                                                 <label class="form-label" for="nombre">Horario Inicio</label>
                                                 <input class="form-control" type="text" name="horario_inicio"/>
                                                 <br> 
                                                 <label class="form-label" for="nombre">Horario Fin</label>
                                                 <input class="form-control" type="text" name="horario_fin"/> <br>
 
-                                                 <label class="form-label" for="nombre">Ambiente</label>
+                                                <label class="form-label" for="nombre">Ambiente</label>
                                                 <input class="form-control" type="text" name="ambiente"/> <br>
-                                                
+
                                                 <label class="form-label">Estado</label>
                                                 <select class="form-select" name="estado">           
                                                     <option value="Disponible">Disponible</option>
@@ -263,7 +263,7 @@
                                                     <option value="Limpieza">En Limpieza</option>
                                                 </select><br>
 
-                                                <label class="form-label">Personas M谩ximas</label>
+                                                <label class="form-label">Personas M醲imas</label>
                                                 <input class="form-control" type="number" name="personas_maximas"/> <br>
 
                                                 <input class="btn btn-primary col-12 mx-auto" type="submit" value="Agregar"/>
@@ -277,7 +277,7 @@
                                 <img src="../img/banner_agregar_habitacion.png" alt="" width="100%"/>
                             </div>
                         </div>    
-                    /*Aqui acaba el codigo supongo*/
+
                     </div>
                 </div>
             </div>     

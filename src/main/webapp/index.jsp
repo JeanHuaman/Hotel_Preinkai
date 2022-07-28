@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
 <%@page import="modelo.Usuario"%>
 <%@page import="modelo.Habitacion"%>
 <%@page import="java.util.List"%>
@@ -15,11 +17,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hotel PREINKAI</title>
-        <!-- Custom fonts for this template-->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <!-- Custom styles for this page -->
-        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
     </head>
     <body>
         <header>
@@ -130,7 +129,7 @@
             </div>
         </section>
         <br> <br>
-        <section>
+        <section id="habitaciones">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
@@ -140,17 +139,17 @@
                             <!--<div class="card-header py-3">Habitaciones de PREINKAI</div>-->
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>DescripciÃ³n</th>
+                                                <th>Descripción</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>DescripciÃ³n</th>
+                                                <th>Descripción</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -160,7 +159,7 @@
                                                 <td><h5><%= habitacion.getDescripcion()%></h5>
                                                     <h5 style="color: red;"><b>S/.<%= habitacion.getPrecio()%>0</b></h5>
                                                     <br> 
-                                                    <a href="${pageContext.request.contextPath}/HabitacionControlador?accion=RoomDetails&id=<%= habitacion.getId_habitacion()%>" class="btn btn-primary">Ver detalles</a>
+                                                    <a href="#inicio" class="btn btn-primary">Ver disponibilidad</a>
                                                 </td>
                                             </tr>
                                             <% }%>
@@ -170,7 +169,6 @@
                             </div>
                         </div>
                     </div> 
-
                     <div class="col-sm-6">
                         <h2>Servicios de PREINKAI</h2>
                         <!-- DataTales Example -->
@@ -183,14 +181,14 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">DescripciÃ³n</th>
+                                                <th scope="col">Descripción</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Exteriores</td>
-                                                <td>Terraza / solÃ¡rium, Terraza, JardÃ­n</td>
+                                                <td>Terraza / solárium, Terraza, Jarín</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
@@ -205,7 +203,7 @@
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <td>Internet</td>
-                                                <td>Hay conexiÃ³n a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
+                                                <td>Hay conexión a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
@@ -214,13 +212,13 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
-                                                <td>Servicios de recepciÃ³n</td>
-                                                <td>Guardaequipaje, InformaciÃ³n turÃ­stica, RecepciÃ³n 24 horas</td>
+                                                <td>Servicios de recepción</td>
+                                                <td>Guardaequipaje, Información turística, Recepción 24 horas</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">7</th>
                                                 <td>Servicios de limpieza</td>
-                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavanderÃ­a De pago</td>
+                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavandería De pago</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">8</th>
@@ -235,7 +233,7 @@
                                             <tr>
                                                 <th scope="row">10</th>
                                                 <td>Seguridad</td>
-                                                <td>Extintores, CÃ¡maras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
+                                                <td>Extintores, Cámaras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -247,50 +245,55 @@
             </div>
         </div>
     </section>
+
+
     <br><br>  
     <footer id="contactanos">
         <div class="footer-top text-center">
             <div class="container">
-                <h2>Â¿En quÃ© te podemos ayudar?</h2>
-                <p>DÃ©janos tu email y un operador te ofrecerÃ¡ la mejor opciÃ³n disponible segÃºn tu bÃºsqueda</p>
+                <h2>¿En qué te podemos ayudar?</h2>
+                <p>Déjanos tu email y un operador te ofrecerá la mejor opción disponible según tu búsqueda</p>
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        Nombre: <label style="color:red;">(*)</label>
-                                        <input type="text" class="form-control">
+                                <form action="UsuarioControlador?accion=SendMail" method="POST">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            Nombre: <label style="color:red;">(*)</label>
+                                            <input type="text" class="form-control" name="txtNombre" value="${usuario.getNombre()}">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            Celular: <label style="color:red;">(*)</label>
+                                            <input type="text" class="form-control" name="txtCelular" value="${usuario.getCelular()}">
+                                        </div>
+
                                     </div>
-                                    <div class="col-sm-6">
-                                        Apellidos: <label style="color:red;">(*)</label>
-                                        <input type="text" class="form-control">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            Dirección: <label style="color:red;">(*)</label>
+                                            <input type="text" class="form-control" name="txtDireccion" value="${usuario.getDireccion()}">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            Correo: <label style="color:red;">(*)</label>
+                                            <input type="email" class="form-control" name="txtCorreo" value="${usuario.getEmail()}">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        Correo: <label style="color:red;">(*)</label>
-                                        <input type="text" class="form-control">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            Descripción: <label style="color:red;">(*)</label>
+                                            <textarea class="form-control" name="txtDescripcion" required></textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        TelÃ©fono: <label style="color:red;">(*)</label>
-                                        <input type="text" class="form-control">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-primary" style="float: right;" type="submit">Enviar</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        DescripciÃ³n: <label style="color:red;">(*)</label>
-                                        <textarea class="form-control"></textarea>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a href="#" class="btn btn-primary" style="float: right;">Enviar</a>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -304,29 +307,18 @@
         <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright Â© 2022 PREINKAI. All rights reserved.</p>
+                    <p class="pull-left">Copyright © 2022 PREINKAI. All rights reserved.</p>
                 </div>
             </div>
         </div>
 
     </footer><!--/Footer-->
 
-    <!-- Page level custom scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
 
 
 </body>

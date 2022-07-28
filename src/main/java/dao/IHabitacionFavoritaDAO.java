@@ -6,6 +6,6 @@ import modelo.HabitacionFavorita;
 
 public interface IHabitacionFavoritaDAO {
     public List<HabitacionFavorita> listar();
-    public boolean guardar(HabitacionFavorita habitacionFavorita) throws SQLException;
+    public int guardar(HabitacionFavorita habitacionFavorita);
 
 }

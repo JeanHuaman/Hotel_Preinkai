@@ -10,7 +10,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     private static final String REGISTRAR_USUARIO = "INSERT INTO usuario(id_membresia,dni,nombre,celular,direccion,email,password,rol) "
             + "VALUES(?,?,?,?,?,?,?,?)";
-    private static final String SESION_USUARIO = "SELECT id_membresia,dni,nombre,celular,"
+    private static final String SESION_USUARIO = "SELECT id_usuario,id_membresia,dni,nombre,celular,"
             + "direccion,email,password,rol FROM usuario WHERE email=? limit 1";
     Connection conn = null;
     PreparedStatement stmt = null;
@@ -51,6 +51,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             stmt.setString(1, correo);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                int id_usuario = Integer.parseInt(rs.getString("id_usuario"));
                 int membresia = Integer.parseInt(rs.getString("id_membresia"));
                 String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
@@ -60,7 +61,7 @@ public class UsuarioDAO implements IUsuarioDAO {
                 String password = rs.getString("password");
                 String rol = rs.getString("rol");
 
-                usuario = new Usuario(membresia, dni, nombre, celular, direccion, email, password, rol);
+                usuario = new Usuario(id_usuario,membresia, dni, nombre, celular, direccion, email, password, rol);
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -71,24 +72,24 @@ public class UsuarioDAO implements IUsuarioDAO {
         }
         return usuario;
     }
+
     @Override
     public int cantidadUsuario() {
-        Connection conn=null;
-        PreparedStatement stmt=null;
-        ResultSet rs=null;
-        int cantidadUsuarios=0;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int cantidadUsuarios = 0;
         try {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(IUsuarioDAO.CANTIDAD_USUARIO);
             rs = stmt.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 cantidadUsuarios = rs.getInt(1);
             }
-                                    
+
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-        }finally{
+        } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
             Conexion.close(conn);

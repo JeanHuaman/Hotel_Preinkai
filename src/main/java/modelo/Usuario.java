@@ -21,6 +21,7 @@ public class Usuario {
     private String rol;
 
     public Usuario(){}
+    //Listar
     public Usuario(int idUsuario, int idMembresia, String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;
@@ -32,7 +33,7 @@ public class Usuario {
         this.password = password;
         this.rol = rol;
     }
-
+    //Agregar
     public Usuario(int idMembresia, String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
         this.idMembresia = idMembresia;
         this.dni = dni;

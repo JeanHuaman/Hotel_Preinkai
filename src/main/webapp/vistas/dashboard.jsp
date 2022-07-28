@@ -45,7 +45,7 @@
         <header class="py-3">
             <nav class="container d-md-flex justify-content-md-between align-items-md-center">
                 <div class="text-center">
-                    <img src="img/Logo.png" alt="logo">
+                    <img src="../img/preinkai.png" alt="logo">
                 </div>
                 <div class="d-flex justify-content-around">
                     <div class="px-2">
@@ -84,7 +84,7 @@
                             <a href="${pageContext.request.contextPath}/vistas/crudServicios.jsp">Servicios</a>
                         </div>
                     </div> 
-                    <button type="button" class="option">Reportes</button>
+                        <a href="vistas/reportes.jsp" class="btn btn-primary">Reportes</a>
                 </div>                                  
             </section>
             <section class="col-12 col-md-9 py-3">
