@@ -99,11 +99,11 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <p>Entrada</p> 
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" name="fechaEntrada" required value="${fechaEntrada}">
                                         </div>
                                         <div class="col-6">
                                             <p>Salida</p> 
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" name="fechaSalida" required value="${fechaSalida}">
                                         </div> 
                                     </div>
                                     <br>
@@ -111,7 +111,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <p>Adulto(s)</p> 
-                                            <input type="number" class="form-control" name="cantAdultos" min="1">
+                                            <input type="number" class="form-control" name="cantAdultos" min="0">
                                         </div>
                                         <div class="col-6">
                                             <p>Niño(s)</p> 
@@ -119,7 +119,6 @@
                                         </div> 
                                     </div>
                                 </div>
-
                                 <div class="card-footer text-muted">
                                     <input type="submit" class="btn btn-primary" value="Ver Precios">
                                 </div>
@@ -130,6 +129,7 @@
             </div>
         </section>
         <br> <br>
+        ${carritoHabitacion}
         <section>
             <div class="container">
                 <div class="row">

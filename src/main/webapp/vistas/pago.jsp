@@ -4,6 +4,7 @@
     Author     : JEAN
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,17 +22,17 @@
         <main>
             <section class="row px-5 justify-content-around">
                 <div class="col-12 col-md-5 ">
-                    <form>
+                    <form method="POST" action="${pageContext.request.contextPath}/UsuarioControlador?accion=pagar&tipo=habitacion">
                         <div class="mb-3 dimension">
                             <label for="exampleFormControlInput1" class="form-label">Tipo de Pago</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" aria-label="Default select example" name="tipoPago">
                                 <option value="1">Efectivo</option>
                                 <option value="2">Tarjeta</option>
                             </select>
                         </div>
                         <div class="mb-3 dimension">
                             <label for="exampleFormControlInput1" class="form-label">Tipo de Tarjeta</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" aria-label="Default select example" name="tipoTarjeta">
                                 <option value="1">Visa</option>
                                 <option value="2">Mastercard</option>
                             </select>
@@ -55,7 +56,7 @@
                             <input type="text" class="form-control" id="exampleFormControlInput1">
                         </div>
                         <div class="mb-3 ">
-                            <submit class="btn btn-primary w-100">Reservar y pagar</submit>
+                            <button class="btn btn-primary w-100" type="submit">Reservar y pagar</button>
                         </div>
                     </form>
                 </div>
@@ -72,20 +73,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:forEach var="habitacion" items="${carritoHabitacion}">
                                 <tr>
-                                    <td>Habitación 1</td>
-                                    <td class="text-end">S/150.00</td>
+                                    <td>${habitacion.getDescripcion()}</td>
+                                    <td class="text-end">S/ ${habitacion.getPrecio()}</td>
                                 </tr>
-                                <tr>
-                                    <td>Habitación 2</td>
-                                    <td class="text-end">S/150.00</td>
-                                </tr>
+                                </c:forEach>
                             </tbody>
                         </table> 
                     </div>                    
                     <p class="d-flex justify-content-between">
                         <span>Total</span>
-                        <span>S/150.00</span>
+                        <span>S/ ${totalHabitacion}</span>
                     </p>
                 </div>
             </section>

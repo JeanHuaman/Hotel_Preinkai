@@ -1,20 +1,20 @@
-
 package dao;
 
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import modelo.DetalleReserva;
 import modelo.Habitacion;
 import modelo.DetalleServicio;
+import modelo.Reserva;
 import modelo.Servicio;
 import modelo.Usuario;
 
-
-
 public class Prueba {
+
     public static void main(String[] args) throws SQLException {
-        
+
 //        Date fecha;
 //        Date horariInicio;
 //        Date horarioFinal;
@@ -25,7 +25,6 @@ public class Prueba {
 //        
 //        IHabitacionDAO controladorHabitacion = new HabitacionDAO();
 //        List<Habitacion> habitaciones = controladorHabitacion.listar();
-        
 //        IUsuarioDAO controladorUsuario = new UsuarioDAO();
 //        Usuario usuario = new Usuario(1,"78945612","usuarioPrueba","12456788","casa","user@gmail","123","usuario");
 //        int idUsuario = controladorUsuario.registrarse(usuario);
@@ -38,21 +37,26 @@ public class Prueba {
 //
 //            IReservaDAO reserva = new ReservaDAO();
 //            System.out.println(reserva.obtenerIdReserva());
-            
-            System.out.println(new HabitacionDAO().obtenerHabitacion(4));
+        System.out.println(new HabitacionDAO().obtenerHabitacion(4));
 //        Servicio servicio = new Servicio("bar",20,"10:30","11:30","bar Cielo","habilitado",5);
 //        
 //        System.out.println(Servicio.insertarServicios(servicio));
 //        System.out.println(Servicio.nombreServicios());
 //        System.out.println("hola");
-        
+
 //        for(Habitacion h:habitaciones){
 //            System.out.println(h.toString());
 //        }
-        
 //        List<Servicio> servicios = Servicio.filtrarServicios("tenis"); 
 //        Servicio servicio = Servicio.filtrarServicioId(3);
 //        System.out.println(servicio.toString());
+        IReservaDAO controladorReserva = new ReservaDAO();
+        IDetalleReservaDAO IDetalleReserva = new DetalleReservaDAO();
+        Reserva reserva = new Reserva(1, 1200, "visa", "master", "2022-07-20", "2022-07-22", 5);
+        controladorReserva.insertarReserva(reserva);
+        int idReserva = controladorReserva.obtenerIdReserva();
+        DetalleReserva detalle = new DetalleReserva(idReserva, 1, "78945612", "usu hab");
+        IDetalleReserva.insertarDetalleReserva(detalle);
     }
- 
+
 }

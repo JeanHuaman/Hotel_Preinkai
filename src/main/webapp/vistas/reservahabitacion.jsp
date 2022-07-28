@@ -110,16 +110,18 @@
                         </div>
                     </div>
                     <div class ="col-sm-6">
-                        <h3>Radison Plaza del Bosque</h3><br><!-- comment -->
+                        <h3>${habitacion.getDescripcion()}</h3><br><!-- comment -->
                         <h4>1 noche, Desayuno suite 2 Dormitorios</h4><br><!-- comment -->
                         <h4> 3 adultos Suite 2 Dormitorios 3 adultos </h4><br>
                         <br>
                         <div class="row text-center">
                             <div class ="col-sm-6">
-                                <h5> Entrada </h5><input type = "text" class="form-control">    
+                                <h5> Entrada </h5>
+                                <p>${fechaEntrada}</p>   
                             </div>
                             <div class ="col-sm-6">
-                                <h5> Salida </h5><input type = "text" class="form-control">   
+                                <h5> Salida </h5>
+                                <p>${fechaSalida}</p> 
                             </div>
                         </div>
                         <br>
@@ -137,11 +139,11 @@
                                 <h5> Precio Total: </h5> <br> 
                             </div>
                             <div class ="col-sm-6">
-                                <h5> $200 </h5>  <br><!-- comment -->
-                                <h5> $0 </h5>  <br><!-- comment -->
-                                <h5> $200 </h5>  <br>
+                                <h5> $ ${habitacion.getPrecio()} </h5>  <br>
+                                <h5> $0 </h5>  <br>
+                                <h5> $ ${habitacion.getPrecio()} </h5>  <br>
                             </div>
-                            <a href="#" class="btn btn-primary">Reservar</a> 
+                            <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=agregarHabitacion&idHabitacion=${habitacion.id_habitacion}" class="btn btn-primary">Reservar</a> 
                            
                         </div>
                         <br><br><br>

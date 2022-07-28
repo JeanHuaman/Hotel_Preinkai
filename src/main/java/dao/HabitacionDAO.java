@@ -61,6 +61,10 @@ public class HabitacionDAO implements IHabitacionDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
             JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return habitaciones;
     }

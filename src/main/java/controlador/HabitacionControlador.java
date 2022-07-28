@@ -84,8 +84,35 @@ public class HabitacionControlador extends HttpServlet {
         switch (accion) {
 
             case "RoomsRecommendation":
+                HttpSession sesion=request.getSession();
                 int cantAdultos = Integer.parseInt(request.getParameter("cantAdultos"));
                 int cantNinos = Integer.parseInt(request.getParameter("cantNinos"));
+                String fechaEntrada = request.getParameter("fechaEntrada");
+                String fechaSalida = request.getParameter("fechaSalida");
+                
+                String fechaEntradaActual = (String) sesion.getAttribute("fechaEntradaActual");
+                if(fechaEntradaActual==null){
+                    fechaEntradaActual = fechaEntrada;
+                    sesion.setAttribute("fechaEntradaActual", fechaEntradaActual);
+                }
+                
+                String fechaSalidaActual = (String) sesion.getAttribute("fechaSalidaActual");
+                if(fechaSalidaActual==null){
+                    fechaSalidaActual= fechaSalida;
+                    sesion.setAttribute("fechaSalidaActual", fechaSalidaActual);
+                }
+                
+                if(!fechaEntrada.equals(fechaEntradaActual) || !fechaSalida.equals(fechaSalidaActual))
+                {
+                    sesion.setAttribute("carritoHabitacion", null);
+                }
+                
+                
+                sesion.setAttribute("cantidadAdulto", cantAdultos);
+                sesion.setAttribute("fechaEntrada", fechaEntrada);
+                sesion.setAttribute("cantidadNinos", cantNinos);
+                sesion.setAttribute("fechaSalida", fechaSalida);
+                
                 System.out.println("Adultos: " + cantAdultos);
                 System.out.println("Niños: " + cantNinos);
                 HabitacionDAO hdao = new HabitacionDAO();

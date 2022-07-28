@@ -111,7 +111,7 @@
                             </tbody>
                         </table>
                         <a href="index.jsp" class="btn btn-danger">Regresar</a>
-                        <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=agregarHabitacion&idHabitacion=${habitacion.id_habitacion}" class="btn btn-primary">Seleccionar habitación</a>
+                        <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=seleccionarHabitacion&idHabitacion=${habitacion.id_habitacion}" class="btn btn-primary">Seleccionar habitación</a>
 
                     </section>
                     <br><br>

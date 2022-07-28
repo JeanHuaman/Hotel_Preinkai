@@ -158,7 +158,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="col-12 modal-body">
-                                                    <form method="POST" action="${pageContext.request.contextPath}/UsuarioControlador?accion=pagarServicio">
+                                                    <form method="POST" action="${pageContext.request.contextPath}/UsuarioControlador?accion=pagar&tipo=servicio">
                                                         <div class="mb-3 dimension">
                                                             <label for="exampleFormControlInput1" class="form-label">Tipo de Pago</label>
                                                             <select class="form-select" aria-label="Default select example" name="tipoPago">
