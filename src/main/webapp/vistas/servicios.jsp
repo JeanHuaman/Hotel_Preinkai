@@ -189,7 +189,7 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="exampleFormControlInput1" class="form-label">Titular de la tarjeta</label>
-                                                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                                                            <input type="text" class="form-control" id="exampleFormControlInput1" value="${usuario.getNombre()}">
                                                         </div>
                                                         <div class="mb-3 modal-footer">
                                                             <button type="submit" class="btn btn-primary w-100" data-bs-dismiss="modal">Reservar y pagar</button>
