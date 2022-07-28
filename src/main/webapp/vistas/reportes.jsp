@@ -57,7 +57,7 @@
                         <h5>Cantidad:</h5><br>
                         <h5>Intervalos:</h5><br>
                         <h5>Ganancias Generadas:</h5><br>
-                        <button class="btn btn-primary">Download</button>
+                        <a href="../UsuarioControlador?accion=GenerarReporteExcel" class="btn btn-primary">Generar Reporte</a>
                     </div>
                     <div class="col-sm-6">          
 

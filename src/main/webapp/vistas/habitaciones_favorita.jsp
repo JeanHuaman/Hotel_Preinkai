@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modelo.HabitacionFavorita"%>
+<%@page import="modelo.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.HabitacionFavoritaDAO"%>
 <%
@@ -45,11 +46,29 @@
                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                                     </ul>-->
                                 </li>
+                                 <%                                    Usuario usuario = (Usuario) session.getAttribute("usuario");
+                                    if (usuario != null) {
+                                %>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <%= usuario.getEmail()%>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ReservacionControlador?accion=VerReservacion&idUsuario=<%= usuario.getIdUsuario()%>">Ver Reservacion</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                                    </ul>
+                                </li>
+                                <%
+                                } else {
+                                %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar Sesión</a>
+                                </li>
+                                <%
+                                    }
+                                %>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#contactanos">Contáctanos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="vistas/login.jsp">Iniciar sesión</a>
                                 </li>
                             </ul>
 
@@ -81,7 +100,7 @@
                 </main>
             </div>
         </div>
-         <br><br><br>
+         <br><br><br><br><br>
         <footer id="contactanos">
             <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
                 <div class="container">

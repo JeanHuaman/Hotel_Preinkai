@@ -55,13 +55,16 @@ public class HabitacionDAO implements IHabitacionDAO {
                 int estrellas = rs.getInt("estrellas");
 
                 habitacion = new Habitacion(id_habitacion, tipohabitacion,
-                        id_piso, precio, imagen, descripcion, personas_maximas, 
+                        id_piso, precio, imagen, descripcion, personas_maximas,
                         disponibilidad, estrellas);
                 habitaciones.add(habitacion);
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return habitaciones;
     }
@@ -98,6 +101,10 @@ public class HabitacionDAO implements IHabitacionDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return h;
@@ -133,6 +140,10 @@ public class HabitacionDAO implements IHabitacionDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("" + e);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return listarHabitacionesRecomendadas;
@@ -158,7 +169,6 @@ public class HabitacionDAO implements IHabitacionDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-
             Conexion.close(stmt);
             Conexion.close(conn);
         }
@@ -180,12 +190,11 @@ public class HabitacionDAO implements IHabitacionDAO {
             stmt.setInt(5, habitacion.getPersonas_maximas());
             stmt.setString(6, habitacion.getDisponibilidad());
             stmt.setInt(7, habitacion.getEstrellas());
-            stmt.setInt(8,habitacion.getId_habitacion());
+            stmt.setInt(8, habitacion.getId_habitacion());
             rows = stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-
             Conexion.close(stmt);
             Conexion.close(conn);
         }
@@ -206,7 +215,6 @@ public class HabitacionDAO implements IHabitacionDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-
             Conexion.close(stmt);
             Conexion.close(conn);
         }
@@ -242,29 +250,32 @@ public class HabitacionDAO implements IHabitacionDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return h;
     }
-    
+
     @Override
     public int cantidadHabitaciones() {
-        Connection conn=null;
-        PreparedStatement stmt=null;
-        ResultSet rs=null;
-        int cantidadHabitaciones=0;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int cantidadHabitaciones = 0;
         try {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(IHabitacionDAO.CANTIDAD_HABITACION);
             rs = stmt.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 cantidadHabitaciones = rs.getInt(1);
             }
-                                    
+
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-        }finally{
+        } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
             Conexion.close(conn);

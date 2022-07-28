@@ -21,30 +21,23 @@ public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
     private boolean estadoOperacion;
 
     @Override
-    public boolean guardar(HabitacionFavorita habitacionFavorita) throws SQLException {
-        String sql = null;
-        estadoOperacion = false;
-        conn = Conexion.getConexion();
-
+    public int guardar(HabitacionFavorita habitacionFavorita){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
         try {
-            conn.setAutoCommit(false);
-            sql = INSERT_HABITACION_FAVORITA;
-            stmt = conn.prepareStatement(sql);
-
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(INSERT_HABITACION_FAVORITA);
             stmt.setInt(1, habitacionFavorita.getId_usuario());
             stmt.setInt(2, habitacionFavorita.getId_habitacion());
-
-            estadoOperacion = stmt.executeUpdate() > 0;
-
-            conn.commit();
-            stmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            conn.rollback();
-            e.printStackTrace();
+            rows = stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
-
-        return estadoOperacion;
+        return rows;
     }
 
     @Override
@@ -65,6 +58,10 @@ public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
             JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return habitacionesFavoritas;
     }

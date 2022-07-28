@@ -4,7 +4,7 @@
 <%@page import="controlador.ServicioControlador"%>
 
 <%
-    List<String> nombreServicios = ServicioControlador.listarServicios();
+    List<String> nombreServicios = ServicioControlador.listar();
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
