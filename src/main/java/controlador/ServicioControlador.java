@@ -1,8 +1,10 @@
 package controlador;
 
 import dao.ServicioDAO;
+import dao.IServicioDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import modelo.Servicio;
@@ -148,4 +150,9 @@ public class ServicioControlador extends HttpServlet {
         int cantidadInserto = new ServicioDAO().insertar(servicio);
         response.sendRedirect("vistas/crudHabitaciones.jsp");
     }
+    public static List<String> listarServicios(){
+       IServicioDAO servicio = new ServicioDAO();
+       List<String> listaServicios = servicio.nombreServicios();
+       return listaServicios;
+   }
 }
