@@ -3,17 +3,19 @@ package controlador;
 
 
 import dao.HabitacionDAO;
+import dao.HabitacionFavoritaDAO;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Habitacion;
+import modelo.HabitacionFavorita;
 
 
 
 public class Prueba {
     public static void main(String[] args) {
-        List<Habitacion> habitaciones=new HabitacionDAO().listar();
-        for (Habitacion habitacion:habitaciones) {
-            System.out.println(habitacion.getDescripcion());
+        List<HabitacionFavorita> habitaciones=new HabitacionFavoritaDAO().listar();
+        for (HabitacionFavorita habitacion:habitaciones) {
+            System.out.println(habitacion.toString());
         }
         /*List<Habitacion> habitaciones=new HabitacionDAO().listarId(1);
         for (Habitacion habitacion:habitaciones) {

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : habitaciones
-    Created on : 2 jul. 2022, 22:23:20
-    Author     : JEAN
+    Document   : verReporteEnPDFHabitaciones
+    Created on : 28/07/2022, 07:39:57 PM
+    Author     : minay
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

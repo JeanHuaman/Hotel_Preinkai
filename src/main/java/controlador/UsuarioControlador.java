@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import dao.HabitacionFavoritaDAO;
 import dao.UsuarioDAO;
 import java.io.IOException;
@@ -31,8 +33,6 @@ import modelo.Usuario;
 import dao.IDetalleServicioDAO;
 import dao.IReservaDAO;
 import dao.IServicioDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import servicios.Excel;
 import servicios.Mail;
 

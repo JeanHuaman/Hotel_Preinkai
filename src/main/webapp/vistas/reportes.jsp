@@ -1,3 +1,4 @@
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,11 +18,24 @@
                 </div>
                 <div class="d-flex justify-content-around">
                     <div class="px-2">
-                        <a class="btn btn-primary" href="">Reportes</a>
+                        <a class="btn btn-primary" href="">Ver Reservación</a>
                     </div>
-                    <div class="px-2">
-                        <a class="btn btn-primary" href="">Alexander Minaya Rosas de la Vega</a>
-                    </div>
+                    <%   Usuario usuario = (Usuario) session.getAttribute("usuario");
+                        if (usuario != null) {
+                    %>
+                    <ul class="navbar-nav me-auto my-2 my-lg-0" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= usuario.getEmail()%>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <%
+                        }
+                    %>
                 </div>
             </nav>  
         </header>
@@ -46,65 +60,39 @@
             <section class="col-12 col-md-9">
                 <div class="row">
                     <h3 class="text-center"> Reportes </h3>
-                    <div class="col-sm-6">        
-
+                    <div class="col-sm-6 text-center">   
                         <div class="card_item">
-
                             <div class="card-body">
-                                <h4 class="card-title">Habitaciones con mayor numero de vistas</h4>
-
+                                <br><br>
+                                <h4 style="color:blue;">Reserva de Habitaciones</h4>
                             </div></div>
-                        <h5>Cantidad:</h5><br>
-                        <h5>Intervalos:</h5><br>
-                        <h5>Ganancias Generadas:</h5><br>
-                        <a href="../UsuarioControlador?accion=GenerarReporteExcel" class="btn btn-primary">Generar Reporte</a>
+                        <h5>La reserva hotelera es la obligación que asume un alojamiento turístico de guardar para una fecha o un periodo de tiempo determinado una o varias habitaciones o plazas, con la exigencia inmediata de pago de todo o parte del precio que éste supondrá, penalizando en caso de cancelación.</h5><br>
+                        <a href="../UsuarioControlador?accion=GenerarReporteExcel" class="btn btn-success">Generar Reporte en Excel</a>
+                        <a href="../vistas/pdfReservaHabitacion.jsp" target="_blank" class="btn btn-danger">Generar Reporte en Pdf</a>
                     </div>
-                    <div class="col-sm-6">          
-
+                    <div class="col-sm-6">   
+                        <br><br><br><br>
+                        <img src="${pageContext.request.contextPath}/img/reserva_de_habitaciones.png" width="100%;">
+                    </div>
+                    <div class="col-sm-6">   
+                        <br><br><br><br>
+                        <img src="${pageContext.request.contextPath}/img/reserva_de_servicios.png" width="100%;">
+                        <br><br><br><br>
+                    </div>
+                    <div class="col-sm-6 text-center">   
                         <div class="card_item">
-
                             <div class="card-body">
-                                <h4 class="card-title">Habitaciones con mayor numero de vistas</h4>
-
+                                <br><br>
+                                <h4 style="color:blue;">Reserva de Servicios</h4>
                             </div></div>
-                        <h5>Cantidad:</h5><br>
-                        <h5>Intervalos:</h5><br>
-                        <h5>Ganancias Generadas:</h5><br>
-                        <button class="btn btn-primary">Download</button>
+                        <h5>La reserva hotelera también se encuentra la reservación de servicios en el cual cada usuario ha realizado, por ello es importante un reporte en pdf de la reserva de servicios, de tal forma tener un mejor control de los servicios que brinda el hotel.</h5><br>
+                        <a href="../vistas/pdfReservaServicio.jsp" target="_blank" class="btn btn-danger">Generar Reporte en Pdf</a>
                     </div>
                 </div> 
-                <br>
-
-
-                <div class="col-sm-6">        
-
-                    <div class="card_item">
-
-                        <div class="card-body">
-                            <h4 class="card-title">Eventos mas usados</h4>
-
-                        </div></div>
-                    <h5>Cantidad:</h5><br>
-                    <h5>Intervalos:</h5><br>
-                    <h5>Ganancias Generadas:</h5><br>
-                    <button class="btn btn-primary">Download</button>
-
-                </div>
-                <div class="col-sm-6">          
-
-                        <div class="card_item">
-
-                            <div class="card-body">
-                                <h4 class="card-title">Habitaciones con mayor numero de vistas</h4>
-
-                            </div></div>
-                        <h5>Cantidad:</h5><br>
-                        <h5>Intervalos:</h5><br>
-                        <h5>Ganancias Generadas:</h5><br>
-                        <button class="btn btn-primary">Download</button>
-                    </div>
-                
-
             </section>
+            <br>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     </body>
 </html>

@@ -11,7 +11,10 @@ import modelo.HabitacionFavorita;
 
 public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
 
-    private static final String SELECT_HABITACION_FAVORITA = "SELECT imagen, descripcion, precio FROM habitaciones_favoritas hf INNER JOIN habitacion h on h.id_habitacion=hf.id_habitacion";
+    private static final String SELECT_HABITACION_FAVORITA = "SELECT imagen, descripcion, precio "
+            + "FROM habitaciones_favoritas hf "
+            + "INNER JOIN habitacion h on h.id_habitacion=hf.id_habitacion "
+            + "WHERE hf.id_usuario=10";
     private static final String INSERT_HABITACION_FAVORITA = "INSERT INTO habitaciones_favoritas "
             + "(id_usuario, id_habitacion) VALUES (?,?)";
     Connection conn = null;

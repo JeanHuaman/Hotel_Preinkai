@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a49acb13-a7fb-406e-b852-da9438607365">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT s.nombre_servicio,s.ambiente,s.horario_inicio,s.horario_fin,r.fecha_entrada,r.importe_total,u.dni,u.nombre FROM detalle_servicio ds INNER JOIN servicio s on s.id_servicio=ds.id_servicio INNER JOIN reserva r on r.id_reserva=ds.id_reserva INNER JOIN usuario u on u.id_usuario=r.id_usuario]]>
+	</queryString>
+	<field name="nombre_servicio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ambiente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horario_inicio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horario_fin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_entrada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe_total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dni" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="125" y="19" width="554" height="35" uuid="a0509dbf-fb09-447a-bf8e-1470689b77e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE RESERVA DE SERVICIOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="20" width="100" height="20" uuid="89790565-52eb-449f-a136-1b0ad25317da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="20" width="100" height="20" uuid="7e312dd9-2e09-4718-9303-ee01f4a90cc6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Ambiente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="20" width="83" height="20" uuid="016a1571-9471-44cf-8111-cc44aa59dd42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Horario Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="20" width="83" height="20" uuid="9b75573d-3671-46d6-aa53-711bf097897a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Horario Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="20" width="83" height="20" uuid="e0e60774-5db5-49e4-ac9f-09303d3df490"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="525" y="20" width="100" height="20" uuid="5f63d61f-c362-4bca-8897-592c0618d075"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Importe Total (S/.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="637" y="20" width="62" height="20" uuid="bb649ff5-a047-4ecc-a490-54fc92147b24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="713" y="20" width="79" height="20" uuid="619f85a3-0541-4560-9fd2-2681c7601e8c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="12" width="100" height="20" uuid="0095e9b8-5658-4bae-b3e2-72490f2d301e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre_servicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="12" width="100" height="20" uuid="686e7fcf-b995-47a5-8800-9d4cb6a0b892"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ambiente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="12" width="83" height="20" uuid="0b202ef4-b087-4b4b-8001-0baf3003655a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{horario_inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="10" width="83" height="20" uuid="848d9696-9dd2-404d-91a1-6d1526761b40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{horario_fin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="10" width="83" height="20" uuid="92bb3c24-323d-4a6e-9265-2ec265f8ed68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha_entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="526" y="10" width="100" height="20" uuid="5d5ce73c-8d2e-428a-bd36-2c93fea8ab67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{importe_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="637" y="10" width="62" height="20" uuid="982aa780-e797-4b06-81c5-4e85b1b8b79e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="713" y="10" width="79" height="20" uuid="85824b84-c26b-4932-9fe5-64701196aa26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
