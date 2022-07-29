@@ -12,8 +12,8 @@ public class Mail {
     }*/
 
     public void enviarMail(String nombre, String celular, String direccion, String correo,String descripcion) {
-        final String username = "alexanderminaya064@gmail.com";
-        final String password = "igoqqtxuhqhpeibt";
+        final String username = "jeanhuaman2504@gmail.com";
+        final String password = "nlzvhnklypnswilh";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");

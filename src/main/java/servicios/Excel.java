@@ -41,7 +41,7 @@ public class Excel {
         Workbook book = new XSSFWorkbook();
         Sheet sheet = book.createSheet("Reporte de Reserva de Habitaciones");
         try {
-            InputStream is = new FileInputStream("D:\\preinkai.png");
+            InputStream is = new FileInputStream("D:\\preinkai.jpeg");
             byte[] bytes = IOUtils.toByteArray(is);
             int imgIndex = book.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
             is.close();

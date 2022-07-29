@@ -1,4 +1,5 @@
 package controlador;
+
 import dao.DetalleReservaDAO;
 import dao.HabitacionFavoritaDAO;
 import dao.UsuarioDAO;
@@ -56,7 +57,7 @@ public class UsuarioControlador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getParameter("accion");
         if (accion != null) {
-            switch(accion) {
+            switch (accion) {
 //                case "editar":  
 //                    this.editarProducto(request, response);
 //                    break;
@@ -104,13 +105,13 @@ public class UsuarioControlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getParameter("accion");
         if (accion != null) {
-            switch(accion) {
+            switch (accion) {
                 case "pagar":
                     this.pagarReserva(request, response);
                     break;
                 case "agregarServicio":
                     this.agregarServicio(request, response);
-                    break;                    
+                    break;
                 case "agregarHabitacion": {
                     try {
                         this.agregarHabitacion(request, response);
@@ -235,6 +236,14 @@ public class UsuarioControlador extends HttpServlet {
         IServicioDAO controladorServicio = new ServicioDAO();
         List<Servicio> carritoServicios = (List<Servicio>) sesion.getAttribute("carritoServicios");
         int cantidadPersonas = Integer.parseInt(request.getParameter("personas"));
+        int totalPersonasServicio;
+        if (sesion.getAttribute("totalPersonasServicio") == null) {
+            totalPersonasServicio = 0;
+            sesion.setAttribute("totalPersonasServicio", totalPersonasServicio);
+        }
+        totalPersonasServicio = (int) sesion.getAttribute("totalPersonasServicio");
+        totalPersonasServicio += cantidadPersonas;
+        sesion.setAttribute("totalPersonasServicio", totalPersonasServicio);
         int idServicio = Integer.parseInt(request.getParameter("idServicio"));
         Servicio servicio = controladorServicio.filtrarServicioId(idServicio);
         double total = 0;
@@ -250,7 +259,6 @@ public class UsuarioControlador extends HttpServlet {
         for (Servicio unidad : carritoServicios) {
             total = unidad.getPrecio() * unidad.getPersonasMaximas() + total;
         }
-
         sesion.setAttribute("totalServicio", total);
 
         request.getRequestDispatcher("vistas/servicios.jsp").forward(request, response);
@@ -270,9 +278,9 @@ public class UsuarioControlador extends HttpServlet {
                 double totalServicios = (double) sesion.getAttribute("totalServicio");
 
                 String fecha = (String) sesion.getAttribute("fechaServicio");
-                int cantidad = 4;
+                int totalPersonasServicio = (int) sesion.getAttribute("totalPersonasServicio");;
 
-                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalServicios, tipoPago, tipoTarjeta, fecha, fecha, cantidad);
+                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalServicios, tipoPago, tipoTarjeta, fecha, fecha, totalPersonasServicio);
                 controladorReserva.insertarReserva(reserva);
                 int idReserva = controladorReserva.obtenerIdReserva();
                 for (Servicio s : carritoServicios) {
@@ -283,6 +291,7 @@ public class UsuarioControlador extends HttpServlet {
                 sesion.setAttribute("carritoServicios", null);
                 sesion.setAttribute("totalServicio", 0);
                 sesion.setAttribute("fechaServicio", "");
+                sesion.setAttribute("totalPersonasServicio", 0);
             }
 
             if (tipoReserva.equalsIgnoreCase("habitacion")) {
@@ -292,12 +301,12 @@ public class UsuarioControlador extends HttpServlet {
                 String fechaEntrada = (String) sesion.getAttribute("fechaEntrada");
                 String fechaSalida = (String) sesion.getAttribute("fechaSalida");
                 int totalHuespedes = (int) sesion.getAttribute("totalHuespedes");
-                
+
                 Reserva reserva = new Reserva(usuario.getIdUsuario(), totalHabitaciones, tipoPago, tipoTarjeta, fechaEntrada, fechaSalida, totalHuespedes);
                 controladorReserva.insertarReserva(reserva);
                 int idReserva = controladorReserva.obtenerIdReserva();
-                
-                for(Habitacion s : carritoHabitaciones) {
+
+                for (Habitacion s : carritoHabitaciones) {
 
                     DetalleReserva detalle = new DetalleReserva(idReserva, s.getId_habitacion(), usuario.getDni(), usuario.getNombre());
                     IDetalleReserva.insertarDetalleReserva(detalle);
@@ -320,7 +329,7 @@ public class UsuarioControlador extends HttpServlet {
         int idHabitacion = Integer.parseInt(request.getParameter("idHabitacion"));
         Habitacion habitacion = Ihabitacion.obtenerHabitacion(idHabitacion);
         double totalHabitacion = 0;
-        int totalHuespedes =0;
+        int totalHuespedes = 0;
         if (carritoHabitacion == null) {
             carritoHabitacion = new ArrayList();
             sesion.setAttribute("carritoHabitacion", carritoHabitacion);

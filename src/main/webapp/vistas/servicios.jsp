@@ -46,22 +46,16 @@
                     <button class="col-8 col-sm-1 btn btn-primary fs-4" type="submit">Buscar</button>
                 </form>
             </div>
-        </header>        
-
+        </header>
         <main>
             <section class="row px-5 me-0">
                 <div class="col-12 col-lg-8 ">
                     <div class="encabezado">
                         <p>Selecciona la hora de reservación </p>
-                        <div class="row">
-                            <span class="col-12 col-sm-3">Turno 
+                        <div class="row fs-5">
+                            <span class="col-12 col-sm-3">Turno :
                                 <span>${nombreServicioActual}</span>
                             </span>
-                            <div class="col-12 col-sm-8 mx-auto row gap-1">
-                                <button class="col-12 col-sm-3 btn btn-primary">Mañana</button>
-                                <button class="col-12 col-sm-3 btn btn-primary">Tarde</button>
-                                <button class="col-12 col-sm-3 btn btn-primary">Noche</button>
-                            </div>
                         </div> 
                     </div>                    
                     <div class="desplazamiento py-3">
