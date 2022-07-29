@@ -93,17 +93,15 @@
                                         <tbody>
                                             <c:forEach var="habitacion" items="${habitaciones_recomendadas}">
                                                 <tr>
-                                                    <td> <img src="<c:out value="${pageContext.request.contextPath}/img/${habitacion.imagen}"></c:out>" class="img-fluid rounded-start" 
-                                                              ></td>
-                                                        <td><h5><c:out value="${habitacion.descripcion}"></c:out></h5>
+                                                    <td> <img src="${pageContext.request.contextPath}/img/${habitacion.imagen}" class="img-fluid rounded-start"></td>
+                                                        <td><h5>${habitacion.descripcion}</h5>
                                                             <p class="card-text">Elige tu habitación favorita y haz tu reserva. 
                                                                 Fácil, sencillo y muy cómodo a través de nuestra web. 
                                                                 Solamente haciendo clic en Añadir a mis favoritos.</p>
                                                             <h5 style="color: red;"><b>S/.<c:out value="${habitacion.precio}"></c:out>0</b></h5>
                                                             <form action="UsuarioControlador" method="post">
                                                                 <input type="hidden" name="accion" value="SaveFavoriteRoom">
-                                                                <input type="number" name="id_usuario" value="<%= usuario.getIdUsuario()%>" hidden="true">
-                                                            <input type="number" name="id_habitacion" value="<c:out value="${habitacion.id_habitacion}"></c:out>" hidden="true">
+                                                            <input type="number" name="id_habitacion" value="${habitacion.id_habitacion}" hidden="true">
                                                                 <center><input type="submit" class="btn btn-success w-100" value="+ Agregar a mis favoritos"></center>
                                                             </form>
                                                 <center><a href="${pageContext.request.contextPath}/UsuarioControlador?accion=seleccionarHabitacion&idHabitacion=${habitacion.id_habitacion}" class="btn btn-primary w-100" style="float: center;width: 50%;margin: 1px;">Reservar</a></center>

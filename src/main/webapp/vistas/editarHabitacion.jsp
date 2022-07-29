@@ -142,8 +142,8 @@
                             <br><br>
                         </div>
                         <div class="col-sm-6">
-                            <img src="img/banner_edit_habitacion.png" alt="" style="width: 100%;"/><br><br>
-                            <img src="img/banner_edit_habitacion2.png" alt="" style="width: 100%;"/>
+                            <img src="${pageContext.request.contextPath}/img/banner_edit_habitacion.png" alt="" style="width: 100%;"/><br><br>
+                            <img src="${pageContext.request.contextPath}/img/banner_edit_habitacion2.png" alt="" style="width: 100%;"/>
                         </div>
                     </div>
                 </form>         

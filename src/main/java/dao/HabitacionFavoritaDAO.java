@@ -11,7 +11,7 @@ import modelo.HabitacionFavorita;
 
 public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
 
-    private static final String SELECT_HABITACION_FAVORITA = "SELECT imagen, descripcion, precio FROM habitaciones_favoritas hf INNER JOIN habitacion h on h.id_habitacion=hf.id_habitacion";
+    private static final String SELECT_HABITACION_FAVORITA = "SELECT h.imagen, h.descripcion, h.precio FROM habitacion h  INNER JOIN habitaciones_favoritas hf  on hf.id_habitacion=h.id_habitacion where hf.id_usuario=?";
     private static final String INSERT_HABITACION_FAVORITA = "INSERT INTO habitaciones_favoritas "
             + "(id_usuario, id_habitacion) VALUES (?,?)";
     Connection conn = null;
@@ -41,11 +41,12 @@ public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
     }
 
     @Override
-    public List<HabitacionFavorita> listar() {
+    public List<HabitacionFavorita> listar(int idUsuario) {
         List<HabitacionFavorita> habitacionesFavoritas = new ArrayList();
         try {
             conn = Conexion.getConexion();
             stmt = conn.prepareStatement(SELECT_HABITACION_FAVORITA);
+            stmt.setInt(1, idUsuario);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 String imagen = rs.getString("imagen");

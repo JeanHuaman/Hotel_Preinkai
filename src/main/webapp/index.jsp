@@ -51,7 +51,7 @@
                                             <%= usuario.getEmail()%>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/vistas/pago.jsp">Favoritos</a></li>
+                                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/vistas/habitaciones_favorita.jsp">Favoritos</a></li>
                                             <li><a class="dropdown-item" href="#historial">Historial</a></li>
                                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
                                         </ul>

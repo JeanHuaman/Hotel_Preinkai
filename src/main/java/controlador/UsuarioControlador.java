@@ -185,15 +185,15 @@ public class UsuarioControlador extends HttpServlet {
     }
 
     private void agregarHabitacionFavorita(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
         int id_habitacion = Integer.parseInt(request.getParameter("id_habitacion"));
 
-        HabitacionFavorita habitacion_favorita = new HabitacionFavorita(id_usuario, id_habitacion);
+        HabitacionFavorita habitacion_favorita = new HabitacionFavorita(usuario.getIdUsuario(), id_habitacion);
         System.out.println("Listaaa: " + habitacion_favorita);
         int registrado = new HabitacionFavoritaDAO().guardar(habitacion_favorita);
+        response.sendRedirect("vistas/habitaciones_favorita.jsp");
 
-        request.setAttribute("idRegistrado", (Object) registrado);
-        request.getRequestDispatcher("./vistas/habitaciones_favorita.jsp").forward(request, response);
     }
 
     private void iniciarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -261,7 +261,7 @@ public class UsuarioControlador extends HttpServlet {
         }
         sesion.setAttribute("totalServicio", total);
         response.sendRedirect("vistas/servicios.jsp");
-        
+
     }
 
     private void pagarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

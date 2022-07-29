@@ -4,10 +4,8 @@
 <%@page import="java.util.List"%>
 <%@page import="dao.HabitacionFavoritaDAO"%>
 <%
-
-    List<HabitacionFavorita> habitacionesFavoritas = new HabitacionFavoritaDAO().listar();
-
-
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    List<HabitacionFavorita> habitacionesFavoritas = new HabitacionFavoritaDAO().listar(usuario.getIdUsuario());
 %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +22,7 @@
                 <nav class="navbar navbar-expand-lg bg-light">
                     <div class="container-fluid d-flex justify-content-between">
                         <div>
-                            <a class="navbar-brand" href="#">HOTEL PREINKAI</a>
+                            <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">HOTEL PREINKAI</a>
                         </div>
                         <div>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +33,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="#contactanos">Contactanos</a>
                                     </li>                                      
-                                        <%                                    Usuario usuario = (Usuario) session.getAttribute("usuario");
+                                        <%
                                             if (usuario != null) {
                                         %>
                                     <li class="nav-item">
@@ -101,7 +99,7 @@
             <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
                 <div class="container">
                     <div class="row">
-                        <p class="pull-left">Copyright © 2022 PREINKAI. All rights reserved.</p>
+                        <p class="pull-left">Copyright ï¿½ 2022 PREINKAI. All rights reserved.</p>
                     </div>
                 </div>
             </div>
