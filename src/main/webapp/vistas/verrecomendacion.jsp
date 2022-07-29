@@ -117,7 +117,7 @@
                                                             <input type="number" name="id_habitacion" value="<c:out value="${habitacion.id_habitacion}"></c:out>" hidden="true">
                                                                 <center><input type="submit" class="btn btn-success" value="+ Agregar a mis favoritos" style="width: 50%;margin: 1px;"></center>
                                                             </form>
-                                                <center><a href="#" class="btn btn-primary" style="float: center;width: 50%;margin: 1px;">Reservar</a></center>
+                                                <center><a href="${pageContext.request.contextPath}/UsuarioControlador?accion=seleccionarHabitacion&idHabitacion=${habitacion.id_habitacion}" class="btn btn-primary" style="float: center;width: 50%;margin: 1px;">Reservar</a></center>
                                                 <br>
                                                 </td>
                                                 </tr>

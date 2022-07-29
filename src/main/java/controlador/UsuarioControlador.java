@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
-
 import dao.DetalleReservaDAO;
 import dao.HabitacionFavoritaDAO;
 import dao.UsuarioDAO;
@@ -30,7 +24,6 @@ import modelo.Usuario;
 import modelo.DetalleServicio;
 import modelo.Reserva;
 import modelo.Servicio;
-import modelo.Usuario;
 import dao.IDetalleServicioDAO;
 import dao.IHabitacionDAO;
 import dao.IReservaDAO;
@@ -63,7 +56,7 @@ public class UsuarioControlador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getParameter("accion");
         if (accion != null) {
-            switch (accion) {
+            switch(accion) {
 //                case "editar":  
 //                    this.editarProducto(request, response);
 //                    break;
@@ -111,10 +104,7 @@ public class UsuarioControlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getParameter("accion");
         if (accion != null) {
-            switch (accion) {
-                case "agregarServicio":
-                    this.agregarServicio(request, response);
-                    break;
+            switch(accion) {
                 case "pagar":
                     this.pagarReserva(request, response);
                     break;
