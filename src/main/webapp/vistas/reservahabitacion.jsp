@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                             <br>
-                            <h4 style ="color: red;"> Tarifa no se admite modificacion ni cancelacion </h4>
+                            <h4 style ="color: red;"> Tarifa no se admite modificacion ni cancelación </h4>
                             <br> 
                             <div class="row text-center">
                                 <p>Detalle de la reserva</p> 

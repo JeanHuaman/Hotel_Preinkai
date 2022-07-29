@@ -53,7 +53,7 @@
                     <div class="encabezado">
                         <p>Selecciona la hora de reservación </p>
                         <div class="row fs-5">
-                            <span class="col-12 col-sm-3">Turno :
+                            <span class="col-12 col-sm-3">Servicio :
                                 <span>${nombreServicioActual}</span>
                             </span>
                         </div> 
@@ -64,7 +64,6 @@
                             <div>Personas</div>
                             <div>Precio C/u</div>
                             <div>Horario</div>
-                            <div>Subtotal</div>
                             <div>Accion</div>
                             <div class="grid_total">
                                 <%
@@ -80,7 +79,7 @@
                                 <form class="grid" action="${pageContext.request.contextPath}/UsuarioControlador?accion=agregarServicio" method="POST">
 
                                     <div><%= servicios.get(i).getAmbiente()%></div>
-                                    <div><input name="personas" min="0" required="true" value="0" type="number" style="width: 80px;"></div>
+                                    <div><input required name="personas" min="0" required="true" value="0" type="number" style="width: 80px;"></div>
                                     <div><%= servicios.get(i).getPrecio()%></div>
                                     <div>                                        
                                         <select name="idServicio">
@@ -98,7 +97,6 @@
                                             %>
                                         </select>
                                     </div>
-                                    <div><%= servicios.get(i).getPrecio()%></div>
                                     <div><input class="btn btn-primary" type="submit" value="Reservar"></div>        
                                 </form>
                                 <%

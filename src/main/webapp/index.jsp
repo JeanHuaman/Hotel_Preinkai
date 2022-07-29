@@ -22,56 +22,52 @@
         <header>
             <div class="header_top">
                 <nav class="navbar navbar-expand-lg bg-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">HOTEL PREINKAI</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarScroll">
-                            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="HabitacionControlador?accion=listarHabitaciones">Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#habitaciones">Habitaciones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/vistas/servicios.jsp">
-                                        Servicios
-                                    </a>
-                                    <!--<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    </ul>-->
-                                </li>
-                                <%                                    Usuario usuario = (Usuario) session.getAttribute("usuario");
-                                    if (usuario != null) {
-                                %>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <%= usuario.getEmail()%>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ReservacionControlador?accion=VerReservacion&idUsuario=<%= usuario.getIdUsuario()%>">Ver Reservacion</a></li>
-                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesiï¿½n</a></li>
-                                    </ul>
-                                </li>
-                                <%
-                                } else {
-                                %>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar Sesiï¿½n</a>
-                                </li>
-                                <%
-                                    }
-                                %>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#contactanos">Contactanos</a>
-                                </li>
-                            </ul>
+                    <div class="container-fluid d-flex justify-content-between">
+                        <div>
+                            <a class="navbar-brand" href="#">HOTEL PREINKAI</a>
+                        </div>
+                        <div>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarScroll">
+                                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#contactanos">Contactanos</a>
+                                    </li>                                      
+                                        <%                                    Usuario usuario = (Usuario) session.getAttribute("usuario");
+                                            if (usuario != null) {
+                                        %>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="${pageContext.request.contextPath}/vistas/servicios.jsp">
+                                            Servicios
+                                        </a>
+                                    </li>
+                                    <li  class="nav-item">
+                                        <a class="nav-link" href="${pageContext.request.contextPath}/vistas/pago.jsp">Ver Reservacion</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <%= usuario.getEmail()%>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/vistas/pago.jsp">Favoritos</a></li>
+                                            <li><a class="dropdown-item" href="#historial">Historial</a></li>
+                                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                                        </ul>
+                                    </li>
+                                    <%
+                                    } else {
+                                    %>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="${pageContext.request.contextPath}/UsuarioControlador?accion=GoToLogin">Iniciar Sesión</a>
+                                    </li>
+                                    <%
+                                        }
+                                    %>                                
+                                </ul>
 
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -104,15 +100,15 @@
                                         </div> 
                                     </div>
                                     <br>
-                                    <p class="card-text">Su reserva serï¿½ de 1 noche(s)</p>
+                                    <p class="card-text">Su reserva sería de 1 noche(s)</p>
                                     <div class="row">
                                         <div class="col-6">
                                             <p>Adulto(s)</p> 
-                                            <input type="number" class="form-control" name="cantAdultos" min="0">
+                                            <input type="number" class="form-control" name="cantAdultos" min="0" required>
                                         </div>
                                         <div class="col-6">
                                             <p>Niño(s)</p> 
-                                            <input type="number" class="form-control" name="cantNinos" min="0">
+                                            <input type="number" class="form-control" name="cantNinos" min="0" required>
                                         </div> 
                                     </div>
                                 </div>
@@ -141,19 +137,19 @@
                                         <thead>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripciï¿½n</th>
+                                                <th>Descripción</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Imagen</th>
-                                                <th>Descripciï¿½n</th>
+                                                <th>Descripción</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <% for (Habitacion habitacion : habitaciones) {%>
                                             <tr>
-                                                <td><img src="<%= habitacion.getImagen()%>" class="card-img-top" alt="..."></td>
+                                                <td><img src="${pageContext.request.contextPath}/img/<%= habitacion.getImagen()%>" class="card-img-top" alt="..."></td>
                                                 <td><h5><%= habitacion.getDescripcion()%></h5>
                                                     <h5 style="color: red;"><b>S/.<%= habitacion.getPrecio()%>0</b></h5>
                                                     <br> 
@@ -179,14 +175,14 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">Descripciï¿½n</th>
+                                                <th scope="col">Descripción</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Exteriores</td>
-                                                <td>Terraza , Terraza, JardÃ­n</td>
+                                                <td>Terraza , Terraza, Jardí­n</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
@@ -201,7 +197,7 @@
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <td>Internet</td>
-                                                <td>Hay conexiï¿½n a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
+                                                <td>Hay conexión a internet Wi-Fi disponible en todo el establecimiento. Gratis.</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
@@ -210,13 +206,13 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
-                                                <td>Servicios de recepciÃ³n</td>
-                                                <td>Guardaequipaje, InformaciÃ³n turÃ­stica, RecepciÃ³n 24 horas</td>
+                                                <td>Servicios de recepción</td>
+                                                <td>Guardaequipaje, Información turÃ­stica, Recepción 24 horas</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">7</th>
                                                 <td>Servicios de limpieza</td>
-                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavanderï¿½a De pago</td>
+                                                <td>Servicio de limpieza diario, Servicio de planchado De pago, Servicio de limpieza en seco De pago, Servicio de lavandería De pago</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">8</th>
@@ -231,7 +227,7 @@
                                             <tr>
                                                 <th scope="row">10</th>
                                                 <td>Seguridad</td>
-                                                <td>Extintores, Cï¿½maras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
+                                                <td>Extintores, Cámaras de seguridad en las zonas comunitarias, Detectores de humo, Alarma de seguridad, Tarjeta de acceso, Seguridad 24 horas, Caja fuerte</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -249,8 +245,8 @@
     <footer id="contactanos">
         <div class="footer-top text-center">
             <div class="container">
-                <h2>ï¿½En quï¿½ te podemos ayudar?</h2>
-                <p>Dï¿½janos tu email y un operador te ofrecerï¿½ la mejor opciï¿½n disponible segï¿½n tu bï¿½squeda</p>
+                <h2>¿En que te podemos ayudar?</h2>
+                <p>Déjanos tu email y un operador te ofrecerá la mejor opción disponible según tu búsqueda</p>
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="card">
@@ -270,7 +266,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            Direcciï¿½n: <label style="color:red;">(*)</label>
+                                            Dirección: <label style="color:red;">(*)</label>
                                             <input type="text" class="form-control" name="txtDireccion" value="${usuario.getDireccion()}">
                                         </div>
                                         <div class="col-sm-6">
@@ -281,7 +277,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            Descripciï¿½n: <label style="color:red;">(*)</label>
+                                            Descripción: <label style="color:red;">(*)</label>
                                             <textarea class="form-control" name="txtDescripcion" required></textarea>
                                         </div>
                                     </div>
@@ -305,7 +301,7 @@
         <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright ï¿½ 2022 PREINKAI. All rights reserved.</p>
+                    <p class="pull-left">Copyright @2022 PREINKAI. All rights reserved.</p>
                 </div>
             </div>
         </div>

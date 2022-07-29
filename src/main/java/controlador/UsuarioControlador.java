@@ -260,8 +260,8 @@ public class UsuarioControlador extends HttpServlet {
             total = unidad.getPrecio() * unidad.getPersonasMaximas() + total;
         }
         sesion.setAttribute("totalServicio", total);
-
-        request.getRequestDispatcher("vistas/servicios.jsp").forward(request, response);
+        response.sendRedirect("vistas/servicios.jsp");
+        
     }
 
     private void pagarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
