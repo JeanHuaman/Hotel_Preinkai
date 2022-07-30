@@ -18,8 +18,17 @@ public class Reserva {
     private String fechaEntrada;
     private String fechaSalida;
     private int CantidadPersonas;
+    private String tipoReserva;
 
-    public Reserva(int idReserva, int idUsuario, double importeTotal, String tipoPago, String tipoTarjeta, String fechaEntrada, String fechaSalida, int CantidadPersonas) {
+    public String getTipoReserva() {
+        return tipoReserva;
+    }
+
+    public void setTipoReserva(String tipoReserva) {
+        this.tipoReserva = tipoReserva;
+    }
+
+    public Reserva(int idReserva, int idUsuario, double importeTotal, String tipoPago, String tipoTarjeta, String fechaEntrada, String fechaSalida, int CantidadPersonas, String tipoReserva) {
         this.idReserva = idReserva;
         this.idUsuario = idUsuario;
         this.importeTotal = importeTotal;
@@ -28,9 +37,10 @@ public class Reserva {
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
         this.CantidadPersonas = CantidadPersonas;
+        this.tipoReserva = tipoReserva;
     }
 
-    public Reserva(int idUsuario, double importeTotal, String tipoPago, String tipoTarjeta, String fechaEntrada, String fechaSalida, int CantidadPersonas) {
+    public Reserva(int idUsuario, double importeTotal, String tipoPago, String tipoTarjeta, String fechaEntrada, String fechaSalida, int CantidadPersonas,String tipoReserva) {
         this.idUsuario = idUsuario;
         this.importeTotal = importeTotal;
         this.tipoPago = tipoPago;
@@ -38,6 +48,7 @@ public class Reserva {
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
         this.CantidadPersonas = CantidadPersonas;
+        this.tipoReserva = tipoReserva;
     }
 
     public int getIdReserva() {

@@ -50,13 +50,7 @@ public class Prueba {
 //        List<Servicio> servicios = Servicio.filtrarServicios("tenis"); 
 //        Servicio servicio = Servicio.filtrarServicioId(3);
 //        System.out.println(servicio.toString());
-        IReservaDAO controladorReserva = new ReservaDAO();
-        IDetalleReservaDAO IDetalleReserva = new DetalleReservaDAO();
-        Reserva reserva = new Reserva(1, 1200, "visa", "master", "2022-07-20", "2022-07-22", 5);
-        controladorReserva.insertarReserva(reserva);
-        int idReserva = controladorReserva.obtenerIdReserva();
-        DetalleReserva detalle = new DetalleReserva(idReserva, 1, "78945612", "usu hab");
-        IDetalleReserva.insertarDetalleReserva(detalle);
+
     }
 
 }

@@ -4,10 +4,13 @@ package controlador;
 
 import dao.HabitacionDAO;
 import dao.HabitacionFavoritaDAO;
+import dao.IReservaDAO;
+import dao.ReservaDAO;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Habitacion;
 import modelo.HabitacionFavorita;
+import modelo.Reserva;
 
 
 
@@ -22,8 +25,9 @@ public class Prueba {
             System.out.println(habitacion.getDescripcion());
         }*/
         
-        
-        
+        IReservaDAO ireserva = new ReservaDAO();
+        List<Reserva> historial = ireserva.listarReservas(14);
+        System.out.println(historial.toString());
         
 //        String marca=new MarcaDaoJDBC().getNombreMarca(2);
 //        System.out.println(marca);

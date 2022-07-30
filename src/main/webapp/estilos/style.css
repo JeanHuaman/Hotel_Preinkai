@@ -63,3 +63,21 @@ a{
     grid-auto-rows: minmax(70px, auto);
     justify-content : space-between
 }
+.historial{
+    display: grid;
+    grid-template-columns: repeat(7, minmax(50px,1fr));
+    grid-auto-rows: minmax(50px, auto);
+}
+.historial .cabeza{
+    height: 35px;
+    border-bottom: #000;
+    border-bottom-style: dashed; 
+    margin-bottom: 5px;
+}
+.historialFondo{
+    background-color: #94b8ed;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}

@@ -3,22 +3,26 @@ package controlador;
 import dao.DetalleReservaDAO;
 import dao.HabitacionFavoritaDAO;
 import dao.UsuarioDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+
 import dao.DetalleServicioDAO;
 import dao.HabitacionDAO;
 import dao.IDetalleReservaDAO;
 import dao.ReservaDAO;
 import dao.ServicioDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import modelo.HabitacionFavorita;
 import modelo.Usuario;
 import modelo.DetalleServicio;
@@ -34,7 +38,6 @@ import modelo.DetalleReserva;
 import modelo.Habitacion;
 
 /**
- *
  * @author JEAN
  */
 @WebServlet(name = "UsuarioControlador", urlPatterns = {"/UsuarioControlador"})
@@ -77,7 +80,10 @@ public class UsuarioControlador extends HttpServlet {
                     this.cerrarSession(request, response);
                     break;
                 case "GenerarReporteExcel":
-this.generarReporteExcel(request, response);
+                    this.generarReporteExcel(request, response);
+                    break;
+                case "historial":
+                    this.historial(request,response);
                     break;
                 default:
                     this.accionDefault(request, response);
@@ -87,6 +93,7 @@ this.generarReporteExcel(request, response);
             this.accionDefault(request, response);
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -184,21 +191,18 @@ this.generarReporteExcel(request, response);
 
     private void agregarHabitacionFavorita(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        boolean encontrado=false;
+        boolean encontrado = false;
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
         int id_habitacion = Integer.parseInt(request.getParameter("id_habitacion"));
         List<HabitacionFavorita> habitacionesFavoritas = new HabitacionFavoritaDAO().listar(usuario.getIdUsuario());
-        for(HabitacionFavorita hab : habitacionesFavoritas)
-        {
-            if(hab.getId_habitacion()==id_habitacion && !encontrado)
-            {
-                encontrado=true;
+        for (HabitacionFavorita hab : habitacionesFavoritas) {
+            if (hab.getId_habitacion() == id_habitacion && !encontrado) {
+                encontrado = true;
                 break;
             }
         }
 
-        if(!encontrado)
-        {
+        if (!encontrado) {
             HabitacionFavorita habitacion_favorita = new HabitacionFavorita(usuario.getIdUsuario(), id_habitacion);
             System.out.println("Listaaa: " + habitacion_favorita);
             int registrado = new HabitacionFavoritaDAO().guardar(habitacion_favorita);
@@ -291,9 +295,10 @@ this.generarReporteExcel(request, response);
                 double totalServicios = (double) sesion.getAttribute("totalServicio");
 
                 String fecha = (String) sesion.getAttribute("fechaServicio");
-                int totalPersonasServicio = (int) sesion.getAttribute("totalPersonasServicio");;
+                int totalPersonasServicio = (int) sesion.getAttribute("totalPersonasServicio");
+                ;
 
-                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalServicios, tipoPago, tipoTarjeta, fecha, fecha, totalPersonasServicio);
+                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalServicios, tipoPago, tipoTarjeta, fecha, fecha, totalPersonasServicio, tipoReserva);
                 controladorReserva.insertarReserva(reserva);
                 int idReserva = controladorReserva.obtenerIdReserva();
                 for (Servicio s : carritoServicios) {
@@ -315,7 +320,7 @@ this.generarReporteExcel(request, response);
                 String fechaSalida = (String) sesion.getAttribute("fechaSalida");
                 int totalHuespedes = (int) sesion.getAttribute("totalHuespedes");
 
-                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalHabitaciones, tipoPago, tipoTarjeta, fechaEntrada, fechaSalida, totalHuespedes);
+                Reserva reserva = new Reserva(usuario.getIdUsuario(), totalHabitaciones, tipoPago, tipoTarjeta, fechaEntrada, fechaSalida, totalHuespedes, tipoReserva);
                 controladorReserva.insertarReserva(reserva);
                 int idReserva = controladorReserva.obtenerIdReserva();
 
@@ -368,4 +373,13 @@ this.generarReporteExcel(request, response);
         request.getRequestDispatcher("vistas/reservahabitacion.jsp").forward(request, response);
     }
 
+
+    private void historial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        IReservaDAO ireserva = new ReservaDAO();
+        List<Reserva> historial = ireserva.listarReservas(usuario.getIdUsuario());
+        sesion.setAttribute("historial",historial);
+        response.sendRedirect("vistas/historialServiciosHabitaciones.jsp");
+    }
 }

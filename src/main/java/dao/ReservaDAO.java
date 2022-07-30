@@ -14,12 +14,15 @@ import java.util.List;
 import modelo.Reserva;
 import modelo.Servicio;
 
+import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author JEAN
  */
 public class ReservaDAO implements IReservaDAO{
 
+       
     @Override
     public int insertarReserva(Reserva reserva) {
         Connection conn=null;
@@ -35,6 +38,7 @@ public class ReservaDAO implements IReservaDAO{
              stmt.setString(5,reserva.getFechaEntrada());
              stmt.setString(6,reserva.getFechaSalida());
              stmt.setInt(7,reserva.getCantidadPersonas());
+             stmt.setString(8,reserva.getTipoReserva());
              rows = stmt.executeUpdate();
          }catch(SQLException ex){
              ex.printStackTrace(System.out);
@@ -120,5 +124,40 @@ public class ReservaDAO implements IReservaDAO{
         }
         return totalVentas;
     }
-    
+
+    @Override
+    public List<Reserva> listarReservas(int idUsuario) {
+        Connection conn=null;
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        List<Reserva> reservas = new ArrayList();
+        try {
+            conn = Conexion.getConexion();
+            stmt = conn.prepareStatement(IReservaDAO.SELECT_RESERVA);
+            stmt.setInt(1,idUsuario);
+            rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                int idReserva = rs.getInt("id_reserva");
+                double importe = rs.getDouble("importe_total");
+                String tipoPago = rs.getString("tipo_pago");
+                String tipoTarjeta = rs.getString("tipo_tarjeta");
+                String fechaEntrada = rs.getString("fecha_entrada");
+                String fechaSalida = rs.getString("fecha_salida");
+                int personas = rs.getInt("cantidad_personas");
+                String tipo = rs.getString("tipo");
+                Reserva reserva = new Reserva(idReserva,idUsuario,importe,tipoPago,tipoTarjeta,fechaEntrada,fechaSalida,personas,tipo);
+                reservas.add(reserva);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return reservas;
+    }
+
 }
