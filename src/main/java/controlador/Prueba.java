@@ -13,10 +13,10 @@ import modelo.HabitacionFavorita;
 
 public class Prueba {
     public static void main(String[] args) {
-        List<HabitacionFavorita> habitaciones=new HabitacionFavoritaDAO().listar();
-        for (HabitacionFavorita habitacion:habitaciones) {
-            System.out.println(habitacion.toString());
-        }
+//        List<HabitacionFavorita> habitaciones=new HabitacionFavoritaDAO().listar();
+//        for (HabitacionFavorita habitacion:habitaciones) {
+//            System.out.println(habitacion.toString());
+//        }
         /*List<Habitacion> habitaciones=new HabitacionDAO().listarId(1);
         for (Habitacion habitacion:habitaciones) {
             System.out.println(habitacion.getDescripcion());

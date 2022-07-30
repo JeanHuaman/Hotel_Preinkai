@@ -65,7 +65,7 @@ public class UsuarioControlador extends HttpServlet {
                     try {
                         this.seleccionarHabitacion(request, response);
                     } catch (SQLException ex) {
-                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;
@@ -103,7 +103,7 @@ this.generarReporteExcel(request, response);
                     try {
                         this.agregarHabitacion(request, response);
                     } catch (SQLException ex) {
-                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;
