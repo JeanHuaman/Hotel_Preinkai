@@ -74,7 +74,7 @@
         <div class="container">
             <div class="row mt-3">
                 <h1 class="text-center">Habitaciones Favoritas</h1>
-
+                <h1>HOLAAAAAAAA</h1>
                 <main class="mt-3">
                     <div class="row row-cols-1 row-cols-md-3 g-4" style="padding: 25px;">
                         <% for (HabitacionFavorita habitacionFavorita : habitacionesFavoritas) {%>

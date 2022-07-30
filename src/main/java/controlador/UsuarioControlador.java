@@ -4,7 +4,6 @@ import dao.DetalleReservaDAO;
 import dao.HabitacionFavoritaDAO;
 import dao.UsuarioDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,6 @@ import dao.IDetalleServicioDAO;
 import dao.IHabitacionDAO;
 import dao.IReservaDAO;
 import dao.IServicioDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import servicios.Excel;
 import servicios.Mail;
 import modelo.DetalleReserva;
@@ -80,17 +77,7 @@ public class UsuarioControlador extends HttpServlet {
                     this.cerrarSession(request, response);
                     break;
                 case "GenerarReporteExcel":
-                    Excel ex = new Excel();
-
-                    try {
-                        ex.crearExcel();
-                        RequestDispatcher requestDispatcherExcel = request.getRequestDispatcher("vistas/verReporteEnExcel.jsp");
-                        requestDispatcherExcel.forward(request, response);
-                    } catch (SQLException e) {
-                        e.printStackTrace(System.out);
-                        System.out.println("" + e);
-                    }
-
+this.generarReporteExcel(request, response);
                     break;
                 default:
                     this.accionDefault(request, response);
@@ -162,6 +149,18 @@ public class UsuarioControlador extends HttpServlet {
 
         mail.enviarMail(nombreSM, celularSM, direccionSM, correoSM, descripcionSM);
         request.getRequestDispatcher("vistas/verMail.jsp").forward(request, response);
+    }
+
+    private void generarReporteExcel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Excel ex = new Excel();
+        try {
+            ex.crearExcel();
+            RequestDispatcher requestDispatcherExcel = request.getRequestDispatcher("vistas/verReporteEnExcel.jsp");
+            requestDispatcherExcel.forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            System.out.println("" + e);
+        }
     }
 
     private void agregarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

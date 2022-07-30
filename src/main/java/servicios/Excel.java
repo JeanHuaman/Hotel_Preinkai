@@ -33,9 +33,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Excel {
 
-    public static void main(String[] args) throws SQLException {
+    /*public static void main(String[] args) throws SQLException {
         crearExcel();
-    }
+    }*/
 
     public static void crearExcel() throws SQLException {
         Workbook book = new XSSFWorkbook();

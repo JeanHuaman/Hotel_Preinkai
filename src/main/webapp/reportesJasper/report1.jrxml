@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba4bc688-a0ad-47d0-b5c4-d5f5ffabda31">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT r.id_reserva,usu.nombre,importe_total,fecha_entrada,fecha_salida,h.descripcion FROM reserva r INNER JOIN usuario usu on usu.id_usuario=r.id_usuario INNER JOIN detalle_reservacion dr on dr.id_reserva=r.id_reserva INNER JOIN habitacion h on h.id_habitacion=dr.id_habitacion]]>
+	</queryString>
+	<field name="id_reserva" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe_total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_entrada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_salida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="14" width="526" height="47" uuid="07dae75c-2e43-4c43-945f-cc7972159504"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Reporte de Reserva de Habitaciones]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="18" width="64" height="20" uuid="46d3a77a-a5b7-458e-9abc-7122f4063ec4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="18" width="88" height="20" uuid="f6e1097b-722e-4641-804f-7886a7a66c4b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="18" width="76" height="20" uuid="5560476e-daf3-420f-aec1-a31aecab260d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="18" width="81" height="20" uuid="98200dc9-1216-4499-ab2c-c6ba90a95f7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="18" width="156" height="20" uuid="fd6ea403-086a-431b-b6f6-57cd9b458f7a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="16" y="17" width="64" height="20" uuid="0219a882-d8aa-4d32-9861-65c7fa19a7f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_reserva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="17" width="88" height="20" uuid="e08d3293-fc54-4e8b-b56a-3c0229c1bc2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="17" width="76" height="20" uuid="9ec4d987-bd69-4b52-a2f5-eaf02fad2eb0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{importe_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="17" width="81" height="20" uuid="fe64fded-0904-49d8-9fd0-02dc15467147"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha_entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="17" width="156" height="20" uuid="4f5e3651-69ce-4585-85ff-89e9c9079edb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
