@@ -141,7 +141,7 @@ public class ServicioControlador extends HttpServlet {
 
     private void agregarServicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombre_servicio = request.getParameter("nombre_servicio");
-        int precio = Integer.parseInt(request.getParameter("precio"));
+        double precio = Double.parseDouble(request.getParameter("precio"));
         String horario_inicio = request.getParameter("horario_inicio");
         String horario_fin = request.getParameter("horario_fin");
         String ambiente = request.getParameter("ambiente");

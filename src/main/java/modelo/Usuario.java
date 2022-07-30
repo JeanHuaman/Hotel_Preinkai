@@ -11,7 +11,6 @@ package modelo;
  */
 public class Usuario {
     private int idUsuario;
-    private int idMembresia;
     private String dni;
     private String nombre;
     private String celular;
@@ -22,9 +21,8 @@ public class Usuario {
 
     public Usuario(){}
     //Listar
-    public Usuario(int idUsuario, int idMembresia, String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
+    public Usuario(int idUsuario, String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
         this.idUsuario = idUsuario;
-        this.idMembresia = idMembresia;
         this.dni = dni;
         this.nombre = nombre;
         this.celular = celular;
@@ -34,8 +32,7 @@ public class Usuario {
         this.rol = rol;
     }
     //Agregar
-    public Usuario(int idMembresia, String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
-        this.idMembresia = idMembresia;
+    public Usuario(String dni, String nombre, String celular, String direccion, String email, String password, String rol) {
         this.dni = dni;
         this.nombre = nombre;
         this.celular = celular;
@@ -51,14 +48,6 @@ public class Usuario {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public int getIdMembresia() {
-        return idMembresia;
-    }
-
-    public void setIdMembresia(int idMembresia) {
-        this.idMembresia = idMembresia;
     }
 
     public String getDni() {
@@ -119,7 +108,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", idMembresia=" + idMembresia + ", dni=" + dni + ", nombre=" + nombre + ", celular=" + celular + ", direccion=" + direccion + ", email=" + email + ", password=" + password + ", rol=" + rol + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + "," + "dni=" + dni + ", nombre=" + nombre + ", celular=" + celular + ", direccion=" + direccion + ", email=" + email + ", password=" + password + ", rol=" + rol + '}';
     }
 
     

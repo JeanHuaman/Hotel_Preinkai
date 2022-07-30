@@ -1,3 +1,4 @@
+<%@page import="modelo.Usuario"%>
 <%@page import="dao.PisoDAO"%>
 <%@page import="modelo.Piso"%>
 <%@page import="dao.TipoHabitacionDAO"%>
@@ -29,18 +30,34 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <!-- Custom styles for this page -->
         <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+        <link href="${pageContext.request.contextPath}/estilos/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <header class="bg-light bg-gradient py-2">
-            <div class="container mx-auto row">
-                <div class="col-12 col-sm-2">
-                    <img src="../img/Logo.png" alt="logo" class="logo">
+        <header>
+            <nav class="p-3 d-md-flex justify-content-md-between align-items-md-center bg-light">
+                <div class="text-center">                    
+                    <a href="${pageContext.request.contextPath}/index.jsp"><p class="fs-2 link-secondary">HOTEL PREINKAI</p></a> 
                 </div>
-                <h1 class=" col-12 col-sm-8 inline text-center">PREINKAI</h1>
-            </div>
+                <div class="d-flex justify-content-around">
+                    <%   Usuario usuario = (Usuario) session.getAttribute("usuario");
+                        if (usuario != null) {
+                    %>
+                    <ul class="navbar-nav me-auto my-2 my-lg-0" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= usuario.getEmail()%>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">                                
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioControlador?accion=cerrarSesion">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <%
+                        }
+                    %>
+                </div>
+            </nav>  
         </header>
-
         <div class="container mt-1">
             <div class="row">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -74,19 +91,6 @@
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>
-                                        <tfoot class="text-center">
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Tipo de Habitación</th>
-                                                <th>Disponibilidad</th>
-                                                <th>Piso</th>
-                                                <th>Precio</th>
-                                                <th>Descripción</th>
-                                                <th>Personas Máximas</th>
-                                                <th>Estrellas</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
                                             <% for (Habitacion habitacion : habitaciones) {%>
                                             <tr>
@@ -99,8 +103,8 @@
                                                 <td class="text-center"><%= habitacion.getPersonas_maximas()%></td>
                                                 <td class="text-center"><%= habitacion.getEstrellas()%></td>
                                                 <td style="text-align: center;">
-                                                    <a class="btn btn-success" href="${pageContext.request.contextPath}/HabitacionControlador?accion=EditRoom&id=<%= habitacion.getId_habitacion()%>">Editar</a> <br>
-                                                    <a class="btn btn-danger" href="${pageContext.request.contextPath}/HabitacionControlador?accion=eliminar&id=<%= habitacion.getId_habitacion()%>">Eliminar</a>
+                                                    <a class="btn btn-success w-100" href="${pageContext.request.contextPath}/HabitacionControlador?accion=EditRoom&id=<%= habitacion.getId_habitacion()%>">Editar</a> <br>
+                                                    <a class="btn btn-danger w-100" href="${pageContext.request.contextPath}/HabitacionControlador?accion=eliminar&id_habitacion=<%= habitacion.getId_habitacion()%>">Eliminar</a>
                                                 </td>
                                             </tr>
                                             <% }%>
@@ -120,7 +124,7 @@
                                         <div class="row justify-content-between my-4">
                                             <form action="${pageContext.request.contextPath}/HabitacionControlador?accion=AddRoom" method="POST">
                                                 <br>
-                                                <label class="form-label" for="id_tipohabitacion">Tipo de HabitaciÃ³n</label>
+                                                <label class="form-label" for="id_tipohabitacion">Tipo de Habitación</label>
                                                 <select class="form-select" name="id_tipohabitacion">
                                                     <% for (TipoHabitacion tipo_habitacion : tiposhabitacion) {%>
                                                     <option value="<%= tipo_habitacion.getIdTipoHabitacion()%>"><%= tipo_habitacion.getNombreH()%></option>
@@ -139,13 +143,13 @@
 
                                                 <label class="form-label" for="imagen">Imagen</label>
                                                 <select class="form-select" name="imagen">
-                                                    <option value="http://localhost/habitaciones/habitacion-1.jpg">HabitaciÃ³n ClÃ¡sica - 1 cama extragrande</option>
-                                                    <option value="http://localhost/habitaciones/habitacion-2.jpg">Suite Presidencial con cama extragrande</option>
-                                                    <option value="http://localhost/habitaciones/habitacion-3.jpg">Suite Executive Le Meridien - Cama extragrande</option>
+                                                    <option value="habitacion-1.jpg">Habitación Clásica - 1 cama extragrande</option>
+                                                    <option value="habitacion-2.jpg">Suite Presidencial con cama extragrande</option>
+                                                    <option value="habitacion-3.jpg">Suite Executive Le Meridien - Cama extragrande</option>
                                                 </select>    <br>
 
                                                 <label class="form-label">Descripción</label>
-                                                <textarea class="col-12 form-control" for="descripcion" name="descripcion" placeholder="Escribe una descripciÃ³n"></textarea><br>
+                                                <textarea class="col-12 form-control" for="descripcion" name="descripcion" placeholder="Escribe una descripción"></textarea><br>
 
                                                 <label class="form-label">Personas Máximas</label>
                                                 <input class="form-control" type="number" name="personas_maximas"/> <br>
@@ -197,19 +201,6 @@
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>
-                                        <tfoot class="text-center">
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Nombre</th>
-                                                <th>Precio</th>
-                                                <th>Horario Inicio</th>
-                                                <th>Horario Fin</th>
-                                                <th>Ambiente</th>
-                                                <th>Estado</th>
-                                                <th>Personas Máximas</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
                                             <% for (Servicio servicio : servicios) {%> 
                                             <tr>
@@ -222,8 +213,8 @@
                                                 <td><%= servicio.getEstado()%></td>
                                                 <td class="text-center"><%= servicio.getPersonasMaximas()%></td>
                                                 <td style="text-align: center;">
-                                                    <a class="btn btn-success" href="${pageContext.request.contextPath}/ServicioControlador?accion=EditService&id=<%= servicio.getId_servicio()%>">Editar</a> <br>
-                                                    <a class="btn btn-danger" href="${pageContext.request.contextPath}/ServicioControlador?accion=eliminar&id=<%= servicio.getId_servicio()%>">Eliminar</a>
+                                                    <a class="btn btn-success w-100" href="${pageContext.request.contextPath}/ServicioControlador?accion=EditService&id=<%= servicio.getId_servicio()%>">Editar</a> <br>
+                                                    <a class="btn btn-danger w-100" href="${pageContext.request.contextPath}/ServicioControlador?accion=eliminar&id_servicio=<%= servicio.getId_servicio()%>">Eliminar</a>
                                                 </td>
                                             </tr>
                                             <% }%>

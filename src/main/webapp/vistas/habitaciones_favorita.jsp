@@ -84,7 +84,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title"><%= habitacionFavorita.getDescripcion()%></h5>
                                     <p class="card-text">S/.<%= habitacionFavorita.getPrecio()%>0</p>
-                                    <a href="#" class="btn btn-primary">Reservar</a>
+                                    <a href="${pageContext.request.contextPath}/UsuarioControlador?accion=seleccionarHabitacion&idHabitacion=<%= habitacionFavorita.getId_habitacion()%>" class="btn btn-primary">Reservar</a>
                                 </div>
                             </div>
 
@@ -99,7 +99,7 @@
             <div class="footer-bottom text-center" style="background-color: black;color:white;padding: 10px">
                 <div class="container">
                     <div class="row">
-                        <p class="pull-left">Copyright � 2022 PREINKAI. All rights reserved.</p>
+                        <p class="pull-left">Copyright @2022 PREINKAI. All rights reserved.</p>
                     </div>
                 </div>
             </div>

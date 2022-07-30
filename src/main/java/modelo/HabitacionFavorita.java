@@ -24,10 +24,11 @@ public class HabitacionFavorita {
         this.id_habitacion = id_habitacion;
     }
 
-    public HabitacionFavorita(String imagen, String descripcion, double precio) {
+    public HabitacionFavorita(String imagen, String descripcion, double precio,int id_habitacion) {
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.id_habitacion=id_habitacion;
     }
 
     

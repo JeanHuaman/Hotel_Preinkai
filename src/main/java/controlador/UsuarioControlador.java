@@ -166,7 +166,6 @@ public class UsuarioControlador extends HttpServlet {
 
     private void agregarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int id_membresia = Integer.parseInt(request.getParameter("id_membresia"));
         String dni = request.getParameter("dni");
         String nombre = request.getParameter("nombre");
         String celular = request.getParameter("celular");
@@ -175,7 +174,7 @@ public class UsuarioControlador extends HttpServlet {
         String password = request.getParameter("password");
         String rol = request.getParameter("rol");
 
-        Usuario usuario = new Usuario(id_membresia, dni, nombre, celular, direccion, email, password, rol);
+        Usuario usuario = new Usuario(dni, nombre, celular, direccion, email, password, rol);
         System.out.println("Listaaa: " + usuario);
         int registrado = new UsuarioDAO().registrarse(usuario);
 
@@ -186,12 +185,27 @@ public class UsuarioControlador extends HttpServlet {
 
     private void agregarHabitacionFavorita(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sesion = request.getSession();
+        boolean encontrado=false;
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
         int id_habitacion = Integer.parseInt(request.getParameter("id_habitacion"));
+        List<HabitacionFavorita> habitacionesFavoritas = new HabitacionFavoritaDAO().listar(usuario.getIdUsuario());
+        for(HabitacionFavorita hab : habitacionesFavoritas)
+        {
+            if(hab.getId_habitacion()==id_habitacion && !encontrado)
+            {
+                encontrado=true;
+                break;
+            }
+        }
 
-        HabitacionFavorita habitacion_favorita = new HabitacionFavorita(usuario.getIdUsuario(), id_habitacion);
-        System.out.println("Listaaa: " + habitacion_favorita);
-        int registrado = new HabitacionFavoritaDAO().guardar(habitacion_favorita);
+        if(!encontrado)
+        {
+            HabitacionFavorita habitacion_favorita = new HabitacionFavorita(usuario.getIdUsuario(), id_habitacion);
+            System.out.println("Listaaa: " + habitacion_favorita);
+            int registrado = new HabitacionFavoritaDAO().guardar(habitacion_favorita);
+        }
+
+
         response.sendRedirect("vistas/habitaciones_favorita.jsp");
 
     }

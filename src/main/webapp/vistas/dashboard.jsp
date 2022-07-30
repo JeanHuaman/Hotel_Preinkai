@@ -21,11 +21,7 @@
     int cantidadHabitaciones = habitacionDao.cantidadHabitaciones();
     
     IServicioDAO servicioDao = new ServicioDAO();
-    int cantidadServicios = servicioDao.cantidadServicios();
-    
-    IMembresiaDAO membresiaDao = new MembresiaDAO();
-    int cantidadMembresias = membresiaDao.cantidadMembresia();
-    
+    int cantidadServicios = servicioDao.cantidadServicios();   
     
     
 %>
@@ -81,7 +77,7 @@
                     <div class="collapse multi-collapse " id="multiCollapseExample1">
                         <div class="card card-body subOption">
                             <a href="${pageContext.request.contextPath}/vistas/crudHabitaciones.jsp">Habitaciones</a>
-                            <a href="${pageContext.request.contextPath}/vistas/crudServicios.jsp">Servicios</a>
+                            <a href="${pageContext.request.contextPath}/vistas/crudHabitaciones.jsp">Servicios</a>
                         </div>
                     </div> 
                         <a href="vistas/reportes.jsp" class="btn btn-primary">Reportes</a>
@@ -108,13 +104,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Servicios</h5>
                             <p class="card-text"><%= cantidadServicios %></p>
-                        </div>
-                    </div>
-                    <div class="card_item">
-                        <img src="${pageContext.request.contextPath}/img/logoMembresia.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Membresia</h5>
-                            <p class="card-text"><%= cantidadMembresias %></p>
                         </div>
                     </div>
                     <div class="card_item">

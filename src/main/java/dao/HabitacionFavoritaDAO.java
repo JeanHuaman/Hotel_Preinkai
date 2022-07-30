@@ -11,7 +11,7 @@ import modelo.HabitacionFavorita;
 
 public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
 
-    private static final String SELECT_HABITACION_FAVORITA = "SELECT h.imagen, h.descripcion, h.precio FROM habitacion h  INNER JOIN habitaciones_favoritas hf  on hf.id_habitacion=h.id_habitacion where hf.id_usuario=?";
+    private static final String SELECT_HABITACION_FAVORITA = "SELECT h.id_habitacion,h.imagen, h.descripcion, h.precio FROM habitacion h  INNER JOIN habitaciones_favoritas hf  on hf.id_habitacion=h.id_habitacion where hf.id_usuario=?";
     private static final String INSERT_HABITACION_FAVORITA = "INSERT INTO habitaciones_favoritas "
             + "(id_usuario, id_habitacion) VALUES (?,?)";
     Connection conn = null;
@@ -49,16 +49,16 @@ public class HabitacionFavoritaDAO implements IHabitacionFavoritaDAO {
             stmt.setInt(1, idUsuario);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                int idHabitacion = rs.getInt("id_habitacion");
                 String imagen = rs.getString("imagen");
                 String descripcion = rs.getString("descripcion");
                 double precio = rs.getDouble("precio");
 
-                habitacionFavorita = new HabitacionFavorita(imagen, descripcion, precio);
+                habitacionFavorita = new HabitacionFavorita(imagen, descripcion, precio,idHabitacion);
                 habitacionesFavoritas.add(habitacionFavorita);
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-            JOptionPane.showMessageDialog(null, ex);
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);

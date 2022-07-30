@@ -55,12 +55,6 @@
 
                     <form action="${pageContext.request.contextPath}/UsuarioControlador?accion=AddUser" class="formulario__register" method="POST">
                         <h2>Regístrarse</h2>
-                        <select class="form-select" name="id_membresia" required="true">           
-                            <option value="1">Bronce</option>
-                            <option value="2">Plata</option>
-                            <option value="3">Oro</option>
-                            <option value="4">Diamante</option>
-                        </select>
                         <input type="text" placeholder="DNI" name="dni" required="true">
                         <input type="text" placeholder="Nombres y Apellidos" name="nombre" required="true">
                         <input type="text" placeholder="Celular" name="celular" required="true">
